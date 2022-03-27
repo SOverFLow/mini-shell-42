@@ -10,4 +10,23 @@
 #                                                                              #
 # **************************************************************************** #
 
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+NAME = minishell
+LIBNAME = Libft/libft.a
+SRCS = main.c
 
+$(LIBNAME):
+	$(MAKE) -C Libft
+
+$(NAME): $(LIBNAME)
+	$(CC) $(SRCS) $(LIBNAME) -o $(NAME)
+
+all: $(NAME)
+
+clean:
+	$(MAKE) clean -C Libft
+fclean: clean
+	$(MAKE) fclean -C Libft
+	rm -rf minishell
+re: fclean all
