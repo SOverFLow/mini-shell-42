@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -lreadline -Wall -Wextra -Werror
 NAME = minishell
 LIBNAME = Libft/libft.a
 SRCS = main.c
@@ -20,7 +20,7 @@ $(LIBNAME):
 	$(MAKE) -C Libft
 
 $(NAME): $(LIBNAME)
-	$(CC) $(SRCS) $(LIBNAME) -o $(NAME)
+	$(CC) -lreadline $(SRCS) $(LIBNAME) -o $(NAME)
 
 all: $(NAME)
 
