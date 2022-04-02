@@ -21,7 +21,8 @@ int main(int argc, char **argv)
     else if (argc == 2)
     {
         if (chdir(argv[1]) != 0)
-            printf("Error\n");
+            perror(argv[1]);
+        system("pwd");
     }
     return (0);
 }
