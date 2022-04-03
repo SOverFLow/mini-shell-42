@@ -14,14 +14,13 @@ CC = cc
 CFLAGS = -lreadline -Wall -Wextra -Werror
 NAME = minishell
 LIBNAME = Libft/libft.a
-SRCS = main.c parse/ft_parsing.c parse/lst_comp.c
+SRCS = main.c parse/ft_parsing.c parse/lst_comp.c parse/ft_custtom_split.c
 
 $(LIBNAME):
 	$(MAKE) -C Libft
 
 $(NAME): $(LIBNAME)
 	$(CC) -lreadline $(SRCS) $(LIBNAME) -o $(NAME)
-
 all: $(NAME)
 
 clean:
