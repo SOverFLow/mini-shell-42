@@ -55,7 +55,7 @@ static int	ft_w_len(char *str)
 	return (len);
 }
 
-char **ft_custom_split(char *str)
+char	**ft_custom_split(char *str)
 {
 	int i = 0 ;
 	int j = 0;

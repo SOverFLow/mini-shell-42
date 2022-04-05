@@ -40,10 +40,48 @@ int	whatisthis(char **splited, int index)
 	return (ARG);
 }
 
-t_list *ft_parsing(char *line)
+int	ft_arrylen(char **arry)
+{
+	int	i;
+
+	i = 0;
+	while (arry[i])
+		i++;
+	return (i);
+}
+
+t_list	*lst_creat(t_comp *comp)
+{
+	t_list	*lst_comp;
+
+	while (comp != NULL)
+	{
+		ft_lstadd_back(&comp, );
+	}
+}
+
+t_list	*ft_parsing(char *line)
 {
 	char	**split;
+	char	**splited;
+	int		i;
+	int		j;
+	t_comp	*comp;
 
-	split = ft_split(line, ' ');
+
+	split = ft_split(line, '|');
+	comp = malloc(sizeof(t_comp) * ft_arrylen(split));
+	i = 0;
+	while (split[i] != NULL)
+	{
+		splited = ft_custom_split(split[i]);
+		j = 0;
+		while (splited[j])
+		{
+			ft_comp_add(&comp, ft_comp_new(splited[j], whatisthis(splited, j)));
+			j++;
+		}
+		i++;
+	}
 
 }
