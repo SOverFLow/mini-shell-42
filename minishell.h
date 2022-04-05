@@ -28,7 +28,7 @@
 #define L_R 		6 // <
 #define R_APPEND	7 // >>
 #define HER_DOC 	8 // <<
-
+#define LIMITER		9 // limiter
 
 typedef struct s_comp
 {
