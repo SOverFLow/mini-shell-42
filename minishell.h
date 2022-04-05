@@ -20,6 +20,16 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+#define CMD 		1 // command
+#define	INFILE		3 // input file
+#define OUTFILE		4 // output file
+#define ARG 		2 // argument
+#define R_R			5 // >
+#define L_R 		6 // <
+#define R_APPEND	7 // >>
+#define HER_DOC 	8 // <<
+
+
 typedef struct s_comp
 {
 	char *data;
