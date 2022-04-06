@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int main(int argc, char **argv)
+int ft_cd(int argc, char **argv)
 {
     if (argc == 1)
         printf("invalid parametres\n");
