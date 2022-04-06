@@ -48,5 +48,6 @@ int		execute_built_cmd(char **args);
 
 // cammand
 int ft_pwd();
+int     ft_echo(char **args);
 
 #endif
