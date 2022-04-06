@@ -15,7 +15,12 @@
 int ft_pwd()
 {
     char *path;
-    path = getcwd(path, 50);
-    printf("%s\n", path);
-    return (1);
+
+    if (getcwd(path, 50))
+	{
+		ft_putendl_fd(path, 1);
+		return (1);
+	}
+	else
+		return (0);
 }
