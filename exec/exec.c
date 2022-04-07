@@ -36,12 +36,12 @@ char	*ft_get_Path(char *cmd, char **env)
 	return (cmd);
 }
 
-void	ft_exec(char *cmd, char **env)
+void	ft_exec(char **cmd, char **env)
 {
 	char	**argv;
 	char	*path;
 
-	argv = ft_split(cmd, ' ');
+	argv = cmd;
 	if (ft_str_ichr(argv[0], '/') > -1)
 		path = argv[0];
 	else
@@ -49,4 +49,11 @@ void	ft_exec(char *cmd, char **env)
 	execve(path, argv, env);
 	write(2, ": command not found\n", 20);
 	exit(1);
+}
+
+int main(int argc, char **argv, char **envp)
+{
+	if (argc > 1)
+		ft_exec(argv + 1, envp);
+	return (0);
 }
