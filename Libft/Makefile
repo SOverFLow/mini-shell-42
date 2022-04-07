@@ -25,7 +25,7 @@ ft_lstclear_bonus.c ft_lstmap_bonus.c
 OBJ=$(SRC:.c=.o)
 OBJB=$(SRCB:.c=.o)
 
-all: $(NAME)
+all: $(NAME) bonus
 
 $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)

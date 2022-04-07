@@ -50,16 +50,6 @@ int	ft_arrylen(char **arry)
 	return (i);
 }
 
-t_list	*lst_creat(t_comp *comp)
-{
-	t_list	*lst_comp;
-
-	while (comp != NULL)
-	{
-		ft_lstadd_back(&comp, );
-	}
-}
-
 t_list	*ft_parsing(char *line)
 {
 	char	**split;
@@ -67,21 +57,26 @@ t_list	*ft_parsing(char *line)
 	int		i;
 	int		j;
 	t_comp	*comp;
+	t_list	*lst_comp;
 
-
+	if(!line)
+		return (0);
+	lst_comp = NULL;
 	split = ft_split(line, '|');
 	comp = malloc(sizeof(t_comp) * ft_arrylen(split));
 	i = 0;
 	while (split[i] != NULL)
 	{
-		splited = ft_custom_split(split[i]);
+		splited = ft_split(split[i], ' ');
 		j = 0;
+		//comp = ft_comp_new(splited[j], whatisthis(splited, j));
 		while (splited[j])
 		{
 			ft_comp_add(&comp, ft_comp_new(splited[j], whatisthis(splited, j)));
+			ft_lstadd_back(&lst_comp, ft_lstnew(splited[j]));
 			j++;
 		}
 		i++;
 	}
-
+	return (lst_comp);
 }
