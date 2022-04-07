@@ -50,7 +50,7 @@ char	**ft_custom_split(char *str);
 int		is_cmd_built(char *cmd);
 int		execute_built_cmd(char **args);
 char	*ft_get_Path(char *cmd, char **env);
-void	ft_exec(char **cmd, char **env);
+void	ft_exec(char *cmd, char **env);
 
 // cammand
 int ft_pwd();

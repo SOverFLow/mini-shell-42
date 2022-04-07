@@ -36,24 +36,35 @@ char	*ft_get_Path(char *cmd, char **env)
 	return (cmd);
 }
 
-void	ft_exec(char **cmd, char **env)
+void	ft_exec(char *cmd, char **env)
 {
 	char	**argv;
 	char	*path;
 
-	argv = cmd;
+	argv = ft_split(cmd, ' ');
 	if (ft_str_ichr(argv[0], '/') > -1)
 		path = argv[0];
 	else
 		path = ft_get_Path(argv[0], env);
 	execve(path, argv, env);
-	write(2, ": command not found\n", 20);
+	write(2, "command not found\n", 20);
 	exit(1);
 }
 
 int main(int argc, char **argv, char **envp)
 {
-	if (argc > 1)
-		ft_exec(argv + 1, envp);
-	return (0);
+	char *line;
+	int pid;
+
+	while (1)
+	{
+		add_history(line);
+		line = readline("minishell:> ");
+		pid = fork();
+		if (pid == 0)
+			ft_exec(line, envp);
+	}
+	// if (argc > 1)
+	// 	ft_exec(argv + 1, envp);
+	// return (0);
 }
