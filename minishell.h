@@ -30,6 +30,10 @@
 #define HER_DOC 	8 // <<
 #define LIMITER		9 // limiter
 
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
+
 typedef struct s_comp
 {
 	char *data;
@@ -45,9 +49,16 @@ char	**ft_custom_split(char *str);
 //exec
 int		is_cmd_built(char *cmd);
 int		execute_built_cmd(char **args);
+char	*ft_get_Path(char *cmd, char **env);
+void	ft_exec(char *cmd, char **env);
 
 // cammand
 int ft_pwd();
 int     ft_echo(char **args);
+
+// utils
+char	*ft_path_join (char *path, char *bin);
+char	*ft_str_ndup (char *str, unsigned int n);
+int		ft_str_ichr (char *str, char c);
 
 #endif
