@@ -14,11 +14,17 @@
 
 int	main(int argc, char **argv, char **env)
 {
-	char	*line;
+	char *line;
+	int pid;
 
 	while (1)
 	{
-		add_history(line);
 		line = readline("minishell:> ");
+		add_history(line);
+		pid = fork();
+		if (pid == 0)
+		{
+			ft_exec(line, env);
+		}
 	}
 }

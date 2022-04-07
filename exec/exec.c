@@ -50,21 +50,3 @@ void	ft_exec(char *cmd, char **env)
 	write(2, "command not found\n", 20);
 	exit(1);
 }
-
-int main(int argc, char **argv, char **envp)
-{
-	char *line;
-	int pid;
-
-	while (1)
-	{
-		add_history(line);
-		line = readline("minishell:> ");
-		pid = fork();
-		if (pid == 0)
-			ft_exec(line, envp);
-	}
-	// if (argc > 1)
-	// 	ft_exec(argv + 1, envp);
-	// return (0);
-}
