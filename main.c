@@ -15,10 +15,20 @@
 int	main(int argc, char **argv, char **env)
 {
 	char	*line;
+	t_list	*lst_comp;
+	t_comp	*comp;
 
 	while (1)
 	{
+		lst_comp = NULL;
+		comp = NULL;
 		add_history(line);
 		line = readline("minishell:> ");
+		if (*line != '\0')
+		{
+			lst_comp = ft_parsing(line);
+			//comp = (t_comp *)lst_comp->content;
+			printf("%s", lst_comp->content);
+		}
 	}
 }

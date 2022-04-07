@@ -38,8 +38,11 @@ void	ft_comp_add(t_comp **head,t_comp *new)
 {
 	t_comp	*last;
 
-	if ((*head) == NULL)
-		
-	last = ft_comp_last((*head));
-	last->next = new;
+	if (*head == NULL)
+		*head = new;
+	else
+	{
+		last = ft_comp_last((*head));
+		last->next = new;
+	}
 }
