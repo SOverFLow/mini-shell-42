@@ -26,5 +26,6 @@ int	main(int argc, char **argv, char **env)
 		{
 			ft_exec(line, env);
 		}
+		waitpid(pid , NULL, 0);
 	}
 }

@@ -92,9 +92,12 @@ void ft_exec_cmd(t_comp *tokens, char **env)
 	while (cmd && cmd[i])
 	{
 		pid = fork();
+		if (pid < 0)
+			perror("fork error\n");
 		if (pid == 0)
 			ft_exec(cmd[i], env);
 		i++;
+		waitpid(pid , NULL, 0);
 	}
 // 	if (cmd && is_cmd_built(cmd[0]))
 // 	{
