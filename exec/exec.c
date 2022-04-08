@@ -81,18 +81,23 @@ char **ft_get_cmd(t_comp *head)
 	return (cmd_tab);
 }
 
-void ft_exec_cmd(t_comp *tokens)
+void ft_exec_cmd(t_comp *tokens, char **env)
 {
 	char **cmd;
 	int i;
+	int pid;
 
 	cmd = ft_get_cmd(tokens);
+	i = 0;
+	while (cmd && cmd[i])
+	{
+		pid = fork();
+		if (pid == 0)
+			ft_exec(cmd[i], env);
+		i++;
+	}
 	if (cmd && is_cmd_built(cmd[0]))
 	{
 		//execute_built_cmd()
-	}
-	else if (cmd)
-	{
-		
 	}
 }
