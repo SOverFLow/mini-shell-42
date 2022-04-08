@@ -56,6 +56,7 @@ void	ft_exec(char *cmd, char **env);
 // cammand
 int ft_pwd();
 int     ft_echo(char **args);
+int     ft_env(char **env);
 
 // utils
 char	*ft_path_join (char *path, char *bin);
