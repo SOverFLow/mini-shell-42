@@ -87,4 +87,12 @@ void ft_exec_cmd(t_comp *tokens)
 	int i;
 
 	cmd = ft_get_cmd(tokens);
+	if (cmd && is_cmd_built(cmd[0]))
+	{
+		//execute_built_cmd()
+	}
+	else if (cmd)
+	{
+		
+	}
 }

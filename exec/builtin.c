@@ -29,7 +29,7 @@ int		is_cmd_built(char *cmd)
 	return (0);
 }
 
-int		execute_built_cmd(char **args)
+int		execute_built_cmd(char **args, t_comp *token, char **argv)
 {
 	int		r;
 
