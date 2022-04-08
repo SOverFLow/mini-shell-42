@@ -96,8 +96,8 @@ void ft_exec_cmd(t_comp *tokens, char **env)
 			ft_exec(cmd[i], env);
 		i++;
 	}
-	if (cmd && is_cmd_built(cmd[0]))
-	{
-		//execute_built_cmd()
-	}
+// 	if (cmd && is_cmd_built(cmd[0]))
+// 	{
+// 		//execute_built_cmd()
+// 	}
 }
