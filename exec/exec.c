@@ -50,3 +50,41 @@ void	ft_exec(char *cmd, char **env)
 	write(2, "command not found\n", 20);
 	exit(1);
 }
+
+char **ft_get_cmd(t_comp *head)
+{
+	t_comp *cmd;
+	char **cmd_tab;
+	int i;
+
+	if (!head)
+		return (NULL);
+	cmd = head->next;
+	i = 2;
+	while (cmd && cmd->whatisthis < 3)
+	{
+		cmd = cmd->next;
+		i++;
+	}
+	cmd_tab = malloc(sizeof(char *) * i);
+	if (!cmd_tab)
+		return (NULL);
+	cmd = head->next;
+	cmd_tab[0] = head->data;
+	i = 1;
+	while (cmd && cmd->whatisthis < 3)
+	{
+		cmd_tab[i++] = cmd->data;
+		cmd = cmd->next;
+	}
+	cmd_tab[i] = NULL;
+	return (cmd_tab);
+}
+
+void ft_exec_cmd(t_comp *tokens)
+{
+	char **cmd;
+	int i;
+
+	cmd = ft_get_cmd(tokens);
+}
