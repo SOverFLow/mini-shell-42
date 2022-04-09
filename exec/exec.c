@@ -51,20 +51,56 @@ void	ft_exec(char *cmd, char **env)
 	exit(1);
 }
 
-int main(int argc, char **argv, char **envp)
+char **ft_get_cmd(t_comp *head)
 {
-	char *line;
+	t_comp *cmd;
+	char **cmd_tab;
+	int i;
+
+	if (!head)
+		return (NULL);
+	cmd = head->next;
+	i = 2;
+	while (cmd && cmd->whatisthis < 3)
+	{
+		cmd = cmd->next;
+		i++;
+	}
+	cmd_tab = malloc(sizeof(char *) * i);
+	if (!cmd_tab)
+		return (NULL);
+	cmd = head->next;
+	cmd_tab[0] = head->data;
+	i = 1;
+	while (cmd && cmd->whatisthis < 3)
+	{
+		cmd_tab[i++] = cmd->data;
+		cmd = cmd->next;
+	}
+	cmd_tab[i] = NULL;
+	return (cmd_tab);
+}
+
+void ft_exec_cmd(t_comp *tokens, char **env)
+{
+	char **cmd;
+	int i;
 	int pid;
 
-	while (1)
+	cmd = ft_get_cmd(tokens);
+	i = 0;
+	while (cmd && cmd[i])
 	{
-		add_history(line);
-		line = readline("minishell:> ");
 		pid = fork();
+		if (pid < 0)
+			perror("fork error\n");
 		if (pid == 0)
-			ft_exec(line, envp);
+			ft_exec(cmd[i], env);
+		i++;
+		waitpid(pid , NULL, 0);
 	}
-	// if (argc > 1)
-	// 	ft_exec(argv + 1, envp);
-	// return (0);
+// 	if (cmd && is_cmd_built(cmd[0]))
+// 	{
+// 		//execute_built_cmd()
+// 	}
 }

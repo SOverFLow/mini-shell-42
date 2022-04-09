@@ -75,7 +75,6 @@ t_list	*ft_parsing(char *line)
 {
 	char	**split;
 	int		i;
-	int		j;
 	t_list	*lst_comp;
 
 	if(!line)

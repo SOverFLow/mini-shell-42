@@ -50,17 +50,19 @@ t_comp	*ft_comp_creat(char *line);
 
 //exec
 int		is_cmd_built(char *cmd);
-int		execute_built_cmd(char **args);
+int		execute_built_cmd(char **args, t_comp *token, char **argv);
 char	*ft_get_Path(char *cmd, char **env);
 void	ft_exec(char *cmd, char **env);
+char 	**ft_get_cmd(t_comp *head);
 
 // cammand
 int ft_pwd();
 int     ft_echo(char **args);
+int     ft_env(char **env);
 
 // utils
-char	*ft_path_join (char *path, char *bin);
-char	*ft_str_ndup (char *str, unsigned int n);
-int		ft_str_ichr (char *str, char c);
+char	*ft_path_join(char *path, char *bin);
+char	*ft_str_ndup(char *str, unsigned int n);
+int		ft_str_ichr(char *str, char c);
 
 #endif

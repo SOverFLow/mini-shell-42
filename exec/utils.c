@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-char	*ft_path_join (char *path, char *bin)
+char	*ft_path_join(char *path, char *bin)
 {
 	char	*joined;
 	int		i;
@@ -31,7 +31,7 @@ char	*ft_path_join (char *path, char *bin)
 	return (joined);
 }
 
-char	*ft_str_ndup (char *str, unsigned int n)
+char	*ft_str_ndup(char *str, unsigned int n)
 {
 	char				*duped;
 	unsigned int		i;
@@ -44,7 +44,7 @@ char	*ft_str_ndup (char *str, unsigned int n)
 	return (duped);
 }
 
-int	ft_str_ichr (char *str, char c)
+int	ft_str_ichr(char *str, char c)
 {
 	int	i;
 

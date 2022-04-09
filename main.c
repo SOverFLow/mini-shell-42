@@ -14,17 +14,15 @@
 
 int	main(int argc, char **argv, char **env)
 {
-	char	*line;
-	t_list	*lst_comp;
-	t_comp	*comp;
+	char *line;
+	int pid;
 
 	while (1)
 	{
-		lst_comp = NULL;
-		comp = NULL;
-		add_history(line);
 		line = readline("minishell:> ");
-		if (*line != '\0')
+		add_history(line);
+		pid = fork();
+		if (pid == 0)
 		{
 			lst_comp = ft_parsing(line);
 			lst_comp = lst_comp->next;
@@ -35,5 +33,6 @@ int	main(int argc, char **argv, char **env)
 				comp = comp->next;
 			}
 		}
+		waitpid(pid , NULL, 0);
 	}
 }
