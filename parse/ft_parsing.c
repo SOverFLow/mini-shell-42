@@ -14,30 +14,32 @@
 
 int	is_redirection(char *str)
 {
-	if (ft_strncmp(">", str, 2))
-		return (R_R);
-	if (ft_strncmp(">>", str, 3))
-		return (R_APPEND);
-	if (ft_strncmp("<", str, 2))
-		return (L_R);
-	if (ft_strncmp("<<", str, 3))
-		return (HER_DOC);
+	if (ft_strncmp(">", str, 2) == 0)
+		return (5);
+	if (ft_strncmp(">>", str, 3) == 0)
+		return (7);
+	if (ft_strncmp("<", str, 2) == 0)
+		return (6);
+	if (ft_strncmp("<<", str, 3) == 0)
+		return (8);
 	return (0);
 }
 
 int	whatisthis(char **splited, int index)
 {
 	if (index == 0)
-		return (CMD);
-	if (splited[0][0] == '-' && splited[0][1] != '\0')
-		return (ARG);
-	if (is_redirection(splited[index + 1]) == 1)
-		return (OUTFILE);
-	if (is_redirection(splited[index - 1]) == 3)
-		return (INFILE);
-	if (is_redirection(splited[index - 1]) == HER_DOC)
-		return (LIMITER);
-	return (ARG);
+		return (1);
+	if (is_redirection(splited[index]) != 0)
+		return (is_redirection(splited[index]));
+	if (is_redirection(splited[index - 1]) == 5)
+		return (4);
+	if (is_redirection(splited[index - 1]) == 6)
+		return (3);
+	if (is_redirection(splited[index - 1]) == 8)
+		return (9);
+	if (is_redirection(splited[index - 1]) == 7)
+		return (4);
+	return (2);
 }
 
 int	ft_arrylen(char **arry)
@@ -50,32 +52,40 @@ int	ft_arrylen(char **arry)
 	return (i);
 }
 
+t_comp	*ft_comp_creat(char *line)
+{
+	int		i;
+	char	**splited;
+	t_comp	*comp;
+
+	i = 0;
+	splited = ft_custom_split(line);
+	// comp = ft_comp_new(splited[i], whatisthis(splited, i));
+	// i++;
+	comp = NULL;
+	while (splited[i] != NULL)
+	{
+		ft_comp_add(&comp, ft_comp_new(splited[i], whatisthis(splited, i)));
+		i++;
+	}
+	return (comp);
+}
+
 t_list	*ft_parsing(char *line)
 {
 	char	**split;
-	char	**splited;
 	int		i;
 	int		j;
-	t_comp	*comp;
 	t_list	*lst_comp;
 
 	if(!line)
 		return (0);
 	lst_comp = NULL;
 	split = ft_split(line, '|');
-	comp = malloc(sizeof(t_comp) * ft_arrylen(split));
 	i = 0;
 	while (split[i] != NULL)
 	{
-		splited = ft_split(split[i], ' ');
-		j = 0;
-		//comp = ft_comp_new(splited[j], whatisthis(splited, j));
-		while (splited[j])
-		{
-			ft_comp_add(&comp, ft_comp_new(splited[j], whatisthis(splited, j)));
-			ft_lstadd_back(&lst_comp, ft_lstnew(splited[j]));
-			j++;
-		}
+		ft_lstadd_back(&lst_comp, ft_lstnew(ft_comp_creat(split[i])));
 		i++;
 	}
 	return (lst_comp);
