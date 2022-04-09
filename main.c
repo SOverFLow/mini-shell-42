@@ -27,8 +27,13 @@ int	main(int argc, char **argv, char **env)
 		if (*line != '\0')
 		{
 			lst_comp = ft_parsing(line);
-			//comp = (t_comp *)lst_comp->content;
-			printf("%s", lst_comp->content);
+			lst_comp = lst_comp->next;
+			comp = lst_comp->content;
+			while(comp)
+			{
+				printf("%s   %d\n", comp->data, comp->whatisthis);
+				comp = comp->next;
+			}
 		}
 	}
 }

@@ -46,6 +46,7 @@ t_comp	*ft_comp_last(t_comp *comp);
 void	ft_comp_add(t_comp **head,t_comp *new);
 char	**ft_custom_split(char *str);
 t_list	*ft_parsing(char *line);
+t_comp	*ft_comp_creat(char *line);
 
 //exec
 int		is_cmd_built(char *cmd);
