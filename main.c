@@ -14,25 +14,21 @@
 
 int	main(int argc, char **argv, char **env)
 {
-	char *line;
-	int pid;
+	char	*line;
+	t_comp	*comp;
+	t_list	*lst_comp;
 
 	while (1)
 	{
 		line = readline("minishell:> ");
 		add_history(line);
-		pid = fork();
-		if (pid == 0)
+		lst_comp = ft_parsing(line);
+		//lst_comp = lst_comp->next;
+		comp = lst_comp->content;
+		while(comp)
 		{
-			lst_comp = ft_parsing(line);
-			lst_comp = lst_comp->next;
-			comp = lst_comp->content;
-			while(comp)
-			{
-				printf("%s   %d\n", comp->data, comp->whatisthis);
-				comp = comp->next;
-			}
+			printf("%s   %d\n", comp->data, comp->whatisthis);
+			comp = comp->next;
 		}
-		waitpid(pid , NULL, 0);
 	}
 }
