@@ -56,7 +56,7 @@ void	ft_exec(char *cmd, char **env);
 char 	**ft_get_cmd(t_comp *head);
 
 // cammand
-int ft_pwd();
+int		ft_pwd();
 int     ft_echo(char **args);
 int     ft_env(char **env);
 

@@ -42,16 +42,6 @@ int	whatisthis(char **splited, int index)
 	return (2);
 }
 
-int	ft_arrylen(char **arry)
-{
-	int	i;
-
-	i = 0;
-	while (arry[i])
-		i++;
-	return (i);
-}
-
 t_comp	*ft_comp_creat(char *line)
 {
 	int		i;
@@ -60,8 +50,6 @@ t_comp	*ft_comp_creat(char *line)
 
 	i = 0;
 	splited = ft_custom_split(line);
-	// comp = ft_comp_new(splited[i], whatisthis(splited, i));
-	// i++;
 	comp = NULL;
 	while (splited[i] != NULL)
 	{
