@@ -104,3 +104,52 @@ void ft_exec_cmd(t_comp *tokens, char **env)
 // 		//execute_built_cmd()
 // 	}
 }
+
+void cammand_execute()
+{
+	int tmpin = dup(0);
+	int tmpout = dup(1);
+	int fdin;
+	int pid;
+	int fdout;
+	int i = 0;
+
+	if (infile)
+		fdin = open(infile, O_READ);
+	else
+		fdin = dup(tmpin);
+	while (i < num_of_simple_cmd)
+	{
+		dup2(fdin, 0);
+		close(fdin);
+		if (i == num_of_simple_cmd - 1)
+		{
+			if (outfile)
+				fdout = open(outfile, O_RDWR);
+			else
+				fdout = dup(tmpout);
+		}
+		else
+		{
+			int fdpipe[2];
+			pipe(fdpipe);
+			fdout = fdpipe[1];
+			fdin = fdpipe[0];
+		}
+		dup2(fdout, 1);
+		close(fdout);
+		pid = fork();
+		if ( ret == 0)
+		{
+			execve(path, argv, NULL);
+			perror("execve\n");
+			exit(1);
+		}
+		i++;
+	}
+	dup2(tmpin, 0);
+	dup2(tmpout, 1);
+	close(tmpin);
+	close(tmpout);
+	waitpid(pid, NULL , 0);
+}
