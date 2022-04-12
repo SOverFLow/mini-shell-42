@@ -41,6 +41,14 @@ typedef struct s_comp
 	struct s_comp *next;
 }		t_comp;
 
+typedef struct s_mini
+{
+	int fdin;
+	int fdout;
+	int pipein;
+	int pipeout;
+}		t_mini;
+
 t_comp	*ft_comp_new(char *data, int whatisthat);
 t_comp	*ft_comp_last(t_comp *comp);
 void	ft_comp_add(t_comp **head,t_comp *new);
@@ -64,5 +72,9 @@ int     ft_env(char **env);
 char	*ft_path_join(char *path, char *bin);
 char	*ft_str_ndup(char *str, unsigned int n);
 int		ft_str_ichr(char *str, char c);
+
+// heredoc
+void ft_start_here_doc(char *stop, int fd);
+void ft_here_doc(char *stop);
 
 #endif
