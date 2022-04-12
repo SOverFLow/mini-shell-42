@@ -153,3 +153,8 @@ void ft_exec_cmd(t_comp *tokens, char **env)
 // 	close(tmpout);
 // 	waitpid(pid, NULL , 0);
 // }
+
+void	ft_execution(t_list	lst_comp)
+{
+
+}

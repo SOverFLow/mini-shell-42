@@ -30,5 +30,6 @@ int	main(int argc, char **argv, char **env)
 			printf("%s   %d\n", comp->data, comp->whatisthis);
 			comp = comp->next;
 		}
+		printf("\n pathis %s\n", ft_get_Path(line, env));
 	}
 }
