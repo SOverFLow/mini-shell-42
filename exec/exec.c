@@ -154,7 +154,40 @@ void ft_exec_cmd(t_comp *tokens, char **env)
 // 	waitpid(pid, NULL , 0);
 // }
 
-void	ft_execution(t_list	lst_comp)
+int	ft_execut(int infile, t_comp *comp, char **env)
 {
+	int	pid;
+	int	fd[2];
 
+	pid = fork();
+	if (pid == 0)
+	{
+		colse(fd[0]);
+		dup2(fd[1], 1);
+		dup2(infile, 0);
+		execve(ft_get_Path(comp->data, env), ft_get_cmd(comp), env);
+	}
+	wait(NULL);
+	close(fd[1]);
+	return (fd[0]);
+}
+
+void	ft_execution(t_list	*lst_comp, char **env)
+{
+	t_comp	*comp;
+	int		cmd_len;
+	int		i;
+
+	cmd_len = ft_lstsize(lst_comp);
+	i = 0;
+	if (cmd_len == 1)
+		//exec one cmd
+	else
+	{
+		while (i < cmd_len - 1)
+		{
+			comp = lst_comp->content;
+			//call function like that int	ft_exec(int infile, t_comp *comp);
+		}
+	}
 }

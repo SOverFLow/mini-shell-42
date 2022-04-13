@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include "Libft/libft.h"
 #include <stdio.h>
+#include <fcntl.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 
