@@ -14,23 +14,25 @@
 
 int	main(int argc, char **argv, char **env)
 {
-	char	*line;
-	t_list	*lst_comp;
-	t_comp	*comp;
-	int pid;
+	//char	*line;
+	// t_list	*lst_comp;
+	// t_comp	*comp;
+	// int pid;
 
-	while (1)
-	{
-		line = readline("minishell:> ");
-		if (line && *line)
-			add_history(line);
-		lst_comp = ft_parsing(line);
-		if (ft_str_ichr(line, '|') == -1)
-		{
-			pid = fork();
-			if (pid == 0)
-				ft_exec(line, env);
-		}
-		waitpid(pid, NULL, 0);
-	}
+	// while (1)
+	// {
+	// 	line = readline("minishell:> ");
+	// 	if (line && *line)
+	// 		add_history(line);
+	// 	lst_comp = ft_parsing(line);
+	// 	if (ft_str_ichr(line, '|') == -1)
+	// 	{
+	// 		pid = fork();
+	// 		if (pid == 0)
+	// 			ft_exec(line, env);
+	// 	}
+	// 	waitpid(pid, NULL, 0);
+	// }
+
+	printf("%s\n", check_s_car(" kdfj dkjh dxzkhj>dkh dskhj "));
 }

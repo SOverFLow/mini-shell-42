@@ -72,6 +72,7 @@ int     ft_env(char **env);
 char	*ft_path_join(char *path, char *bin);
 char	*ft_str_ndup(char *str, unsigned int n);
 int		ft_str_ichr(char *str, char c);
+char *check_s_car(char *line);
 
 // heredoc
 void ft_start_here_doc(char *stop, int fd);
