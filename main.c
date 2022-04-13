@@ -15,21 +15,22 @@
 int	main(int argc, char **argv, char **env)
 {
 	char	*line;
-	// t_list	*lst_comp;
-	// t_comp	*comp;
+	t_list	*lst_comp;
+	t_comp	*comp;
+	int pid;
 
-	// while (1)
-	// {
+	while (1)
+	{
 		line = readline("minishell:> ");
-		add_history(line);
+		if (line && *line)
+			add_history(line);
 		lst_comp = ft_parsing(line);
-		//lst_comp = lst_comp->next;
-		comp = lst_comp->content;
-		while(comp)
+		if (ft_str_ichr(line, '|') == -1)
 		{
-			printf("%s   %d\n", comp->data, comp->whatisthis);
-			comp = comp->next;
+			pid = fork();
+			if (pid == 0)
+				ft_exec(line, env);
 		}
-		printf("\n pathis %s\n", ft_get_Path(line, env));
+		waitpid(pid, NULL, 0);
 	}
 }
