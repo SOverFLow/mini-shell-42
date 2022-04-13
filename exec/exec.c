@@ -36,6 +36,8 @@ char	*ft_get_Path(char *cmd, char **env)
 	return (cmd);
 }
 
+
+
 void	ft_exec(char *cmd, char **env)
 {
 	char	**argv;

@@ -73,6 +73,8 @@ char	*ft_path_join(char *path, char *bin);
 char	*ft_str_ndup(char *str, unsigned int n);
 int		ft_str_ichr(char *str, char c);
 char *check_s_car(char *line);
+char *is_outfile(t_comp *head);
+//
 
 // heredoc
 void ft_start_here_doc(char *stop, int fd);

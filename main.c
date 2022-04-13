@@ -33,6 +33,4 @@ int	main(int argc, char **argv, char **env)
 	// 	}
 	// 	waitpid(pid, NULL, 0);
 	// }
-
-	printf("%s\n", check_s_car(" kdfj dkjh dxzkhj>dkh dskhj "));
 }
