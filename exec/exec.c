@@ -36,6 +36,8 @@ char	*ft_get_Path(char *cmd, char **env)
 	return (cmd);
 }
 
+
+
 void	ft_exec(char *cmd, char **env)
 {
 	char	**argv;
@@ -103,6 +105,54 @@ void ft_exec_cmd(t_comp *tokens, char **env)
 // 	{
 // 		//execute_built_cmd()
 // 	}
+}
+
+int where_caracter(char *line, char c)
+{
+	int i;
+
+	i = 0;
+	while (line[i] && line[i] != c)
+		i++;
+	if (line[i] == c)
+		return (i);
+}
+
+char *check_s_car(char *line)
+{
+	int i;
+	int len;
+	char *newstr;
+	int j;
+
+	i = 0;
+	len  = 0;
+	j = 0;
+	if (ft_str_ichr(line, '>') > -1)
+	{
+		len = where_caracter(line, '>');
+		if (line[len - 1] != ' ')
+			i += 1;
+		if (line[len + 1] != ' ')
+			i += 1;
+		newstr = malloc(sizeof(char) * (ft_strlen(line) + i));
+		printf("%zu\n", ft_strlen(line));
+		printf("%zu\n", ft_strlen(newstr));
+		printf("%d\n", i);
+
+		if (!newstr)
+			return (NULL);
+		while (j < ft_strlen(line) + i)
+		{
+			if (j == len + 1 || j == len - 1)
+				newstr[j] = ' ';
+			else
+				newstr[j] = line[j];
+			j++;
+		}
+	
+	}
+	return (newstr);
 }
 
 // void cammand_execute()
