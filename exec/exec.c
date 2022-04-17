@@ -130,9 +130,11 @@ void	ft_execution(t_list	*lst_comp, char **env)
 	cmd_len = ft_lstsize(lst_comp);
 	i = 0;
 	infile = 0;
-	comp = lst_comp->content;
 	if (cmd_len == 1)
+	{
+		comp = lst_comp->content;
 		ft_lst_cmd(infile, comp, env);
+	}
 	else
 	{
 		while (i < cmd_len - 1)
@@ -142,6 +144,7 @@ void	ft_execution(t_list	*lst_comp, char **env)
 			lst_comp = lst_comp->next;
 			i++;
 		}
+		comp = lst_comp->content;
 		ft_lst_cmd(infile, comp, env);
 	}
 }
