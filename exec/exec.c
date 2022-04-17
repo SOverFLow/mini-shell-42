@@ -86,7 +86,7 @@ int	ft_execut(int infile, t_comp *comp, char **env)
 		if (out == NULL)
 			outfile = fd[1];
 		else
-			outfile = open(out, O_WRONLY, O_CREAT | 0666);
+			outfile = open(out, O_WRONLY | O_CREAT,  0666);
 		close(fd[0]);
 		dup2(outfile, 1);
 		dup2(infile, 0);
@@ -108,8 +108,8 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env)
 	in	= is_infile(comp);
 	if (out == NULL)
 		outfile = 1;
-	else 
-		outfile = open(out, O_WRONLY, O_CREAT | 0666);
+	else
+		outfile = open(out, O_WRONLY | O_CREAT, 0666);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -130,8 +130,9 @@ void	ft_execution(t_list	*lst_comp, char **env)
 	cmd_len = ft_lstsize(lst_comp);
 	i = 0;
 	infile = 0;
+	comp = lst_comp->content;
 	if (cmd_len == 1)
-		printf("zid chi cmd\n");
+		ft_lst_cmd(infile, comp, env);
 	else
 	{
 		while (i < cmd_len - 1)
