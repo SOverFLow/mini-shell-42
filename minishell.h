@@ -75,10 +75,12 @@ char	*ft_str_ndup(char *str, unsigned int n);
 int		ft_str_ichr(char *str, char c);
 char *check_s_car(char *line);
 char *is_outfile(t_comp *head);
+char *is_infile(t_comp *head);
 //
 
 // heredoc
 void ft_start_here_doc(char *stop, int fd);
 void ft_here_doc(char *stop);
+void	ft_execution(t_list	*lst_comp, char **env);
 
 #endif
