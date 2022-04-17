@@ -21,9 +21,13 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		line = readline("minishell:> ");
-		add_history(line);
-		lst_comp = ft_parsing(line);
-		ft_execution(lst_comp, env);
+		if (*line)
+		{
+			add_history(line);
+			lst_comp = ft_parsing(line);
+			ft_execution(lst_comp, env);
+			free(line);
+		}
 		// //lst_comp = lst_comp->next;
 		// comp = lst_comp->content;
 		// while(comp)
