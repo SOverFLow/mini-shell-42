@@ -92,7 +92,7 @@ int	ft_execut(int infile, t_comp *comp, char **env)
 		dup2(infile, 0);
 		if (execve(ft_get_Path(comp->data, env), ft_get_cmd(comp), env) == -1)
 		{
-			ft_putstr_fd("minishell:> ", 2);
+			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(comp->data, 2);
 			ft_putstr_fd(" :command not found\n", 2);
 			exit(127);
@@ -123,7 +123,7 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env)
 		dup2(outfile, 1);
 		if (execve(ft_get_Path(comp->data, env), ft_get_cmd(comp), env) == -1)
 		{
-			ft_putstr_fd("minishell:> ", 2);
+			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(comp->data, 2);
 			ft_putstr_fd(" :command not found\n", 2);
 			exit(127);
