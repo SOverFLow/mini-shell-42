@@ -25,16 +25,9 @@ int	main(int argc, char **argv, char **env)
 		{
 			add_history(line);
 			lst_comp = ft_parsing(line);
-			ft_execution(lst_comp, env);
+			if (lst_comp != NULL)
+				ft_execution(lst_comp, env);
 			free(line);
 		}
-		// //lst_comp = lst_comp->next;
-		// comp = lst_comp->content;
-		// while(comp)
-		// {
-		// 	printf("%s   %d\n", comp->data, comp->whatisthis);
-		// 	comp = comp->next;
-		// }
-		// printf("\n pathis %s\n", ft_get_Path(line, env));
 	}
 }
