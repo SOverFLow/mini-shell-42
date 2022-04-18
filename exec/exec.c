@@ -66,9 +66,6 @@ char **ft_get_cmd(t_comp *head)
 	return (cmd_tab);
 }
 
-
-// said
-
 int	ft_execut(int infile, t_comp *comp, char **env)
 {
 	int	pid;
