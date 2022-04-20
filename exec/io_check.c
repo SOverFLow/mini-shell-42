@@ -2,15 +2,21 @@
 
 char *is_outfile(t_comp *head)
 {
+    char *last;
+    int out;
+
     if (!head)
         return (NULL);
     while (head != NULL)
     {
         if (head->whatisthis == 4)
-            return (head->data);
+        {
+            out = open(head->data, O_WRONLY | O_CREAT, 0666);
+            last = head->data;
+        }
         head = head->next;
     }
-    return (NULL);
+    return (last);
 }
 
 char *is_infile(t_comp *head)
