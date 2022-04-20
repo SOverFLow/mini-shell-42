@@ -27,7 +27,7 @@ int	main(int argc, char **argv, char **env)
 			lst_comp = ft_parsing(line);
 			if (lst_comp != NULL)
 				ft_execution(lst_comp, env);
-			free(line);
+			//free(line);
 		}
 	}
 }
