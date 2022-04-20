@@ -31,6 +31,7 @@ char *opens_files(char **files, int len)
         }
         i++;
     }
+    return (NULL);
 }
 
 char *is_outfile(t_comp *head)
