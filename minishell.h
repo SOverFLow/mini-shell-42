@@ -20,6 +20,7 @@
 #include <fcntl.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <signal.h>
 
 #define CMD 		1 // command
 #define	INFILE		3 // input file
