@@ -12,15 +12,15 @@
 
 #include "../minishell.h"
 
-int ft_pwd()
+void ft_pwd()
 {
     char *path;
 
-    if (getcwd(path, 50))
+	path = getcwd(path, 256);
+    if (!path)
 	{
-		ft_putendl_fd(path, 1);
-		return (1);
+		perror("Error");
+		return ;
 	}
-	else
-		return (0);
+	ft_putendl_fd(path, 1);
 }
