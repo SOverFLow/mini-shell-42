@@ -21,6 +21,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <signal.h>
+#include <sys/wait.h>
 
 #define CMD 		1 // command
 #define	INFILE		3 // input file
@@ -43,13 +44,12 @@ typedef struct s_comp
 	struct s_comp *next;
 }		t_comp;
 
-typedef struct s_mini
+typedef struct s_env
 {
-	int fdin;
-	int fdout;
-	int pipein;
-	int pipeout;
-}		t_mini;
+	char *key;
+	char *val;
+	struct s_env *next;
+}		t_env;
 
 t_comp	*ft_comp_new(char *data, int whatisthat);
 t_comp	*ft_comp_last(t_comp *comp);
@@ -77,11 +77,6 @@ int		ft_str_ichr(char *str, char c);
 char *check_s_car(char *line);
 char *is_outfile(t_comp *head);
 char *is_infile(t_comp *head);
-//
-
-// heredoc
-void ft_start_here_doc(char *stop, int fd);
-void ft_here_doc(char *stop);
 void	ft_execution(t_list	*lst_comp, char **env);
 
 #endif

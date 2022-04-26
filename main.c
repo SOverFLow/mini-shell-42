@@ -18,16 +18,19 @@ int	main(int argc, char **argv, char **env)
 	t_list	*lst_comp;
 	t_comp	*comp;
 
-	signal(SIGINT, handle_sigint);
+	//signal(SIGINT, handle_sigint);
 	while (1)
 	{
-		line = readline("minishell:> ");
+		line = argv[1];
 		if (*line)
 		{
-			add_history(line);
+			//add_history(line);
 			lst_comp = ft_parsing(line);
 			if (lst_comp != NULL)
+			{
 				ft_execution(lst_comp, env);
+				break;
+			}
 			//free(line);
 		}
 	}
