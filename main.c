@@ -18,7 +18,7 @@ int	main(int argc, char **argv, char **env)
 	t_list	*lst_comp;
 	t_comp	*comp;
 
-	//signal(SIGINT, handle_sigint);
+signal(SIGINT, handle_sigint);
 	while (1)
 	{
 		line = argv[1];
