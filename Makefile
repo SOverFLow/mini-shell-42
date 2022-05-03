@@ -20,7 +20,7 @@ $(LIBNAME):
 	$(MAKE) -C Libft
 
 $(NAME): $(LIBNAME)
-	$(CC) -lreadline $(SRCS) $(LIBNAME) -o $(NAME)
+	$(CC) $(SRCS) -lreadline $(LIBNAME) -o $(NAME)
 all: $(NAME)
 
 clean:

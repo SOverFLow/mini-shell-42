@@ -21,17 +21,17 @@ int	main(int argc, char **argv, char **env)
 //signal(SIGINT, handle_sigint);
 	while (1)
 	{
-		line = argv[1];
+		line = readline("minishell :>");
 		if (*line)
 		{
-			//add_history(line);
+			add_history(line);
 			lst_comp = ft_parsing(line);
-			if (lst_comp != NULL)
-			{
+			//if (lst_comp != NULL)
+			//{
 				ft_execution(lst_comp, env);
-				break;
-			}
-			//free(line);
+				//break;
+			//}
+			free(line);
 		}
 	}
 }
