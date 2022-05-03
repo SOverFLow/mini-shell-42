@@ -79,4 +79,7 @@ char *is_outfile(t_comp *head);
 char *is_infile(t_comp *head);
 void	ft_execution(t_list	*lst_comp, char **env);
 
+//env
+void init_env(char **env);
+
 #endif
