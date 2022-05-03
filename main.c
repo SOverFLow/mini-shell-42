@@ -20,7 +20,7 @@ int	main(int argc, char **argv, char **env)
 	t_env *env_node;
 //signal(SIGINT, handle_sigint);
 	
-		//init_env(env);
+	//init_env(env);
 	
 	while (1)
 	{
