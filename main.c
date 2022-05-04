@@ -18,10 +18,14 @@ int	main(int argc, char **argv, char **env)
 	t_list	*lst_comp;
 	t_comp	*comp;
 	t_env *env_node;
-//signal(SIGINT, handle_sigint);
-	
-	//init_env(env);
-	
+		
+	env_node = init_env(env);
+	while (env_node)
+	{
+		printf("%s=\n", env_node->key);
+		env_node = env_node->next;
+	}
+
 	while (1)
 	{
 		line = readline("minishell :>");

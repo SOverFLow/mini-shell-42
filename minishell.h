@@ -80,6 +80,6 @@ char *is_infile(t_comp *head);
 void	ft_execution(t_list	*lst_comp, char **env);
 
 //env
-int init_env(char **env);
+t_env *init_env(char **env);
 
 #endif

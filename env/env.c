@@ -1,18 +1,18 @@
 #include "../minishell.h"
 
-char *trim_from_to(char *s, int from, int to)
+char *trim_key(char *s, int start, int end)
 {
     char *str;
     int i;
 
-    str = malloc(sizeof(char) * (to - from) + 1);
+    str = malloc(sizeof(char) * (end - start) + 1);
     if (!str)
         return (NULL);
     i = 0;
-    while (from < to)
+    while (start < end)
     {
-        str[i] = s[from];
-        from++;
+        str[i] = s[start];
+        start++;
         i++;
     }
     str[i] = '\0';
@@ -21,32 +21,38 @@ char *trim_from_to(char *s, int from, int to)
 
 char *env_key(char *str)
 {
-    char *key;
+    char *key_val;
     int i;
 
     i = -1;
     while (str[++i])
     {
         if (str[i] == '=')
-            return (key = trim_from_to(str, 0, i));
+        {
+            key_val = trim_key(str, 0, i);
+            return (key_val);
+        }
     }
     return (NULL);
 }
 
-int init_env(char **env)
+t_env *init_env(char **env)
 {
     t_env *env_node;
     t_env *new_node;
+    t_env *head;
     int i;
 
-    env = malloc(sizeof(t_env));
-    if (!env)
+    env_node = malloc(sizeof(t_env));
+    head = malloc(sizeof(t_env));
+    if (!env_node)
         return (0);
     i = 1;
     env_node->key = env_key(env[0]);
     env_node->val = ft_strdup(getenv(env_node->key));
     env_node->next = NULL;
-    while (env && env[i])
+    head = env_node;
+    while (env && env[i] && env[0])
     {
         new_node = malloc(sizeof(t_env));
         if (!new_node)
@@ -58,5 +64,5 @@ int init_env(char **env)
         env_node = new_node;
         i++;
     }
-    return (0);
+    return (head);
 }
