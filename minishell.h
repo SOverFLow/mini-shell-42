@@ -81,5 +81,6 @@ void	ft_execution(t_list	*lst_comp, char **env);
 
 //env
 t_env *init_env(char **env);
-
+char *env_key(char *str);
+char *trim_key(char *s, int start, int end);
 #endif
