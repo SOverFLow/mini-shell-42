@@ -18,7 +18,10 @@ int	main(int argc, char **argv, char **env)
 	t_list	*lst_comp;
 	t_comp	*comp;
 	t_env *env_node;
+	struct sigaction sig;
 		
+	sig.sa_handler = SIG_IGN;
+	sigaction(SIGQUIT, &sig, NULL);
 	env_node = init_env(env);
 	while (env_node)
 	{
