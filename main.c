@@ -11,6 +11,10 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+void handler_cntrl_c(int num)
+{
+	ft_putendl_fd("you are press control/c", 1);
+}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -18,14 +22,11 @@ int	main(int argc, char **argv, char **env)
 	t_list	*lst_comp;
 	t_comp	*comp;
 	t_env *env_node;
-	struct sigaction sig;
-		
-	sig.sa_handler = SIG_IGN;
-	sigaction(SIGQUIT, &sig, NULL);
-	env_node = init_env(env);
+
+	signal(SIGINT, handler_cntrl_c);
 	// while (env_node)
 	// {
-	// 	printf("%s=\n", env_node->key);
+	// 	printf("%s=%s\n", env_node->key, env_node->val);
 	// 	env_node = env_node->next;
 	// }
 

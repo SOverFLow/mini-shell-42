@@ -12,26 +12,15 @@
 
 #include "../minishell.h"
 
-int     ft_env(char **env)
+void    ft_env(t_env *head)
 {
-    int i;
 
-    i = 0;
-    while (env[i] != NULL)
+    while(head)
 	{
-		ft_putstr_fd(env[i], 1);
+		ft_putstr_fd(head->key, 1);
+        printf("=");
+        ft_putstr_fd(head->val, 1);
         printf("\n");
-		i += 1;
 	}
 	return (1);
-}
-
-int main(int argc, char **argv, char **env)
-{
-    if (argc == 2 && ft_strncmp(argv[1], "env", 4) == 0)
-    {
-        //printf("%s\n", env[0]);
-        ft_env(env);
-    }
-    return (0);
 }

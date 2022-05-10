@@ -68,7 +68,7 @@ char 	**ft_get_cmd(t_comp *head);
 // cammand
 int		ft_pwd();
 int     ft_echo(char **args);
-int     ft_env(char **env);
+void    ft_env(t_env *head);
 
 // utils
 char	*ft_path_join(char *path, char *bin);
