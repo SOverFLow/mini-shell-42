@@ -24,6 +24,7 @@ int	main(int argc, char **argv, char **env)
 	t_env *env_node;
 
 	//signal(SIGINT, handler_cntrl_c);
+	env_node = init_env(env);
 	// while (env_node)
 	// {
 	// 	printf("%s=%s\n", env_node->key, env_node->val);
