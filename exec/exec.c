@@ -97,7 +97,7 @@ int	ft_execut(int infile, t_comp *comp, char **env)
 			exit(127);
 		}
 	}
-	wait(NULL);
+	waitpid(pid, status, 0);
 	close(fd[1]);
 	return (fd[0]);
 }
@@ -130,7 +130,7 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env)
 			exit(127);
 		}
 	}
-	wait(NULL);
+	waitpid(pid, status, 0);
 }
 
 void	ft_execution(t_list	*lst_comp, char **env)
