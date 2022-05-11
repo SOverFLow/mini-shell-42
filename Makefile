@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 CC = cc
+RDFLAGS= -lreadline -L/goinfre/$(USER)/.brew/opt/readline/lib
 CFLAGS = -lreadline -Wall -Wextra -Werror
 NAME = minishell
 LIBNAME = Libft/libft.a
