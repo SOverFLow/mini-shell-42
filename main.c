@@ -13,7 +13,10 @@
 #include "minishell.h"
 void handler_cntrl_c(int num)
 {
-	ft_putendl_fd("you are press control/c", 1);
+	//rl_replace_line(">", 0);
+	rl_on_new_line();
+	rl_redisplay();
+	printf("\n");
 }
 
 int	main(int argc, char **argv, char **env)
