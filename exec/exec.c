@@ -133,6 +133,7 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env)
 		}
 	}
 	waitpid(pid, status, 0);
+	//close(0);
 }
 
 void	ft_execution(t_list	*lst_comp, char **env)
