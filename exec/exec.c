@@ -12,6 +12,8 @@
 
 #include "../minishell.h"
 
+int *status;
+
 char	*ft_get_Path(char *cmd, char **env)
 {
 	char	*path;
