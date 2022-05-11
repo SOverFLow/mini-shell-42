@@ -23,7 +23,7 @@ int	main(int argc, char **argv, char **env)
 	t_comp	*comp;
 	t_env *env_node;
 
-	signal(SIGINT, handler_cntrl_c);
+	//signal(SIGINT, handler_cntrl_c);
 	// while (env_node)
 	// {
 	// 	printf("%s=%s\n", env_node->key, env_node->val);
