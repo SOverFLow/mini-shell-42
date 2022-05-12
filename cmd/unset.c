@@ -35,7 +35,6 @@ void free_env(t_env *env_node)
         env_node->key = NULL;
         env_node->val = NULL;
         env_node->next = NULL;
-        return ;
     }
 }
 
@@ -43,6 +42,11 @@ void ft_unset(char **args, t_env *env_node)
 {
     t_env *tmp_node;
 
+    if (!args[1])
+    {
+        ft_putstr_fd("unset: not enough arguments\n", 1);
+        return ;
+    }
     if (ft_strncmp(args[1], env_node->key, ft_strlen(env_node->key)) == 0)
     {
         free_env(env_node);

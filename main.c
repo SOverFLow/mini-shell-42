@@ -11,13 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-void handler_cntrl_c(int num)
-{
-	printf("\n");
-	//rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -26,7 +19,9 @@ int	main(int argc, char **argv, char **env)
 	t_comp	*comp;
 	t_env *env_node;
 
-	//signal(SIGINT, handler_cntrl_c);
+	signal(SIGINT, handler_cntrl_c);
+	signal(SIGSEGV, handler_cntrl_d);
+	signal(SIGQUIT, handler_cntrl_back);
 	env_node = init_env(env);
 	// while (env_node)
 	// {

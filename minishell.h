@@ -69,6 +69,7 @@ char 	**ft_get_cmd(t_comp *head);
 int		ft_pwd();
 int     ft_echo(char **args);
 void    ft_env(t_env *head);
+void 	ft_unset(char **args, t_env *env_node);
 
 // utils
 char	*ft_path_join(char *path, char *bin);
@@ -83,4 +84,10 @@ void	ft_execution(t_list	*lst_comp, char **env);
 t_env *init_env(char **env);
 char *env_key(char *str);
 char *trim_key(char *s, int start, int end);
+
+// signals
+void handler_cntrl_c(int num);
+void handler_cntrl_d(int num);
+void handler_cntrl_back(int num);
+
 #endif
