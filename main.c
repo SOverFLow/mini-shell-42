@@ -20,7 +20,7 @@ int	main(int argc, char **argv, char **env)
 
 	signal(SIGINT, handler_cntrl_c);
 	signal(SIGSEGV, handler_cntrl_d);
-	signal(SIGQUIT, handler_cntrl_back);
+	signal(SIGQUIT, SIG_IGN);
 	env_node = init_env(env);
 	while (1)
 	{

@@ -39,8 +39,8 @@ void		execute_built_cmd(t_comp *comp, int infile)
 
 	out = is_outfile(comp);
 	in	= is_infile(comp);
-	printf("out = %s\n", out);
-	printf("in = %s\n", in);
+	//printf("out = %s\n", out);
+	//printf("in = %s\n", in);
 	if (out == NULL)
 		outfile = 1;
 	else

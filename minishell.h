@@ -88,6 +88,5 @@ char *trim_key(char *s, int start, int end);
 // signals
 void handler_cntrl_c(int num);
 void handler_cntrl_d(int num);
-void handler_cntrl_back(int num);
 
 #endif

@@ -31,6 +31,7 @@ void     ft_echo(t_comp *comp)
 	int		n;
 
 	n = 0;
+	char *tmp;
 	if (num_of_args(comp) > 1)
 	{
 		while (comp->next->data && ft_strncmp(comp->next->data, "-n", 3) == 0)
@@ -40,9 +41,10 @@ void     ft_echo(t_comp *comp)
 		}
 		while (comp->next)
 		{
+			tmp = comp->data;
 			// && args[i][0] != '\0'
 			ft_putstr_fd(comp->next->data, 1);
-			if (comp->next)
+			if (comp->next && tmp[0] != '\0')
 				write(1, " ", 1);
 			comp = comp->next;
 		}

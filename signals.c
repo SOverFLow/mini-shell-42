@@ -25,8 +25,3 @@ void handler_cntrl_d(int num)
 	ft_putstr_fd("minishell :> exit", 1);
 	exit(1);
 }
-
-void handler_cntrl_back(int num)
-{
-	num++;
-}
