@@ -21,7 +21,7 @@ $(LIBNAME):
 	$(MAKE) -C Libft
 
 $(NAME): $(LIBNAME)
-	$(CC) $(SRCS) -lreadline $(LIBNAME) -o $(NAME)
+	$(CC) $(SRCS) $(RDFLAGS) $(LIBNAME) -o $(NAME)
 all: $(NAME)
 
 clean:
