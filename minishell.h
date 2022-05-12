@@ -70,6 +70,8 @@ void ft_pwd();
 void     ft_echo(t_comp *comp);
 void    ft_env(t_env *head);
 void 	ft_unset(char **args, t_env *env_node);
+void 	ft_cd(t_comp *comp);
+void 	ft_exit(t_comp *comp);
 
 // utils
 char	*ft_path_join(char *path, char *bin);

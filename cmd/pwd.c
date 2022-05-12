@@ -22,7 +22,7 @@ void ft_pwd()
 		perror("Error");
 		return ;
 	}
-	printf("%s", cmd);
+	printf("%s\n", cmd);
 	//ft_putendl_fd(cmd, 1);
-	printf("oui hhhh\n");
+	// printf("oui hhhh\n");
 }

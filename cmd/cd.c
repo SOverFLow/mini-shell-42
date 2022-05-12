@@ -12,17 +12,28 @@
 
 #include "../minishell.h"
 
-int ft_cd(int argc, char **argv)
+static	int		num_of_args(t_comp *comp)
 {
-    if (argc == 1)
-        printf("invalid parametres\n");
-    else if (argc > 2)
+	int		num;
+
+	num = 0;
+	while (comp)
+	{
+		comp = comp->next;
+		num++;
+	}
+	return (num);
+}
+
+void ft_cd(t_comp *comp)
+{
+    if (num_of_args(comp) == 1)
+        chdir("~");
+    else if (num_of_args(comp) > 2)
         printf("Too many parametres\n");
-    else if (argc == 2)
+    else if (num_of_args(comp) == 2)
     {
-        if (chdir(argv[1]) != 0)
-            perror(argv[1]);
-        system("pwd");
+        if (chdir(comp->next->data) != 0)
+            perror(comp->next->data);
     }
-    return (0);
 }

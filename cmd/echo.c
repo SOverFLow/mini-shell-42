@@ -42,7 +42,6 @@ void     ft_echo(t_comp *comp)
 		while (comp->next)
 		{
 			tmp = comp->data;
-			// && args[i][0] != '\0'
 			ft_putstr_fd(comp->next->data, 1);
 			if (comp->next && tmp[0] != '\0')
 				write(1, " ", 1);

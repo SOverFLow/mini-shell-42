@@ -51,12 +51,12 @@ void		execute_built_cmd(t_comp *comp, int infile)
 	dup2(outfile, 1);
 	if (ft_strncmp(comp->data, "echo", 5) == 0)
 		ft_echo(comp);
-	// if (ft_strcmp(args[0], "cd") == 0)
-    // {
-    //     // cd cammand
-    // }
+	if (ft_strncmp(comp->data, "cd", 3) == 0)
+		ft_cd(comp);
 	if (ft_strncmp(comp->data, "pwd", 4) == 0)
 		ft_pwd();
+	if (ft_strncmp(comp->data, "exit", 5) == 0)
+		ft_exit(comp);
 	// if (ft_strncmp(comp->data, "env", 4) == 0)
 	// 	 ft_env();
 	// if (ft_strcmp(args[0], "export") == 0)
