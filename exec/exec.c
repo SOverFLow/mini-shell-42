@@ -148,7 +148,12 @@ void	ft_execution(t_list	*lst_comp, char **env)
 	if (cmd_len == 1)
 	{
 		comp = lst_comp->content;
-		ft_lst_cmd(infile, comp, env);
+		if (is_cmd_built(comp->data))
+		{
+			execute_built_cmd(comp);
+		}
+		else
+			ft_lst_cmd(infile, comp, env);
 	}
 	else
 	{
