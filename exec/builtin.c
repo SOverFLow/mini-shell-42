@@ -59,12 +59,8 @@ void		execute_built_cmd(t_comp *comp, int infile)
 		ft_exit(comp);
 	// if (ft_strncmp(comp->data, "env", 4) == 0)
 	// 	 ft_env();
-	// if (ft_strcmp(args[0], "export") == 0)
-    // {
-    //     // export cammand
-    // }
-	// if (ft_strcmp(args[0], "unset") == 0)
-    // {
-    //     // export cammand
-    // }
+	// if (ft_strncmp(comp->data, "export", 7) == 0)
+	// 	ft_export()
+	// if (ft_strcmp(comp->data, "unset", 6) == 0)
+	// 	ft_unset(comp, env);
 }

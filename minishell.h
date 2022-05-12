@@ -69,7 +69,7 @@ char 	**ft_get_cmd(t_comp *head);
 void ft_pwd();
 void     ft_echo(t_comp *comp);
 void    ft_env(t_env *head);
-void 	ft_unset(char **args, t_env *env_node);
+void 	ft_unset(t_comp *comp, t_env *env_node);
 void 	ft_cd(t_comp *comp);
 void 	ft_exit(t_comp *comp);
 
