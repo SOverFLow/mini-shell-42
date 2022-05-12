@@ -14,13 +14,15 @@
 
 void ft_pwd()
 {
-    char *path;
-
-	path = getcwd(path, 256);
-    if (!path)
+    char path[256];
+	char *cmd;
+	cmd = getcwd(path, sizeof(path));
+    if (!cmd)
 	{
 		perror("Error");
 		return ;
 	}
-	ft_putendl_fd(path, 1);
+	printf("%s", cmd);
+	//ft_putendl_fd(cmd, 1);
+	printf("oui hhhh\n");
 }

@@ -60,13 +60,13 @@ t_comp	*ft_comp_creat(char *line);
 
 //exec
 int		is_cmd_built(char *cmd);
-void		execute_built_cmd(t_comp *comp);
+void	execute_built_cmd(t_comp *comp, int infile);
 char	*ft_get_Path(char *cmd, char **env);
 void	ft_exec(char *cmd, char **env);
 char 	**ft_get_cmd(t_comp *head);
 
 // cammand
-int		ft_pwd();
+void ft_pwd();
 void     ft_echo(t_comp *comp);
 void    ft_env(t_env *head);
 void 	ft_unset(char **args, t_env *env_node);

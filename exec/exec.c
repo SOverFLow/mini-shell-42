@@ -149,9 +149,7 @@ void	ft_execution(t_list	*lst_comp, char **env)
 	{
 		comp = lst_comp->content;
 		if (is_cmd_built(comp->data))
-		{
-			execute_built_cmd(comp);
-		}
+			execute_built_cmd(comp, infile);
 		else
 			ft_lst_cmd(infile, comp, env);
 	}
@@ -160,11 +158,17 @@ void	ft_execution(t_list	*lst_comp, char **env)
 		while (i < cmd_len - 1)
 		{
 			comp = lst_comp->content;
-			infile = ft_execut(infile, comp, env);
+			if (is_cmd_built(comp->data))
+				execute_built_cmd(comp, infile);
+			else
+				infile = ft_execut(infile, comp, env);
 			lst_comp = lst_comp->next;
 			i++;
 		}
 		comp = lst_comp->content;
-		ft_lst_cmd(infile, comp, env);
+		if (is_cmd_built(comp->data))
+			execute_built_cmd(comp, infile);
+		else
+			ft_lst_cmd(infile, comp, env);
 	}
 }
