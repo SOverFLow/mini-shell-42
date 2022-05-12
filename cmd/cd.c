@@ -30,7 +30,7 @@ void ft_cd(t_comp *comp)
     if (num_of_args(comp) == 1)
         chdir("~");
     else if (num_of_args(comp) > 2)
-        printf("Too many parametres\n");
+        printf("minishell: cd: Too many parametres\n");
     else if (num_of_args(comp) == 2)
     {
         if (chdir(comp->next->data) != 0)

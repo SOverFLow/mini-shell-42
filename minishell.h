@@ -66,8 +66,8 @@ void	ft_exec(char *cmd, char **env);
 char 	**ft_get_cmd(t_comp *head);
 
 // cammand
-void ft_pwd();
-void     ft_echo(t_comp *comp);
+void 	ft_pwd(int outfile);
+void    ft_echo(t_comp *comp, int outfile);
 void    ft_env(t_env *head);
 void 	ft_unset(t_comp *comp, t_env *env_node);
 void 	ft_cd(t_comp *comp);
@@ -77,18 +77,18 @@ void 	ft_exit(t_comp *comp);
 char	*ft_path_join(char *path, char *bin);
 char	*ft_str_ndup(char *str, unsigned int n);
 int		ft_str_ichr(char *str, char c);
-char *check_s_car(char *line);
-char *is_outfile(t_comp *head);
-char *is_infile(t_comp *head);
+char 	*check_s_car(char *line);
+char 	*is_outfile(t_comp *head);
+char 	*is_infile(t_comp *head);
 void	ft_execution(t_list	*lst_comp, char **env);
 
 //env
-t_env *init_env(char **env);
-char *env_key(char *str);
-char *trim_key(char *s, int start, int end);
+t_env	*init_env(char **env);
+char 	*env_key(char *str);
+char 	*trim_key(char *s, int start, int end);
 
 // signals
-void handler_cntrl_c(int num);
-void handler_cntrl_d(int num);
+void 	handler_cntrl_c(int num);
+void 	handler_cntrl_d(int num);
 
 #endif

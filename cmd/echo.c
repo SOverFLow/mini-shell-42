@@ -26,7 +26,7 @@ static	int		num_of_args(t_comp *comp)
 	return (num);
 }
 
-void     ft_echo(t_comp *comp)
+void     ft_echo(t_comp *comp, int outfile)
 {
 	int		n;
 
@@ -39,15 +39,15 @@ void     ft_echo(t_comp *comp)
 			n = 1;
 			comp = comp->next;
 		}
-		while (comp->next)
+		while (comp->next && comp->next->whatisthis < 3)
 		{
 			tmp = comp->data;
-			ft_putstr_fd(comp->next->data, 1);
+			ft_putstr_fd(comp->next->data, outfile);
 			if (comp->next && tmp[0] != '\0')
-				write(1, " ", 1);
+				write(outfile, " ", 1);
 			comp = comp->next;
 		}
 	}
     if (n == 0)
-		write(1, "\n", 1);
+		write(outfile, "\n", 1);
 }

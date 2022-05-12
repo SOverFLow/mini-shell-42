@@ -47,14 +47,15 @@ void		execute_built_cmd(t_comp *comp, int infile)
 		outfile = open(out, O_WRONLY | O_CREAT, 0666);
 	if (in != NULL)
 		infile = open(in, O_RDONLY);
-	dup2(infile, 0);
-	dup2(outfile, 1);
+	//dup2(infile, 0);
+	//close(outfile);
+	//dup2(outfile, 1);
 	if (ft_strncmp(comp->data, "echo", 5) == 0)
-		ft_echo(comp);
+		ft_echo(comp, outfile);
 	if (ft_strncmp(comp->data, "cd", 3) == 0)
 		ft_cd(comp);
 	if (ft_strncmp(comp->data, "pwd", 4) == 0)
-		ft_pwd();
+		ft_pwd(outfile);
 	if (ft_strncmp(comp->data, "exit", 5) == 0)
 		ft_exit(comp);
 	// if (ft_strncmp(comp->data, "env", 4) == 0)

@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void ft_pwd()
+void ft_pwd(int outfile)
 {
     char path[256];
 	char *cmd;
@@ -22,7 +22,7 @@ void ft_pwd()
 		perror("Error");
 		return ;
 	}
-	printf("%s\n", cmd);
-	//ft_putendl_fd(cmd, 1);
+	//printf("%s\n", cmd);
+	ft_putendl_fd(cmd, outfile);
 	// printf("oui hhhh\n");
 }
