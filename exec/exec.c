@@ -150,6 +150,20 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env)
 	waitpid(pid, &status, 0);
 }
 
+//find prev node
+t_comp *find_prev_node(t_comp *head, t_comp *find)
+{
+	t_comp *current_node;
+
+	current_node = head;
+	while (current_node->next != NULL)
+	{
+		if (current_node->next == find)
+			return (current_node);
+		current_node = current_node->next;
+	}
+	return (NULL);
+}
 
 void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 {
