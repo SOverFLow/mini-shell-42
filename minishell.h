@@ -81,6 +81,7 @@ char 	*check_s_car(char *line);
 char 	*is_outfile(t_comp *head);
 char 	*is_infile(t_comp *head);
 void	ft_execution(t_list	*lst_comp, char **env, t_env *head);
+char    *ft_makespace(char *line);
 
 //env
 t_env	*init_env(char **env);

@@ -67,6 +67,7 @@ t_list	*ft_parsing(char *line)
 
 	if(!line)
 		return (0);
+	line = ft_makespace(line);
 	lst_comp = NULL;
 	split = ft_split(line, '|');
 	i = 0;

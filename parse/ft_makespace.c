@@ -13,65 +13,42 @@
 #include "../minishell.h"
 
 
-int ft_get_next_size(char *line)
+char	*ft_dowork(char *line, char token)
 {
-    int i;
-    int size;
+	int		size;
+	int		i;
+	int		j;
+	char	*str;
 
-    i = 0;
-    size = 0;
-    while(line[i])
+	i = 0;
+	j = 0;
+	size = ft_strlen(line) + 100;
+    str = (char *)malloc(sizeof(char) * size + 1);
+    while (line[i])
     {
-        if (line[i] == '>' && line[i])
+        if (line[i] == token)
         {
-            if (line[i - 1] != ' ' && line[i])
-                size++;
-            if (line[i + 1] == '>' && line[i])
-            {
-                if (line[i + 2] != ' ' && line[i])
-                {
-                    size++;
-                    i += 2;
-                }
-            }
-            else if (line[i + 1] != ' ' && line[i])
-            {
-                i++;
-                size++;
-            }
+            if (line[i - 1] != ' ' && line[i - 1] != token)
+                str[j++] = ' ';
+            str[j++] = line[i];
+            if (line[i + 1] != ' ' && line[i + 1] != token)
+                str[j++] = ' ';
         }
+        else
+            str[j++] = line[i];
         i++;
     }
-    return (size);
+    str[j] = '\0';
+	return (str);
 }
 
 char    *ft_makespace(char *line)
 {
-    int     size;
-    int     i;
-    int     j;
-    char    *new_str;
+    char	*str;
+    char	*final;
 
-    size = ft_get_next_size(line);
-    i = 0;
-    j = 0;
-    if (size == 0)
-        return (line);
-    size += ft_strlen(line);
-    new_str = (char *)malloc(sizeof(char) * size + 1);
-    while (i < size)
-    {
-        if (line[i] == '>')
-        {
-            if (line[i - 1] != ' ')
-                new_str[j] = ' ';
-            
-        }
-    }
-
-}
-
-int main(int ac, char **av)
-{
-    printf("%d\n", ft_get_next_size(av[1]));
+	str = ft_dowork(line, '>');
+	final = ft_dowork(str, '<');
+	free(str);
+	return(final);
 }
