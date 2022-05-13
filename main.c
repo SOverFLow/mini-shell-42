@@ -24,7 +24,7 @@ int	main(int argc, char **argv, char **env)
 	env_node = init_env(env);
 	while (1)
 	{
-		line = readline("minishell :>");
+		line = readline("\033[1;32m minishell:> ");
 		if (*line)
 		{
 			add_history(line);
