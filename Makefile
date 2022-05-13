@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC = cc
-RDFLAGS= -lreadline -L/goinfre/$(USER)/.brew/opt/readline/lib
+RF= -lreadline -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include
 CFLAGS = -lreadline -Wall -Wextra -Werror
 NAME = minishell
 LIBNAME = Libft/libft.a
@@ -21,7 +21,7 @@ $(LIBNAME):
 	$(MAKE) -C Libft
 
 $(NAME): $(LIBNAME)
-	$(CC) $(SRCS) $(RDFLAGS) $(LIBNAME) -o $(NAME)
+	$(CC) $(SRCS) $(RF) $(LIBNAME) -o $(NAME)
 all: $(NAME)
 
 clean:
