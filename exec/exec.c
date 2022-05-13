@@ -131,12 +131,14 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env)
 	else
 		outfile = open(out, O_WRONLY | O_CREAT, 0666);
 	if (in != NULL)
+	{
 		infile = open(in, O_RDONLY);
+	}
 	pid = fork();
 	if (pid == 0)
 	{
-		// if (thereis_infile(comp) && in == NULL)
-		// 	exit(1);
+		if (thereis_infile(comp) && in == NULL)
+			exit(1);
 		dup2(infile, 0);
 		dup2(outfile, 1);
 		if (execve(ft_get_Path(comp->data, env), ft_get_cmd(comp), env) == -1)

@@ -66,6 +66,7 @@ char *is_outfile(t_comp *head)
         }
         head = head->next;
     }
+    files[i] = NULL;
     return (opens_files(files, len));
 }
 
@@ -142,5 +143,6 @@ char *is_infile(t_comp *head)
         }
         head = head->next;
     }
+    files[i] = NULL;
     return (infile_files(files, len));
 }
