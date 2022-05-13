@@ -151,7 +151,7 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env)
 }
 
 
-void	ft_execution(t_list	*lst_comp, char **env)
+void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 {
 	t_comp	*comp;
 	int		cmd_len;
@@ -165,7 +165,7 @@ void	ft_execution(t_list	*lst_comp, char **env)
 	{
 		comp = lst_comp->content;
 		if (is_cmd_built(comp->data))
-			execute_built_cmd(comp, infile);
+			execute_built_cmd(comp, infile, head);
 		else
 			ft_lst_cmd(infile, comp, env);
 	}
@@ -175,7 +175,7 @@ void	ft_execution(t_list	*lst_comp, char **env)
 		{
 			comp = lst_comp->content;
 			if (is_cmd_built(comp->data))
-				execute_built_cmd(comp, infile);
+				execute_built_cmd(comp, infile, head);
 			else
 				infile = ft_execut(infile, comp, env);
 			lst_comp = lst_comp->next;
@@ -183,7 +183,7 @@ void	ft_execution(t_list	*lst_comp, char **env)
 		}
 		comp = lst_comp->content;
 		if (is_cmd_built(comp->data))
-			execute_built_cmd(comp, infile);
+			execute_built_cmd(comp, infile, head);
 		else
 			ft_lst_cmd(infile, comp, env);
 	}

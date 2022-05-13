@@ -12,21 +12,21 @@
 
 #include "../minishell.h"
 
-int is_var_valid(char *str)
-{
-    int i;
+// int is_var_valid(char *str)
+// {
+//     int i;
 
-    i = 0;
-    while (str[i] != NULL)
-    {
-        if (i == 0 && ft_isdigit(str[i]))
-            return (0);
-        if (!(ft_isalnum(str[i])) && str[i] != '_')
-            return (0);
-        i++;
-    }
-    return (1);
-}
+//     i = 0;
+//     while (str[i] != NULL)
+//     {
+//         if (i == 0 && ft_isdigit(str[i]))
+//             return (0);
+//         if (!(ft_isalnum(str[i])) && str[i] != '_')
+//             return (0);
+//         i++;
+//     }
+//     return (1);
+// }
 
 void free_env(t_env *env_node)
 {
@@ -42,7 +42,7 @@ void ft_unset(t_comp *comp, t_env *env_node)
 {
     t_env *tmp_node;
 
-    if (!comp->next->data)
+    if (!comp->next)
     {
         ft_putstr_fd("unset: not enough arguments\n", 1);
         return ;

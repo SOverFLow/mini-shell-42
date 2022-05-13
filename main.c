@@ -30,7 +30,7 @@ int	main(int argc, char **argv, char **env)
 			add_history(line);
 			lst_comp = ft_parsing(line);
 			if (lst_comp != NULL)
-				ft_execution(lst_comp, env);
+				ft_execution(lst_comp, env, env_node);
 			free(line);
 		}
 	}

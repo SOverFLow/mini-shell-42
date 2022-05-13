@@ -31,7 +31,7 @@ int		is_cmd_built(char *cmd)
 	return (0);
 }
 
-void		execute_built_cmd(t_comp *comp, int infile)
+void		execute_built_cmd(t_comp *comp, int infile, t_env *head)
 {
 	char *in;
 	char *out;
@@ -53,10 +53,10 @@ void		execute_built_cmd(t_comp *comp, int infile)
 		ft_pwd(outfile);
 	if (ft_strncmp(comp->data, "exit", 5) == 0)
 		ft_exit(comp);
-	// if (ft_strncmp(comp->data, "env", 4) == 0)
-	// 	 ft_env();
+	if (ft_strncmp(comp->data, "env", 4) == 0)
+		 ft_env(head, comp);
 	// if (ft_strncmp(comp->data, "export", 7) == 0)
 	// 	ft_export()
-	// if (ft_strcmp(comp->data, "unset", 6) == 0)
-	// 	ft_unset(comp, env);
+	if (ft_strncmp(comp->data, "unset", 6) == 0)
+		ft_unset(comp, head);
 }

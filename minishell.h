@@ -60,7 +60,7 @@ t_comp	*ft_comp_creat(char *line);
 
 //exec
 int		is_cmd_built(char *cmd);
-void	execute_built_cmd(t_comp *comp, int infile);
+void	execute_built_cmd(t_comp *comp, int infile, t_env *head);
 char	*ft_get_Path(char *cmd, char **env);
 void	ft_exec(char *cmd, char **env);
 char 	**ft_get_cmd(t_comp *head);
@@ -68,7 +68,7 @@ char 	**ft_get_cmd(t_comp *head);
 // cammand
 void 	ft_pwd(int outfile);
 void    ft_echo(t_comp *comp, int outfile);
-void    ft_env(t_env *head);
+void    ft_env(t_env *head, t_comp *comp);
 void 	ft_unset(t_comp *comp, t_env *env_node);
 void 	ft_cd(t_comp *comp);
 void 	ft_exit(t_comp *comp);
@@ -80,7 +80,7 @@ int		ft_str_ichr(char *str, char c);
 char 	*check_s_car(char *line);
 char 	*is_outfile(t_comp *head);
 char 	*is_infile(t_comp *head);
-void	ft_execution(t_list	*lst_comp, char **env);
+void	ft_execution(t_list	*lst_comp, char **env, t_env *head);
 
 //env
 t_env	*init_env(char **env);

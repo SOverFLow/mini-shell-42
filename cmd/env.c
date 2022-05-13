@@ -12,15 +12,36 @@
 
 #include "../minishell.h"
 
-void    ft_env(t_env *head)
+static	int		num_of_args(t_comp *comp)
 {
+	int		num;
 
-    while(head)
+	num = 0;
+	while (comp)
 	{
-		ft_putstr_fd(head->key, 1);
-        printf("=");
-        ft_putstr_fd(head->val, 1);
-        printf("\n");
+		comp = comp->next;
+		num++;
 	}
-	return (1);
+	return (num);
+}
+
+void    ft_env(t_env *head, t_comp *comp)
+{
+    if (num_of_args(comp) > 1)
+    {
+        ft_putstr_fd("env :", 1);
+        ft_putstr_fd(comp->next->data, 1);
+        ft_putstr_fd(": No such file or directory\n", 1);
+    }
+    else
+    {
+        while(head)
+	    {
+		    ft_putstr_fd(head->key, 1);
+            write(1, "=", 1);
+            ft_putstr_fd(head->val, 1);
+            write(1, "\n", 1);
+            head = head->next;
+	    } 
+    }
 }
