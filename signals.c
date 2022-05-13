@@ -22,6 +22,6 @@ void handler_cntrl_c(int num)
 
 void handler_cntrl_d(int num)
 {
-	ft_putstr_fd("minishell :> exit", 1);
+	ft_putstr_fd("mminishell➜ exit", 1);
 	exit(1);
 }
