@@ -100,6 +100,8 @@ int	ft_execut(int infile, t_comp *comp, char **env)
 		if (in != NULL)
 			infile = open(in, O_RDONLY);
 		close(fd[0]);
+		if (thereis_infile(comp) && in == NULL)
+			exit(1);
 		dup2(outfile, 1);
 		dup2(infile, 0);
 		if (execve(ft_get_Path(comp->data, env), ft_get_cmd(comp), env) == -1)
