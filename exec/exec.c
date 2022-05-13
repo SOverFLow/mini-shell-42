@@ -14,6 +14,17 @@
 
 int status;
 
+int thereis_infile(t_comp *comp)
+{
+	while (comp)
+	{
+		if (comp->whatisthis == 6)
+			return (1);
+		comp = comp->next;
+	}
+	return (0);
+}
+
 char	*ft_get_Path(char *cmd, char **env)
 {
 	char	*path;
@@ -122,6 +133,8 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env)
 	pid = fork();
 	if (pid == 0)
 	{
+		if (thereis_infile(comp) && in == NULL)
+			exit(1);
 		dup2(infile, 0);
 		dup2(outfile, 1);
 		if (execve(ft_get_Path(comp->data, env), ft_get_cmd(comp), env) == -1)
@@ -134,6 +147,7 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env)
 	}
 	waitpid(pid, &status, 0);
 }
+
 
 void	ft_execution(t_list	*lst_comp, char **env)
 {

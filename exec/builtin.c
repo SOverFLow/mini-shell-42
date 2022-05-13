@@ -39,17 +39,12 @@ void		execute_built_cmd(t_comp *comp, int infile)
 
 	out = is_outfile(comp);
 	in	= is_infile(comp);
-	//printf("out = %s\n", out);
-	//printf("in = %s\n", in);
 	if (out == NULL)
 		outfile = 1;
 	else
 		outfile = open(out, O_WRONLY | O_CREAT, 0666);
 	if (in != NULL)
 		infile = open(in, O_RDONLY);
-	//dup2(infile, 0);
-	//close(outfile);
-	//dup2(outfile, 1);
 	if (ft_strncmp(comp->data, "echo", 5) == 0)
 		ft_echo(comp, outfile);
 	if (ft_strncmp(comp->data, "cd", 3) == 0)
