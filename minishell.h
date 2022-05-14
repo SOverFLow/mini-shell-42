@@ -83,6 +83,10 @@ char 	*is_infile(t_comp *head);
 void	ft_execution(t_list	*lst_comp, char **env, t_env *head);
 char    *ft_makespace(char *line);
 int 	thereis_infile(t_comp *comp);
+int 	infile_len(t_comp *head);
+char 	*infile_files(char **files, int len);
+char 	*opens_files(char **files, int len);
+int 	outfile_len(t_comp *head);
 
 //env
 t_env	*init_env(char **env);
