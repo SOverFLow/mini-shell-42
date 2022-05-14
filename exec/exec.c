@@ -99,6 +99,11 @@ int	ft_execut(int infile, t_comp *comp, char **env)
 			outfile = open(out, O_WRONLY | O_CREAT,  0666);
 		if (in != NULL)
 			infile = open(in, O_RDONLY);
+		if (outfile == -1)
+		{
+			perror(out);
+			return (0);
+		}
 		close(fd[0]);
 		if (thereis_infile(comp) && in == NULL)
 			exit(1);
@@ -131,6 +136,11 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env)
 		outfile = 1;
 	else
 		outfile = open(out, O_WRONLY | O_CREAT, 0666);
+	if (outfile == -1)
+	{
+		perror(out);
+		return ;
+	}
 	if (in != NULL)
 	{
 		infile = open(in, O_RDONLY);
