@@ -68,7 +68,7 @@ char 	**ft_get_cmd(t_comp *head);
 // cammand
 void 	ft_pwd(int outfile);
 void    ft_echo(t_comp *comp, int outfile);
-void    ft_env(t_env *head, t_comp *comp);
+void    ft_env(t_env *head, t_comp *comp, int outfile);
 void 	ft_unset(t_comp *comp, t_env *env_node);
 void 	ft_cd(t_comp *comp);
 void 	ft_exit(t_comp *comp);
@@ -82,6 +82,7 @@ char 	*is_outfile(t_comp *head);
 char 	*is_infile(t_comp *head);
 void	ft_execution(t_list	*lst_comp, char **env, t_env *head);
 char    *ft_makespace(char *line);
+int 	thereis_infile(t_comp *comp);
 
 //env
 t_env	*init_env(char **env);

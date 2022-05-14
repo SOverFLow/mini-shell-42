@@ -150,6 +150,7 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env)
 		}
 	}
 	waitpid(pid, &status, 0);
+	//printf("$? = %d\n",WEXITSTATUS(status));
 }
 
 //find prev node
