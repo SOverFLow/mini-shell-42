@@ -22,7 +22,5 @@ void ft_pwd(int outfile)
 		perror("Error");
 		return ;
 	}
-	//printf("%s\n", cmd);
 	ft_putendl_fd(cmd, outfile);
-	// printf("oui hhhh\n");
 }

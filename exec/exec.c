@@ -204,7 +204,6 @@ void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 			else
 				infile = ft_execut(infile, comp, env);
 			lst_comp = lst_comp->next;
-			//printf("infile = %d\n", infile);
 			i++;
 		}
 		comp = lst_comp->content;

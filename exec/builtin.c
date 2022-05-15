@@ -84,12 +84,8 @@ int		execute_builtin_cmds(t_comp *comp, int infile, t_env *head)
 		perror(out);
 		return (0);
 	}
-	//close(fd[0]);
 	if (thereis_infile(comp) && in == NULL)
 		return (0);
-	//printf("fd[0] = %d\n", fd[0]);
-	//dup2(outfile, 1);
-	//dup2(infile, 0);
 	if (ft_strncmp(comp->data, "echo", 5) == 0)
 		ft_echo(comp, outfile);
 	if (ft_strncmp(comp->data, "cd", 3) == 0)
@@ -104,6 +100,5 @@ int		execute_builtin_cmds(t_comp *comp, int infile, t_env *head)
 	// 	ft_export()
 	if (ft_strncmp(comp->data, "unset", 6) == 0)
 		ft_unset(comp, head);
-	//close(fd[1]);
 	return (fd[0]);
 }
