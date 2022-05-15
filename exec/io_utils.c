@@ -27,6 +27,11 @@ char *opens_files(char **files, int len)
         else 
         {
             fd = open(files[i], O_WRONLY | O_CREAT,  0666);
+            if (fd == -1)
+            {
+                perror(files[i]);
+                //return (NULL);
+            }
             close(fd);
         }
         i++;
