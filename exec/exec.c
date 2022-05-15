@@ -109,7 +109,6 @@ int	ft_execut(int infile, t_comp *comp, char **env)
 			exit(1);
 		dup2(outfile, 1);
 		dup2(infile, 0);
-
 		if (execve(ft_get_Path(comp->data, env), ft_get_cmd(comp), env) == -1)
 		{
 			ft_putstr_fd("minishell: ", 2);
@@ -201,10 +200,11 @@ void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 		{
 			comp = lst_comp->content;
 			if (is_cmd_built(comp->data))
-				execute_built_cmd(comp, infile, head);
+				infile = execute_builtin_cmds(comp, infile, head);
 			else
 				infile = ft_execut(infile, comp, env);
 			lst_comp = lst_comp->next;
+			//printf("infile = %d\n", infile);
 			i++;
 		}
 		comp = lst_comp->content;

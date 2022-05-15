@@ -64,6 +64,7 @@ void	execute_built_cmd(t_comp *comp, int infile, t_env *head);
 char	*ft_get_Path(char *cmd, char **env);
 void	ft_exec(char *cmd, char **env);
 char 	**ft_get_cmd(t_comp *head);
+int		execute_builtin_cmds(t_comp *comp, int infile, t_env *head);
 
 // cammand
 void 	ft_pwd(int outfile);

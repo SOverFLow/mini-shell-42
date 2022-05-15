@@ -62,3 +62,48 @@ void		execute_built_cmd(t_comp *comp, int infile, t_env *head)
 	if (ft_strncmp(comp->data, "unset", 6) == 0)
 		ft_unset(comp, head);
 }
+
+int		execute_builtin_cmds(t_comp *comp, int infile, t_env *head)
+{
+	char *in;
+	char *out;
+	int outfile;
+	int	fd[2];
+
+	pipe(fd);
+	out = is_outfile(comp);
+	in	= is_infile(comp);
+	if (out == NULL)
+		outfile = fd[1];
+	else
+		outfile = open(out, O_WRONLY | O_CREAT, 0666);
+	if (in != NULL)
+		infile = open(in, O_RDONLY);
+	if (outfile == -1)
+	{
+		perror(out);
+		return (0);
+	}
+	//close(fd[0]);
+	if (thereis_infile(comp) && in == NULL)
+		return (0);
+	//printf("fd[0] = %d\n", fd[0]);
+	//dup2(outfile, 1);
+	//dup2(infile, 0);
+	if (ft_strncmp(comp->data, "echo", 5) == 0)
+		ft_echo(comp, outfile);
+	if (ft_strncmp(comp->data, "cd", 3) == 0)
+		ft_cd(comp);
+	if (ft_strncmp(comp->data, "pwd", 4) == 0)
+		ft_pwd(outfile);
+	if (ft_strncmp(comp->data, "exit", 5) == 0)
+		ft_exit(comp);
+	if (ft_strncmp(comp->data, "env", 4) == 0)
+		 ft_env(head, comp, outfile);
+	// if (ft_strncmp(comp->data, "export", 7) == 0)
+	// 	ft_export()
+	if (ft_strncmp(comp->data, "unset", 6) == 0)
+		ft_unset(comp, head);
+	//close(fd[1]);
+	return (fd[0]);
+}
