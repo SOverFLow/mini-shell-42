@@ -12,22 +12,6 @@
 
 #include "../minishell.h"
 
-int	is_var_valid(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != NULL)
-	{
-		if (i == 0 && ft_isdigit(str[i]))
-			return (0);
-		if (!(ft_isalnum(str[i])) && str[i] != '_')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 void	free_env(t_env *env_node)
 {
 	if (env_node->next == NULL)
