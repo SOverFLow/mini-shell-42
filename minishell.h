@@ -55,7 +55,7 @@ t_comp	*ft_comp_new(char *data, int whatisthat);
 t_comp	*ft_comp_last(t_comp *comp);
 void	ft_comp_add(t_comp **head,t_comp *new);
 char	**ft_custom_split(char *str);
-t_list	*ft_parsing(char *line);
+t_list	*ft_parsing(char *line, t_env *env_node);
 t_comp	*ft_comp_creat(char *line);
 
 //exec

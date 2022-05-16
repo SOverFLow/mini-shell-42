@@ -59,7 +59,45 @@ t_comp	*ft_comp_creat(char *line)
 	return (comp);
 }
 
-t_list	*ft_parsing(char *line)
+char	*ft_env_serch(char *data, t_env *env_node)
+{
+	while(env_node)
+	{
+		if (ft_strncmp(env_node->key, data + 1, ft_strlen(data)) == 0)
+			return (env_node->val);
+		env_node = env_node->next;
+	}
+	return (NULL);
+}
+
+char	*ft_realvalue(char *data, t_env	*env_list)
+{
+	if (data[0] == '$')
+		return(ft_env_serch(data, env_list));
+	else
+		return (data);
+}
+
+t_list	*ft_last_parser(t_list	*lst_comp, t_env *env_node)
+{
+	t_comp	*comp;
+	t_list	*temp;
+
+	temp = lst_comp;
+	while(lst_comp)
+	{
+		comp = lst_comp->content;
+		while(comp)
+		{
+			comp->data = ft_realvalue(comp->data, env_node);
+			comp = comp->next;
+		}
+		lst_comp = lst_comp->next;
+	}
+	return (temp);
+}
+
+t_list	*ft_parsing(char *line, t_env *env_node)
 {
 	char	**split;
 	int		i;
@@ -76,5 +114,5 @@ t_list	*ft_parsing(char *line)
 		ft_lstadd_back(&lst_comp, ft_lstnew(ft_comp_creat(split[i])));
 		i++;
 	}
-	return (lst_comp);
+	return (ft_last_parser(lst_comp, env_node));
 }
