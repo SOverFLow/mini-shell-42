@@ -6,16 +6,15 @@
 /*   By: selhanda <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 16:05:20 by selhanda          #+#    #+#             */
-/*   Updated: 2022/04/06 16:05:26 by selhanda         ###   ########.fr       */
+/*   Updated: 2022/05/16 16:47:36 by selhanda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-static	int		num_of_args(t_comp *comp)
+static	int	num_of_args(t_comp *comp)
 {
-	int		num;
+	int	num;
 
 	num = 0;
 	while (comp)
@@ -26,9 +25,9 @@ static	int		num_of_args(t_comp *comp)
 	return (num);
 }
 
-void     ft_echo(t_comp *comp, int outfile)
+void	ft_echo(t_comp *comp, int outfile)
 {
-	int		n;
+	int	n;
 
 	n = 0;
 	if (num_of_args(comp) > 1)
@@ -46,6 +45,6 @@ void     ft_echo(t_comp *comp, int outfile)
 			comp = comp->next;
 		}
 	}
-    if (n == 0)
+	if (n == 0)
 		write(outfile, "\n", 1);
 }
