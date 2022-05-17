@@ -36,7 +36,7 @@ static char *get_env_path(t_env *env, char *find , int len)
 	return (NULL);
 }
 
-static void go_to_path(int par, t_env *env)
+static void ft_go_to_path(int par, t_env *env)
 {
 	char *path;
 
@@ -51,7 +51,8 @@ static void go_to_path(int par, t_env *env)
 		path = get_env_path(env, "OLDPWD", 6);
 		edit_old_pwd(env);
 	}
-	chdir(path);
+	if (chdir(path) != 0)
+		perror(path);
 }
 
 static	int	num_of_args(t_comp *comp)
@@ -70,17 +71,18 @@ static	int	num_of_args(t_comp *comp)
 void	ft_cd(t_comp *comp, t_env *env)
 {
 	if (num_of_args(comp) == 1)
-		go_to_path(0, env);
+		ft_go_to_path(0, env);
 	if (num_of_args(comp) > 1)
 	{
 		if (ft_strncmp(comp->next->data, "-", 2) == 0)
-			go_to_path(1, env);
+			ft_go_to_path(1, env);
 		else if (ft_strncmp(comp->next->data, "~", 2) == 0)
-			go_to_path(0, env);
+			ft_go_to_path(0, env);
 		else
 		{
 			edit_old_pwd(env);
-			chdir(comp->next->data);
+			if (chdir(comp->next->data) != 0)
+				perror(comp->next->data);
 		}
 	}
 }
