@@ -50,7 +50,7 @@ void	execute_built_cmd(t_comp *comp, int infile, t_env *head)
 	if (ft_strncmp(comp->data, "echo", 5) == 0)
 		ft_echo(comp, outfile);
 	if (ft_strncmp(comp->data, "cd", 3) == 0)
-		ft_cd(comp);
+		ft_cd(comp, head);
 	if (ft_strncmp(comp->data, "pwd", 4) == 0)
 		ft_pwd(outfile);
 	if (ft_strncmp(comp->data, "exit", 5) == 0)
@@ -89,7 +89,7 @@ int	execute_builtin_cmds(t_comp *comp, int infile, t_env *head)
 	if (ft_strncmp(comp->data, "echo", 5) == 0)
 		ft_echo(comp, outfile);
 	if (ft_strncmp(comp->data, "cd", 3) == 0)
-		ft_cd(comp);
+		ft_cd(comp, head);
 	if (ft_strncmp(comp->data, "pwd", 4) == 0)
 		ft_pwd(outfile);
 	if (ft_strncmp(comp->data, "exit", 5) == 0)
