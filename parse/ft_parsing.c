@@ -27,8 +27,8 @@ int	is_redirection(char *str)
 
 int	whatisthis(char **splited, int index)
 {
-	if (index == 0)
-		return (1);
+	if (index == 0 && is_redirection(splited[0]) == 0)
+		return (2);
 	if (is_redirection(splited[index]) != 0)
 		return (is_redirection(splited[index]));
 	if (is_redirection(splited[index - 1]) == 5)
@@ -66,9 +66,11 @@ char	*ft_env_serch(char *data, char c, t_env *env_node)
 	str = NULL;
 	if (c == '"')
 		str = ft_substr(data, 1, ft_strlen(data) - 2);
+	else if (c == 39)
+		str = ft_substr(data, 1, ft_strlen(data) - 2);
 	else
 		str = data;
-	if (str[0] == '$')
+	if (str[0] == '$' && c != 39)
 	{
 		while(env_node)
 		{
@@ -83,7 +85,7 @@ char	*ft_env_serch(char *data, char c, t_env *env_node)
 
 char	*ft_realvalue(char *data, t_env	*env_list)
 {
-	if ((data[0] == '$' || data[0] == '"' ) && data[1] != '\0')
+	if ((data[0] == '$' || data[0] == '"' || data[0] == 39) && data[1] != '\0')
 		return(ft_env_serch(data, data[0], env_list));
 	else
 		return (data);

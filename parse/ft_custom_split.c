@@ -19,12 +19,12 @@ static int is_space(char c)
 	return (0);
 }
 
-static int	ft_skip(char *str)
+static int	ft_skip(char *str, char c)
 {
 	int	i;
 
 	i = 1;
-	while(str[i] != '"')
+	while(str[i] != c)
 	{
 		i++;
 	}
@@ -46,8 +46,8 @@ static int	ft_w_len(char *str)
 			len++;
 		while (str[i] && !is_space(str[i]))
 		{
-			if (str[i] == '"')
-				i += ft_skip(str + i);
+			if (str[i] == '"' || str[i] == 39)
+				i += ft_skip(str + i, str[i]);
 			else
 				i++;
 		}
@@ -72,10 +72,10 @@ char	**ft_custom_split(char *str)
 			i++;
 		while (str[i] && !is_space(str[i]))
 		{
-			if (str[i] == '"')
+			if (str[i] == '"' || str[i] == 39)
 			{
-				size = ft_skip(str + i);
-				i += ft_skip(str + i);
+				size = ft_skip(str + i, str[i]);
+				i += ft_skip(str + i, str[i]);
 				break;
 			}
 			size++;

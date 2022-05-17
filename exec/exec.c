@@ -25,6 +25,17 @@ int	thereis_infile(t_comp *comp)
 	return (0);
 }
 
+char	*ft_cmd(t_comp *comp)
+{
+	while (comp)
+	{
+		if (comp->whatisthis == 2)
+			return (comp->data);
+		comp = comp->next;
+	}
+	return (NULL);
+}
+
 char	*ft_get_path(char *cmd, char **env)
 {
 	char	*path;
@@ -109,7 +120,7 @@ int	ft_execut(int infile, t_comp *comp, char **env)
 			exit(1);
 		dup2(outfile, 1);
 		dup2(infile, 0);
-		if (execve(ft_get_path(comp->data, env), ft_get_cmd(comp), env) == -1)
+		if (execve(ft_get_path(ft_cmd(comp), env), ft_get_cmd(comp), env) == -1)
 		{
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(comp->data, 2);
@@ -149,7 +160,7 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env)
 			exit(1);
 		dup2(infile, 0);
 		dup2(outfile, 1);
-		if (execve(ft_get_path(comp->data, env), ft_get_cmd(comp), env) == -1)
+		if (execve(ft_get_path(ft_cmd(comp), env), ft_get_cmd(comp), env) == -1)
 		{
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(comp->data, 2);
