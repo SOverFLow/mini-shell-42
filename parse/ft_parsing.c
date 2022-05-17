@@ -59,21 +59,32 @@ t_comp	*ft_comp_creat(char *line)
 	return (comp);
 }
 
-char	*ft_env_serch(char *data, t_env *env_node)
+char	*ft_env_serch(char *data, char c, t_env *env_node)
 {
-	while(env_node)
+	char	*str;
+
+	str = NULL;
+	if (c == '"')
+		str = ft_substr(data, 1, ft_strlen(data) - 2);
+	else
+		str = data;
+	if (str[0] == '$')
 	{
-		if (ft_strncmp(env_node->key, data + 1, ft_strlen(data)) == 0)
-			return (env_node->val);
-		env_node = env_node->next;
+		while(env_node)
+		{
+			if (ft_strncmp(env_node->key, str + 1, ft_strlen(str)) == 0)
+				return (env_node->val);
+			env_node = env_node->next;
+		}
+		str = NULL;
 	}
-	return (NULL);
+	return (str);
 }
 
 char	*ft_realvalue(char *data, t_env	*env_list)
 {
-	if (data[0] == '$')
-		return(ft_env_serch(data, env_list));
+	if ((data[0] == '$' || data[0] == '"' ) && data[1] != '\0')
+		return(ft_env_serch(data, data[0], env_list));
 	else
 		return (data);
 }
