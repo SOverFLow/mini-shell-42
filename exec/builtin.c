@@ -100,5 +100,6 @@ int	execute_builtin_cmds(t_comp *comp, int infile, t_env *head)
 		ft_export(comp, head);
 	if (ft_strncmp(comp->data, "unset", 6) == 0)
 		ft_unset(comp, head);
+	close(fd[1]);
 	return (fd[0]);
 }
