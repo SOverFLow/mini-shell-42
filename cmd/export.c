@@ -58,6 +58,18 @@ void	ft_export(t_comp *comp, t_env *head)
 {
 	char	**split;
 
+	if (num_of_args(comp) == 1)
+	{
+		while (head)
+		{
+			ft_putstr_fd("declare -x ", 1);
+			ft_putstr_fd(head->key, 1);
+			write(1, "=", 1);
+			ft_putstr_fd(head->val, 1);
+			write(1, "\n", 1);
+			head = head->next;
+		}
+	}
 	if (num_of_args(comp) > 1)
 	{
 		while (comp->next)

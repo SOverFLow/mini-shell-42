@@ -71,7 +71,7 @@ void 	ft_pwd(int outfile);
 void    ft_echo(t_comp *comp, int outfile);
 void    ft_env(t_env *head, t_comp *comp, int outfile);
 void 	ft_unset(t_comp *comp, t_env *env_node);
-void 	ft_cd(t_comp *comp);
+void	ft_cd(t_comp *comp, t_env *env);
 void 	ft_exit(t_comp *comp);
 void 	ft_export(t_comp *comp, t_env *head);
 
@@ -89,6 +89,7 @@ int 	infile_len(t_comp *head);
 char 	*infile_files(char **files, int len);
 char 	*opens_files(char **files, int len);
 int 	outfile_len(t_comp *head);
+void	add_var(char *var, t_env *env_node);
 
 //env
 t_env	*init_env(char **env);
