@@ -187,6 +187,8 @@ void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 	if (cmd_len == 1)
 	{
 		comp = lst_comp->content;
+		if (comp->data == NULL)
+			return ;
 		if (is_cmd_built(comp->data))
 			execute_built_cmd(comp, infile, head);
 		else
@@ -197,6 +199,8 @@ void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 		while (i < cmd_len - 1)
 		{
 			comp = lst_comp->content;
+			if (comp->data == NULL)
+				return ;
 			if (is_cmd_built(comp->data))
 				infile = execute_builtin_cmds(comp, infile, head);
 			else
