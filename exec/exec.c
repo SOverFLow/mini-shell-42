@@ -6,15 +6,15 @@
 /*   By: selhanda <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 17:59:20 by selhanda          #+#    #+#             */
-/*   Updated: 2022/04/07 17:59:23 by selhanda         ###   ########.fr       */
+/*   Updated: 2022/05/16 18:21:48 by selhanda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int status;
+int	status;
 
-int thereis_infile(t_comp *comp)
+int	thereis_infile(t_comp *comp)
 {
 	while (comp)
 	{
@@ -25,13 +25,13 @@ int thereis_infile(t_comp *comp)
 	return (0);
 }
 
-char	*ft_get_Path(char *cmd, char **env)
+char	*ft_get_path(char *cmd, char **env)
 {
 	char	*path;
 	char	*dir;
 	char	*bin;
 	int		i;
-
+	
 	i = 0;
 	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
 		i++;
@@ -49,12 +49,12 @@ char	*ft_get_Path(char *cmd, char **env)
 	return (cmd);
 }
 
-char **ft_get_cmd(t_comp *head)
+char	**ft_get_cmd(t_comp *head)
 {
-	t_comp *cmd;
-	char **cmd_tab;
-	int i;
-
+	t_comp	*cmd;
+	char	**cmd_tab;
+	int		i;
+	
 	if (!head)
 		return (NULL);
 	cmd = head->next;
@@ -86,7 +86,7 @@ int	ft_execut(int infile, t_comp *comp, char **env)
 	int	outfile;
 	char *in;
 	char *out;
-
+	
 	pipe(fd);
 	out = is_outfile(comp);
 	in	= is_infile(comp);
@@ -96,7 +96,7 @@ int	ft_execut(int infile, t_comp *comp, char **env)
 		if (out == NULL)
 			outfile = fd[1];
 		else
-			outfile = open(out, O_WRONLY | O_CREAT,  0666);
+			outfile = open(out, O_WRONLY | O_CREAT, 0666);
 		if (outfile == -1)
 		{
 			perror(out);
@@ -109,7 +109,7 @@ int	ft_execut(int infile, t_comp *comp, char **env)
 			exit(1);
 		dup2(outfile, 1);
 		dup2(infile, 0);
-		if (execve(ft_get_Path(comp->data, env), ft_get_cmd(comp), env) == -1)
+		if (execve(ft_get_path(comp->data, env), ft_get_cmd(comp), env) == -1)
 		{
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(comp->data, 2);
@@ -124,11 +124,11 @@ int	ft_execut(int infile, t_comp *comp, char **env)
 
 void	ft_lst_cmd(int infile, t_comp *comp, char **env)
 {
-	int outfile;
-	int pid;
-	char *in;
-	char *out;
-
+	int		outfile;
+	int		pid;
+	char	*in;
+	char	*out;
+	
 	out = is_outfile(comp);
 	in	= is_infile(comp);
 	if (out == NULL)
@@ -149,7 +149,7 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env)
 			exit(1);
 		dup2(infile, 0);
 		dup2(outfile, 1);
-		if (execve(ft_get_Path(comp->data, env), ft_get_cmd(comp), env) == -1)
+		if (execve(ft_get_path(comp->data, env), ft_get_cmd(comp), env) == -1)
 		{
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(comp->data, 2);
@@ -158,14 +158,12 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env)
 		}
 	}
 	waitpid(pid, &status, 0);
-	//printf("$? = %d\n",WEXITSTATUS(status));
 }
 
-//find prev node
-t_comp *find_prev_node(t_comp *head, t_comp *find)
+t_comp	*find_prev_node(t_comp *head, t_comp *find)
 {
-	t_comp *current_node;
-
+	t_comp	*current_node;
+	
 	current_node = head;
 	while (current_node->next != NULL)
 	{
@@ -182,7 +180,7 @@ void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 	int		cmd_len;
 	int		i;
 	int		infile;
-
+	
 	cmd_len = ft_lstsize(lst_comp);
 	i = 0;
 	infile = 0;

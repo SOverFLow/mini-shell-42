@@ -61,7 +61,7 @@ t_comp	*ft_comp_creat(char *line);
 //exec
 int		is_cmd_built(char *cmd);
 void	execute_built_cmd(t_comp *comp, int infile, t_env *head);
-char	*ft_get_Path(char *cmd, char **env);
+char	*ft_get_path(char *cmd, char **env);
 void	ft_exec(char *cmd, char **env);
 char 	**ft_get_cmd(t_comp *head);
 int		execute_builtin_cmds(t_comp *comp, int infile, t_env *head);
@@ -73,6 +73,7 @@ void    ft_env(t_env *head, t_comp *comp, int outfile);
 void 	ft_unset(t_comp *comp, t_env *env_node);
 void 	ft_cd(t_comp *comp);
 void 	ft_exit(t_comp *comp);
+void 	ft_export(t_comp *comp, t_env *head);
 
 // utils
 char	*ft_path_join(char *path, char *bin);

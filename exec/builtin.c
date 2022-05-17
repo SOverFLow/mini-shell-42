@@ -6,13 +6,13 @@
 /*   By: selhanda <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 15:07:09 by selhanda          #+#    #+#             */
-/*   Updated: 2022/04/06 15:07:12 by selhanda         ###   ########.fr       */
+/*   Updated: 2022/05/16 18:07:10 by selhanda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int		is_cmd_built(char *cmd)
+int	is_cmd_built(char *cmd)
 {
 	if (ft_strncmp(cmd, "echo", 5) == 0)
 		return (1);
@@ -31,14 +31,14 @@ int		is_cmd_built(char *cmd)
 	return (0);
 }
 
-void		execute_built_cmd(t_comp *comp, int infile, t_env *head)
+void	execute_built_cmd(t_comp *comp, int infile, t_env *head)
 {
-	char *in;
-	char *out;
-	int outfile;
+	char	*in;
+	char	*out;
+	int		outfile;
 
 	out = is_outfile(comp);
-	in	= is_infile(comp);
+	in = is_infile(comp);
 	if (out == NULL)
 		outfile = 1;
 	else
@@ -56,23 +56,23 @@ void		execute_built_cmd(t_comp *comp, int infile, t_env *head)
 	if (ft_strncmp(comp->data, "exit", 5) == 0)
 		ft_exit(comp);
 	if (ft_strncmp(comp->data, "env", 4) == 0)
-		 ft_env(head, comp, outfile);
-	// if (ft_strncmp(comp->data, "export", 7) == 0)
-	// 	ft_export()
+		ft_env(head, comp, outfile);
+	if (ft_strncmp(comp->data, "export", 7) == 0)
+		ft_export(comp, head);
 	if (ft_strncmp(comp->data, "unset", 6) == 0)
 		ft_unset(comp, head);
 }
 
-int		execute_builtin_cmds(t_comp *comp, int infile, t_env *head)
+int	execute_builtin_cmds(t_comp *comp, int infile, t_env *head)
 {
-	char *in;
-	char *out;
-	int outfile;
-	int	fd[2];
+	char	*in;
+	char	*out;
+	int		outfile;
+	int		fd[2];
 
 	pipe(fd);
 	out = is_outfile(comp);
-	in	= is_infile(comp);
+	in = is_infile(comp);
 	if (out == NULL)
 		outfile = fd[1];
 	else
@@ -95,9 +95,9 @@ int		execute_builtin_cmds(t_comp *comp, int infile, t_env *head)
 	if (ft_strncmp(comp->data, "exit", 5) == 0)
 		ft_exit(comp);
 	if (ft_strncmp(comp->data, "env", 4) == 0)
-		 ft_env(head, comp, outfile);
-	// if (ft_strncmp(comp->data, "export", 7) == 0)
-	// 	ft_export()
+		ft_env(head, comp, outfile);
+	if (ft_strncmp(comp->data, "export", 7) == 0)
+		ft_export(comp, head);
 	if (ft_strncmp(comp->data, "unset", 6) == 0)
 		ft_unset(comp, head);
 	return (fd[0]);
