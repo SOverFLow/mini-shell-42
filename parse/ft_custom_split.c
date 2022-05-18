@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-static int is_space(char c)
+static	int	is_space(char c)
 {
 	if (c == ' ' || c == '\t')
 		return (1);
@@ -24,7 +24,7 @@ static int	ft_skip(char *str, char c)
 	int	i;
 
 	i = 1;
-	while(str[i] != c)
+	while (str[i] != c)
 	{
 		i++;
 	}
@@ -33,8 +33,8 @@ static int	ft_skip(char *str, char c)
 
 static int	ft_w_len(char *str)
 {
-	int i;
-	int len;
+	int	i;
+	int	len;
 
 	i = 0;
 	len = 0;
@@ -57,18 +57,18 @@ static int	ft_w_len(char *str)
 
 char	**ft_custom_split(char *str)
 {
-	int i = 0 ;
-	int j = 0;
-	int size = 0;
-	int wlen = ft_w_len(str);
-	char **split;
-	int k;
+	int		i = 0 ;
+	int		j = 0;
+	int		size = 0;
+	int		wlen = ft_w_len(str);
+	char	**split;
+	int		k;
 
 	split = (char **)malloc(sizeof(char *) * (wlen + 1));
 	while (j < wlen)
 	{
 		k = 0;
-		while(str[i] && is_space(str[i]))
+		while (str[i] && is_space(str[i]))
 			i++;
 		while (str[i] && !is_space(str[i]))
 		{
@@ -76,7 +76,7 @@ char	**ft_custom_split(char *str)
 			{
 				size = ft_skip(str + i, str[i]);
 				i += ft_skip(str + i, str[i]);
-				break;
+				break ;
 			}
 			size++;
 			i++;

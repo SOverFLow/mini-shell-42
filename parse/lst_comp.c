@@ -14,7 +14,7 @@
 
 t_comp	*ft_comp_new(char *data, int whatisthat)
 {
-	t_comp *new;
+	t_comp	*new;
 
 	new = (t_comp *)malloc(sizeof(t_comp));
 	new->data = data;
@@ -25,7 +25,7 @@ t_comp	*ft_comp_new(char *data, int whatisthat)
 
 t_comp	*ft_comp_last(t_comp *comp)
 {
-	while(comp != NULL)
+	while (comp != NULL)
 	{
 		if (comp->next == NULL)
 			return (comp);
@@ -34,7 +34,7 @@ t_comp	*ft_comp_last(t_comp *comp)
 	return (NULL);
 }
 
-void	ft_comp_add(t_comp **head,t_comp *new)
+void	ft_comp_add(t_comp **head, t_comp *new)
 {
 	t_comp	*last;
 

@@ -12,7 +12,6 @@
 
 #include "../minishell.h"
 
-
 char	*ft_dowork(char *line, char token)
 {
 	int		size;
@@ -23,32 +22,32 @@ char	*ft_dowork(char *line, char token)
 	i = 0;
 	j = 0;
 	size = ft_strlen(line) + 100;
-    str = (char *)malloc(sizeof(char) * size + 1);
-    while (line[i])
-    {
-        if (line[i] == token)
-        {
-            if (line[i - 1] != ' ' && line[i - 1] != token)
-                str[j++] = ' ';
-            str[j++] = line[i];
-            if (line[i + 1] != ' ' && line[i + 1] != token)
-                str[j++] = ' ';
-        }
-        else
-            str[j++] = line[i];
-        i++;
-    }
-    str[j] = '\0';
+	str = (char *)malloc(sizeof(char) * size + 1);
+	while (line[i])
+	{
+		if (line[i] == token)
+		{
+			if (line[i - 1] != ' ' && line[i - 1] != token)
+				str[j++] = ' ';
+			str[j++] = line[i];
+			if (line[i + 1] != ' ' && line[i + 1] != token)
+				str[j++] = ' ';
+		}
+		else
+			str[j++] = line[i];
+		i++;
+	}
+	str[j] = '\0';
 	return (str);
 }
 
-char    *ft_makespace(char *line)
+char	*ft_makespace(char *line)
 {
-    char	*str;
-    char	*final;
+	char	*str;
+	char	*final;
 
 	str = ft_dowork(line, '>');
 	final = ft_dowork(str, '<');
 	free(str);
-	return(final);
+	return (final);
 }
