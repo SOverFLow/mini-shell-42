@@ -56,7 +56,6 @@ void	add_var(char *var, t_env *env_node)
 	}
 }
 
-
 static void hidden_env(t_env *head, int outfile)
 {
 	while (head)
@@ -90,7 +89,7 @@ void	ft_export(t_comp *comp, t_env *head, int outfile)
 			key = comp->next->next->data;
 			if (key[0] == '=')
 			{
-				perror("error");
+				ft_putstr_fd("bash: export: `=': not a valid identifier\n", 2);
 				return ;
 			}
 		}
@@ -99,7 +98,7 @@ void	ft_export(t_comp *comp, t_env *head, int outfile)
 			key = comp->next->data;
 			if (key[0] == '=')
 			{
-				perror("error");
+				ft_putstr_fd("bash: export: `=': not a valid identifier\n", 2);
 				return ;
 			}
 			if (comp->next->data != NULL)
