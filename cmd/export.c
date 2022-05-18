@@ -77,11 +77,6 @@ void	ft_export(t_comp *comp, t_env *head, int outfile)
 
 	if (num_of_args(comp) == 1)
 		hidden_env(head, outfile);
-	// while (comp)
-	// {
-	// 	printf("comp => %s\n", comp->data);
-	// 	comp = comp->next;
-	// }
 	if (num_of_args(comp) > 1)
 	{
 		if (comp->next->next)
@@ -102,9 +97,7 @@ void	ft_export(t_comp *comp, t_env *head, int outfile)
 				return ;
 			}
 			if (comp->next->data != NULL)
-			{
 				add_var(comp->next->data, head);
-			}
 			comp = comp->next;
 		}
 	}
