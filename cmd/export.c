@@ -33,6 +33,8 @@ void	add_var(char *var, t_env *env_node)
 
 	if (var)
 		split = ft_split(var, '=');
+	printf("0 => %s\n", split[0]);
+	printf("1 => %s\n", split[1]);
 	if (split[0] != NULL)
 	{
 		if (env_node && env_node->key == NULL)
@@ -72,13 +74,30 @@ static void hidden_env(t_env *head, int outfile)
 void	ft_export(t_comp *comp, t_env *head, int outfile)
 {
 	char	**split;
+	char *key;
 
 	if (num_of_args(comp) == 1)
 		hidden_env(head, outfile);
 	if (num_of_args(comp) > 1)
 	{
+		if (comp->next->next)
+		{
+			key = comp->next->next->data;
+			if (key[0] == '=')
+			{
+				perror("error");
+				return ;
+			}
+
+		}
 		while (comp->next)
 		{
+			key = comp->next->data;
+			if (key[0] == '=')
+			{
+				perror("error");
+				return ;
+			}
 			if (comp->next->data != NULL)
 			{
 				add_var(comp->next->data, head);

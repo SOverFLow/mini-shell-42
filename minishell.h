@@ -74,7 +74,7 @@ void	ft_env(t_env *head, t_comp *comp, int outfile);
 void	ft_unset(t_comp *comp, t_env *env_node);
 void	ft_cd(t_comp *comp, t_env *env);
 void	ft_exit(t_comp *comp);
-void	ft_export(t_comp *comp, t_env *head);
+void	ft_export(t_comp *comp, t_env *head, int outfile);
 
 // utils
 char	*ft_path_join(char *path, char *bin);
