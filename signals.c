@@ -6,13 +6,13 @@
 /*   By: selhanda <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 11:01:56 by selhanda          #+#    #+#             */
-/*   Updated: 2022/05/12 11:02:00 by selhanda         ###   ########.fr       */
+/*   Updated: 2022/05/18 20:32:23 by selhanda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void handler_cntrl_c(int num)
+void	handler_cntrl_c(int num)
 {
 	printf("\n");
 	rl_replace_line("", 0);
@@ -20,7 +20,7 @@ void handler_cntrl_c(int num)
 	rl_redisplay();
 }
 
-void handler_cntrl_d(int num)
+void	handler_cntrl_d(int num)
 {
 	ft_putstr_fd("minishell➜ exit", 1);
 	exit(1);

@@ -6,13 +6,13 @@
 /*   By: selhanda <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 17:59:20 by selhanda          #+#    #+#             */
-/*   Updated: 2022/05/16 18:21:48 by selhanda         ###   ########.fr       */
+/*   Updated: 2022/05/18 20:51:07 by selhanda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	status;
+int	g_status;
 
 int	thereis_infile(t_comp *comp)
 {
@@ -42,7 +42,7 @@ char	*ft_get_path(char *cmd, char **env)
 	char	*dir;
 	char	*bin;
 	int		i;
-	
+
 	i = 0;
 	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
 		i++;
@@ -65,7 +65,7 @@ char	**ft_get_cmd(t_comp *head)
 	t_comp	*cmd;
 	char	**cmd_tab;
 	int		i;
-	
+
 	if (!head)
 		return (NULL);
 	cmd = head->next;
@@ -92,15 +92,15 @@ char	**ft_get_cmd(t_comp *head)
 
 int	ft_execut(int infile, t_comp *comp, char **env)
 {
-	int	pid;
-	int	fd[2];
-	int	outfile;
-	char *in;
-	char *out;
-	
+	int		pid;
+	int		fd[2];
+	int		outfile;
+	char	*in;
+	char	*out;
+
 	pipe(fd);
 	out = is_outfile(comp);
-	in	= is_infile(comp);
+	in = is_infile(comp);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -128,7 +128,7 @@ int	ft_execut(int infile, t_comp *comp, char **env)
 			exit(127);
 		}
 	}
-	waitpid(pid, &status, 0);
+	waitpid(pid, &g_status, 0);
 	close(fd[1]);
 	return (fd[0]);
 }
@@ -139,9 +139,9 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env)
 	int		pid;
 	char	*in;
 	char	*out;
-	
+
 	out = is_outfile(comp);
-	in	= is_infile(comp);
+	in = is_infile(comp);
 	if (out == NULL)
 		outfile = 1;
 	else
@@ -168,13 +168,13 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env)
 			exit(127);
 		}
 	}
-	waitpid(pid, &status, 0);
+	waitpid(pid, &g_status, 0);
 }
 
 t_comp	*find_prev_node(t_comp *head, t_comp *find)
 {
 	t_comp	*current_node;
-	
+
 	current_node = head;
 	while (current_node->next != NULL)
 	{
@@ -191,7 +191,7 @@ void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 	int		cmd_len;
 	int		i;
 	int		infile;
-	
+
 	cmd_len = ft_lstsize(lst_comp);
 	i = 0;
 	infile = 0;
