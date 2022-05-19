@@ -95,6 +95,7 @@ char	*ft_env_serch(char *data, char c, t_env *env_node);
 char	*ft_realvalue(char *data, t_env	*env_list);
 t_list	*ft_last_parser(t_list	*lst_comp, t_env *env_node);
 int		what_redi(t_comp *head);
+char	*ft_cmd(t_comp *comp);
 
 //env
 t_env	*init_env(char **env);

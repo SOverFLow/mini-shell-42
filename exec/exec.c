@@ -14,82 +14,6 @@
 
 int	g_status;
 
-int	thereis_infile(t_comp *comp)
-{
-	while (comp)
-	{
-		if (comp->whatisthis == 6)
-			return (1);
-		comp = comp->next;
-	}
-	return (0);
-}
-
-char	*ft_cmd(t_comp *comp)
-{
-	while (comp)
-	{
-		if (comp->whatisthis == 2)
-			return (comp->data);
-		comp = comp->next;
-	}
-	return (NULL);
-}
-
-char	*ft_get_path(char *cmd, char **env)
-{
-	char	*path;
-	char	*dir;
-	char	*bin;
-	int		i;
-
-	i = 0;
-	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
-		i++;
-	path = env[i] + 5;
-	while (path && ft_str_ichr(path, ':') > -1)
-	{
-		dir = ft_str_ndup(path, ft_str_ichr(path, ':'));
-		bin = ft_path_join(dir, cmd);
-		free(dir);
-		if (access(bin, F_OK) == 0)
-			return (bin);
-		free(bin);
-		path += ft_str_ichr(path, ':') + 1;
-	}
-	return (cmd);
-}
-
-char	**ft_get_cmd(t_comp *head)
-{
-	t_comp	*cmd;
-	char	**cmd_tab;
-	int		i;
-
-	if (!head)
-		return (NULL);
-	cmd = head->next;
-	i = 2;
-	while (cmd && cmd->whatisthis < 3)
-	{
-		cmd = cmd->next;
-		i++;
-	}
-	cmd_tab = malloc(sizeof(char *) * i);
-	if (!cmd_tab)
-		return (NULL);
-	cmd = head->next;
-	cmd_tab[0] = head->data;
-	i = 1;
-	while (cmd && cmd->whatisthis < 3)
-	{
-		cmd_tab[i++] = cmd->data;
-		cmd = cmd->next;
-	}
-	cmd_tab[i] = NULL;
-	return (cmd_tab);
-}
-
 int	ft_execut(int infile, t_comp *comp, char **env, int what)
 {
 	int		pid;
@@ -181,31 +105,15 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 	waitpid(pid, &g_status, 0);
 }
 
-t_comp	*find_prev_node(t_comp *head, t_comp *find)
-{
-	t_comp	*current_node;
-
-	current_node = head;
-	while (current_node->next != NULL)
-	{
-		if (current_node->next == find)
-			return (current_node);
-		current_node = current_node->next;
-	}
-	return (NULL);
-}
-
 void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 {
 	t_comp	*comp;
-	int		cmd_len;
 	int		i;
 	int		infile;
 
-	cmd_len = ft_lstsize(lst_comp);
 	i = 0;
 	infile = 0;
-	if (cmd_len == 1)
+	if (ft_lstsize(lst_comp) == 1)
 	{
 		comp = lst_comp->content;
 		if (comp->data == NULL)
@@ -217,7 +125,7 @@ void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 	}
 	else
 	{
-		while (i < cmd_len - 1)
+		while (i < ft_lstsize(lst_comp) - 1)
 		{
 			comp = lst_comp->content;
 			if (comp->data == NULL)
