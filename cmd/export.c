@@ -33,8 +33,6 @@ void	add_var(char *var, t_env *env_node)
 
 	if (var)
 		split = ft_split(var, '=');
-	printf("0 => %s\n", split[0]);
-	printf("1 => %s\n", split[1]);
 	if (split[0] != NULL)
 	{
 		if (env_node && env_node->key == NULL)
