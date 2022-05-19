@@ -60,12 +60,11 @@ char	**ft_custom_split(char *str)
 	int		i = 0 ;
 	int		j = 0;
 	int		size = 0;
-	int		wlen = ft_w_len(str);
 	char	**split;
 	int		k;
 
-	split = (char **)malloc(sizeof(char *) * (wlen + 1));
-	while (j < wlen)
+	split = (char **)malloc(sizeof(char *) * (ft_w_len(str) + 1));
+	while (j < ft_w_len(str))
 	{
 		k = 0;
 		while (str[i] && is_space(str[i]))
@@ -74,7 +73,7 @@ char	**ft_custom_split(char *str)
 		{
 			if (str[i] == '"' || str[i] == 39)
 			{
-				size = ft_skip(str + i, str[i]);
+				size += ft_skip(str + i, str[i]);
 				i += ft_skip(str + i, str[i]);
 				break ;
 			}
@@ -89,3 +88,14 @@ char	**ft_custom_split(char *str)
 	split[j] = NULL;
 	return (split);
 }
+
+// int	main(int ac, char **av)
+// {
+// 	char	**split;
+// 	int		i;
+
+// 	i = 0;
+// 	split = ft_custom_split(av[1]);
+// 	while (split[i])
+// 		printf("%s\n", split[i++]);
+// }
