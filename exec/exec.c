@@ -31,12 +31,7 @@ int	ft_execut(int infile, t_comp *comp, char **env, int what)
 		if (out == NULL)
 			outfile = fd[1];
 		else
-		{
-			if (what == 5)
-				outfile = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-			else if (what == 7)
-				outfile = open(out, O_WRONLY | O_CREAT | O_APPEND, 0666);
-		}
+			outfile = open_out_file(what, out);
 		if (outfile == -1)
 		{
 			perror(out);
@@ -78,12 +73,7 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 	if (out == NULL)
 		outfile = 1;
 	else
-	{
-		if (what == 5)
-			outfile = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-		else if (what == 7)
-			outfile = open(out, O_WRONLY | O_CREAT | O_APPEND, 0666);
-	}
+		outfile = open_out_file(what, out);
 	if (outfile == -1)
 	{
 		perror(out);

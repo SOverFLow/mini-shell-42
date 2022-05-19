@@ -36,6 +36,17 @@ char	*is_outfile(t_comp *head)
 	return (opens_files(files, len));
 }
 
+int open_out_file(int what, char *out)
+{
+	int outfile;
+
+	if (what == 5)
+		outfile = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	else if (what == 7)
+		outfile = open(out, O_WRONLY | O_CREAT | O_APPEND, 0666);
+	return (outfile);
+}
+
 int	what_redi(t_comp *head)
 {
 	int		what_redi;

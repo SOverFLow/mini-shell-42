@@ -42,12 +42,7 @@ void	execute_built_cmd(t_comp *comp, int infile, t_env *head, int what)
 	if (out == NULL)
 		outfile = 1;
 	else
-	{
-		if (what == 5)
-			outfile = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-		else if (what == 7)
-			outfile = open(out, O_WRONLY | O_CREAT | O_APPEND, 0666);
-	}
+		outfile = open_out_file(what, out);
 	if (in != NULL)
 		infile = open(in, O_RDONLY);
 	if (thereis_infile(comp) && in == NULL)
@@ -81,12 +76,7 @@ int	execute_builtin_cmds(t_comp *comp, int infile, t_env *head, int what)
 	if (out == NULL)
 		outfile = fd[1];
 	else
-	{
-		if (what == 5)
-			outfile = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-		else if (what == 7)
-			outfile = open(out, O_WRONLY | O_CREAT | O_APPEND, 0666);
-	}
+		outfile = open_out_file(what, out);
 	if (in != NULL)
 		infile = open(in, O_RDONLY);
 	if (outfile == -1)
