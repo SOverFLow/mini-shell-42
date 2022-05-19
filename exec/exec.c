@@ -90,7 +90,7 @@ char	**ft_get_cmd(t_comp *head)
 	return (cmd_tab);
 }
 
-int	ft_execut(int infile, t_comp *comp, char **env)
+int	ft_execut(int infile, t_comp *comp, char **env, int what)
 {
 	int		pid;
 	int		fd[2];
@@ -107,7 +107,12 @@ int	ft_execut(int infile, t_comp *comp, char **env)
 		if (out == NULL)
 			outfile = fd[1];
 		else
-			outfile = open(out, O_WRONLY | O_CREAT, 0666);
+		{
+			if (what == 5)
+				outfile = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+			else if (what == 7)
+				outfile = open(out, O_WRONLY | O_CREAT | O_APPEND, 0666);
+		}
 		if (outfile == -1)
 		{
 			perror(out);
@@ -133,7 +138,7 @@ int	ft_execut(int infile, t_comp *comp, char **env)
 	return (fd[0]);
 }
 
-void	ft_lst_cmd(int infile, t_comp *comp, char **env)
+void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 {
 	int		outfile;
 	int		pid;
@@ -145,7 +150,12 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env)
 	if (out == NULL)
 		outfile = 1;
 	else
-		outfile = open(out, O_WRONLY | O_CREAT, 0666);
+	{
+		if (what == 5)
+			outfile = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		else if (what == 7)
+			outfile = open(out, O_WRONLY | O_CREAT | O_APPEND, 0666);
+	}
 	if (outfile == -1)
 	{
 		perror(out);
@@ -201,9 +211,9 @@ void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 		if (comp->data == NULL)
 			return ;
 		if (is_cmd_built(comp->data))
-			execute_built_cmd(comp, infile, head);
+			execute_built_cmd(comp, infile, head, what_redi(comp));
 		else
-			ft_lst_cmd(infile, comp, env);
+			ft_lst_cmd(infile, comp, env, what_redi(comp));
 	}
 	else
 	{
@@ -213,16 +223,16 @@ void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 			if (comp->data == NULL)
 				return ;
 			if (is_cmd_built(comp->data))
-				infile = execute_builtin_cmds(comp, infile, head);
+				infile = execute_builtin_cmds(comp, infile, head, what_redi(comp));
 			else
-				infile = ft_execut(infile, comp, env);
+				infile = ft_execut(infile, comp, env, what_redi(comp));
 			lst_comp = lst_comp->next;
 			i++;
 		}
 		comp = lst_comp->content;
 		if (is_cmd_built(comp->data))
-			execute_built_cmd(comp, infile, head);
+			execute_built_cmd(comp, infile, head, what_redi(comp));
 		else
-			ft_lst_cmd(infile, comp, env);
+			ft_lst_cmd(infile, comp, env, what_redi(comp));
 	}
 }
