@@ -33,8 +33,6 @@ void	add_var(char *var, t_env *env_node)
 
 	if (var)
 		split = ft_split(var, '=');
-	printf("0 => %s\n", split[0]);
-	printf("1 => %s\n", split[1]);
 	if (split[0] != NULL)
 	{
 		if (env_node && env_node->key == NULL)
@@ -55,7 +53,6 @@ void	add_var(char *var, t_env *env_node)
 		new_node->next = tmp_node;
 	}
 }
-
 
 static void hidden_env(t_env *head, int outfile)
 {
@@ -85,23 +82,20 @@ void	ft_export(t_comp *comp, t_env *head, int outfile)
 			key = comp->next->next->data;
 			if (key[0] == '=')
 			{
-				perror("error");
+				ft_putstr_fd("bash: export: `=': not a valid identifier\n", 2);
 				return ;
 			}
-
 		}
 		while (comp->next)
 		{
 			key = comp->next->data;
 			if (key[0] == '=')
 			{
-				perror("error");
+				ft_putstr_fd("bash: export: `=': not a valid identifier\n", 2);
 				return ;
 			}
 			if (comp->next->data != NULL)
-			{
 				add_var(comp->next->data, head);
-			}
 			comp = comp->next;
 		}
 	}

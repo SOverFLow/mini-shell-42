@@ -6,16 +6,16 @@
 /*   By: selhanda <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 13:24:08 by selhanda          #+#    #+#             */
-/*   Updated: 2022/05/16 17:08:13 by selhanda         ###   ########.fr       */
+/*   Updated: 2022/05/18 20:37:45 by selhanda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void edit_old_pwd(t_env *env)
+static	void	edit_old_pwd(t_env *env)
 {
-	char cmd[256];
-	char *old;
+	char	cmd[256];
+	char	*old;
 
 	if (getcwd(cmd, 256) == NULL)
 		perror("Error\n");
@@ -25,20 +25,20 @@ static void edit_old_pwd(t_env *env)
 	add_var(old, env);
 }
 
-static char *get_env_path(t_env *env, char *find , int len)
+static	char	*get_env_path(t_env *env, char *find, int len)
 {
 	while (env)
 	{
-		if (ft_strncmp(env->key ,find , len) == 0)
+		if (ft_strncmp(env->key, find, len) == 0)
 			return (env->val);
 		env = env->next;
 	}
 	return (NULL);
 }
 
-static void ft_go_to_path(int par, t_env *env)
+static	void	ft_go_to_path(int par, t_env *env)
 {
-	char *path;
+	char	*path;
 
 	path = NULL;
 	if (par == 0)

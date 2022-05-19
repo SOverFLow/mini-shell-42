@@ -36,6 +36,26 @@ char	*is_outfile(t_comp *head)
 	return (opens_files(files, len));
 }
 
+int	what_redi(t_comp *head)
+{
+	int		what_redi;
+
+	what_redi = 0;
+
+	if (!head)
+		return (0);
+	while (head != NULL)
+	{
+		if (head->whatisthis == 5 || head->whatisthis == 7)
+		{
+			if (head->next->whatisthis == 4)
+				what_redi = head->whatisthis;
+		}
+		head = head->next;
+	}
+	return (what_redi);
+}
+
 char	*is_infile(t_comp *head)
 {
 	char	**files;

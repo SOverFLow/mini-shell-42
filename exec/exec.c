@@ -6,108 +6,37 @@
 /*   By: selhanda <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 17:59:20 by selhanda          #+#    #+#             */
-/*   Updated: 2022/05/16 18:21:48 by selhanda         ###   ########.fr       */
+/*   Updated: 2022/05/18 20:51:07 by selhanda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	status;
+int	g_status;
 
-int	thereis_infile(t_comp *comp)
+int	ft_execut(int infile, t_comp *comp, char **env, int what)
 {
-	while (comp)
-	{
-		if (comp->whatisthis == 6)
-			return (1);
-		comp = comp->next;
-	}
-	return (0);
-}
+	int		pid;
+	int		fd[2];
+	int		outfile;
+	char	*in;
+	char	*out;
 
-char	*ft_cmd(t_comp *comp)
-{
-	while (comp)
-	{
-		if (comp->whatisthis == 2)
-			return (comp->data);
-		comp = comp->next;
-	}
-	return (NULL);
-}
-
-char	*ft_get_path(char *cmd, char **env)
-{
-	char	*path;
-	char	*dir;
-	char	*bin;
-	int		i;
-	
-	i = 0;
-	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
-		i++;
-	path = env[i] + 5;
-	while (path && ft_str_ichr(path, ':') > -1)
-	{
-		dir = ft_str_ndup(path, ft_str_ichr(path, ':'));
-		bin = ft_path_join(dir, cmd);
-		free(dir);
-		if (access(bin, F_OK) == 0)
-			return (bin);
-		free(bin);
-		path += ft_str_ichr(path, ':') + 1;
-	}
-	return (cmd);
-}
-
-char	**ft_get_cmd(t_comp *head)
-{
-	t_comp	*cmd;
-	char	**cmd_tab;
-	int		i;
-	
-	if (!head)
-		return (NULL);
-	cmd = head->next;
-	i = 2;
-	while (cmd && cmd->whatisthis < 3)
-	{
-		cmd = cmd->next;
-		i++;
-	}
-	cmd_tab = malloc(sizeof(char *) * i);
-	if (!cmd_tab)
-		return (NULL);
-	cmd = head->next;
-	cmd_tab[0] = head->data;
-	i = 1;
-	while (cmd && cmd->whatisthis < 3)
-	{
-		cmd_tab[i++] = cmd->data;
-		cmd = cmd->next;
-	}
-	cmd_tab[i] = NULL;
-	return (cmd_tab);
-}
-
-int	ft_execut(int infile, t_comp *comp, char **env)
-{
-	int	pid;
-	int	fd[2];
-	int	outfile;
-	char *in;
-	char *out;
-	
 	pipe(fd);
 	out = is_outfile(comp);
-	in	= is_infile(comp);
+	in = is_infile(comp);
 	pid = fork();
 	if (pid == 0)
 	{
 		if (out == NULL)
 			outfile = fd[1];
 		else
-			outfile = open(out, O_WRONLY | O_CREAT, 0666);
+		{
+			if (what == 5)
+				outfile = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+			else if (what == 7)
+				outfile = open(out, O_WRONLY | O_CREAT | O_APPEND, 0666);
+		}
 		if (outfile == -1)
 		{
 			perror(out);
@@ -128,24 +57,29 @@ int	ft_execut(int infile, t_comp *comp, char **env)
 			exit(127);
 		}
 	}
-	waitpid(pid, &status, 0);
+	waitpid(pid, &g_status, 0);
 	close(fd[1]);
 	return (fd[0]);
 }
 
-void	ft_lst_cmd(int infile, t_comp *comp, char **env)
+void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 {
 	int		outfile;
 	int		pid;
 	char	*in;
 	char	*out;
-	
+
 	out = is_outfile(comp);
-	in	= is_infile(comp);
+	in = is_infile(comp);
 	if (out == NULL)
 		outfile = 1;
 	else
-		outfile = open(out, O_WRONLY | O_CREAT, 0666);
+	{
+		if (what == 5)
+			outfile = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		else if (what == 7)
+			outfile = open(out, O_WRONLY | O_CREAT | O_APPEND, 0666);
+	}
 	if (outfile == -1)
 	{
 		perror(out);
@@ -168,61 +102,45 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env)
 			exit(127);
 		}
 	}
-	waitpid(pid, &status, 0);
-}
-
-t_comp	*find_prev_node(t_comp *head, t_comp *find)
-{
-	t_comp	*current_node;
-	
-	current_node = head;
-	while (current_node->next != NULL)
-	{
-		if (current_node->next == find)
-			return (current_node);
-		current_node = current_node->next;
-	}
-	return (NULL);
+	waitpid(pid, &g_status, 0);
 }
 
 void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 {
 	t_comp	*comp;
-	int		cmd_len;
 	int		i;
 	int		infile;
-	
-	cmd_len = ft_lstsize(lst_comp);
+
 	i = 0;
 	infile = 0;
-	if (cmd_len == 1)
+	if (ft_lstsize(lst_comp) == 1)
 	{
 		comp = lst_comp->content;
 		if (comp->data == NULL)
 			return ;
 		if (is_cmd_built(comp->data))
-			execute_built_cmd(comp, infile, head);
+			execute_built_cmd(comp, infile, head, what_redi(comp));
 		else
-			ft_lst_cmd(infile, comp, env);
+			ft_lst_cmd(infile, comp, env, what_redi(comp));
 	}
 	else
 	{
-		while (i < cmd_len - 1)
+		while (i < ft_lstsize(lst_comp) - 1)
 		{
 			comp = lst_comp->content;
 			if (comp->data == NULL)
 				return ;
 			if (is_cmd_built(comp->data))
-				infile = execute_builtin_cmds(comp, infile, head);
+				infile = execute_builtin_cmds(comp, infile, head, what_redi(comp));
 			else
-				infile = ft_execut(infile, comp, env);
+				infile = ft_execut(infile, comp, env, what_redi(comp));
 			lst_comp = lst_comp->next;
 			i++;
 		}
 		comp = lst_comp->content;
 		if (is_cmd_built(comp->data))
-			execute_built_cmd(comp, infile, head);
+			execute_built_cmd(comp, infile, head, what_redi(comp));
 		else
-			ft_lst_cmd(infile, comp, env);
+			ft_lst_cmd(infile, comp, env, what_redi(comp));
 	}
 }
