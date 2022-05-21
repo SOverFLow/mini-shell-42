@@ -22,13 +22,17 @@ static	int	is_space(char c)
 static int	ft_skip(char *str, char c)
 {
 	int	i;
+	int index;
 
 	i = 1;
-	while (str[i] != c)
+	index = 0;
+	while (str[i])
 	{
+		if (str[i] == c)
+			index = i;
 		i++;
 	}
-	return (i + 1);
+	return (index + 1);
 }
 
 static int	ft_w_len(char *str)
@@ -75,10 +79,12 @@ char	**ft_custom_split(char *str)
 			{
 				size += ft_skip(str + i, str[i]);
 				i += ft_skip(str + i, str[i]);
-				break ;
 			}
-			size++;
-			i++;
+			else
+			{
+				size++;
+				i++;
+			}
 		}
 		split[j] = malloc(sizeof(char) * size + 1);
 		while (size)
@@ -88,14 +94,3 @@ char	**ft_custom_split(char *str)
 	split[j] = NULL;
 	return (split);
 }
-
-// int	main(int ac, char **av)
-// {
-// 	char	**split;
-// 	int		i;
-
-// 	i = 0;
-// 	split = ft_custom_split(av[1]);
-// 	while (split[i])
-// 		printf("%s\n", split[i++]);
-// }
