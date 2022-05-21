@@ -12,8 +12,6 @@
 
 #include "../minishell.h"
 
-int	g_status;
-
 int	ft_execut(int infile, t_comp *comp, char **env, int what)
 {
 	int		pid;
