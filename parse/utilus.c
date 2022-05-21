@@ -12,6 +12,41 @@
 
 #include "../minishell.h"
 
+int	ft_qcount(char *str, char c)
+{
+	int	len;
+	int	i;
+
+	i = 0;
+	len = 0;
+	while (str[i])
+	{
+		if (str[i] != c)
+			len++;
+		i++;
+	}
+	return (len);
+}
+
+char	*ft_qremove(char *str, char c)
+{
+	char	*new_str;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	new_str = (char *)malloc(sizeof(char) * (ft_qcount(str, c) + 1));
+	while (str[i])
+	{
+		if (str[i] != c)
+			new_str[j++] = str[i];
+		i++;
+	}
+	new_str[j] = '\0';
+	return (new_str);
+}
+
 char	*ft_env_serch(char *data, char c, t_env *env_node)
 {
 	char	*str;
@@ -36,12 +71,27 @@ char	*ft_env_serch(char *data, char c, t_env *env_node)
 	return (str);
 }
 
+char	*ft_dollar(char *str)
+{
+	
+}
+
 char	*ft_realvalue(char *data, t_env	*env_list)
 {
-	if ((data[0] == '$' || data[0] == '"' || data[0] == 39) && data[1] != '\0')
-		return (ft_env_serch(data, data[0], env_list));
-	else
-		return (data);
+	int	i;
+
+	i = 0;
+	while (data[i])
+	{
+		if (data[i] == '"' || data[i] == 39)
+		{
+			data = ft_qremove(data, data[i]);
+			break ;
+		}
+		i++;
+	}
+
+	return (data);
 }
 
 t_list	*ft_last_parser(t_list	*lst_comp, t_env *env_node)
