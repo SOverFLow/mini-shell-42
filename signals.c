@@ -14,7 +14,7 @@
 
 void	handler_cntrl_c(int num)
 {
-	printf("\n");
+	ft_putstr_fd("\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
@@ -22,6 +22,6 @@ void	handler_cntrl_c(int num)
 
 void	handler_cntrl_d(int num)
 {
-	ft_putstr_fd("minishell➜ exit", 1);
+	ft_putstr_fd("exit", 1);
 	exit(1);
 }

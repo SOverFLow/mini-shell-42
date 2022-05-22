@@ -39,6 +39,7 @@ int	her_doc(char *stop_keyword)
 	pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
 		ft_get_herdoc(stop_keyword, fd[1]);
 	}
 	close(fd[1]);
