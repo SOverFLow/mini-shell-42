@@ -73,7 +73,16 @@ char	*ft_env_serch(char *data, char c, t_env *env_node)
 
 char	*ft_dollar(char *str)
 {
-	
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '$' && str[i + 1] != ' ' && str[i + 1] != '.')
+		{
+			
+		}
+	}
 }
 
 char	*ft_realvalue(char *data, t_env	*env_list)

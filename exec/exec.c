@@ -37,6 +37,7 @@ int	ft_execut(int infile, t_comp *comp, char **env, int what)
 			perror(out);
 			return (0);
 		}
+		
 		if (in != NULL)
 			infile = open(in, O_RDONLY);
 		close(fd[0]);
