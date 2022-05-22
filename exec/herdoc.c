@@ -18,7 +18,7 @@ void	ft_get_herdoc(char *stop, int fd)
 
 	while (1)
 	{
-		line = readline(">");
+		line = readline("> ");
 		if (ft_strncmp(line, stop, ft_strlen(stop)) == 0 || !line)
 			break ;
 		ft_putstr_fd(line, fd);
