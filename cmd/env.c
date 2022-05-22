@@ -37,13 +37,11 @@ void	ft_env(t_env *head, t_comp *comp, int outfile)
 	{
 		while (head)
 		{
-			if (head->val != NULL)
-			{
-				ft_putstr_fd(head->key, outfile);
-				write(outfile, "=", 1);
-				ft_putstr_fd(head->val, outfile);
-				write(outfile, "\n", 1);
-			}
+			
+			ft_putstr_fd(head->key, outfile);
+			write(outfile, "=", 1);
+			ft_putstr_fd(head->val, outfile);
+			write(outfile, "\n", 1);
 			head = head->next;
 		}
 	}
