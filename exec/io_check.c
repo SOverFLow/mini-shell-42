@@ -90,3 +90,51 @@ char	*is_infile(t_comp *head)
 	files[i] = NULL;
 	return (infile_files(files, len));
 }
+
+int is_hedoc(t_comp *comp)
+{
+	int yes;
+
+	yes = 0;
+
+	while (comp)
+	{
+		if (comp->whatisthis == 8)
+		{
+			if (comp->next != NULL)
+			{
+				if (comp->next->whatisthis == 9)
+					yes = 1;
+			}
+			else
+			{
+				ft_putstr_fd("syntax error near unexpected token `newline'\n", 2);
+				return (0);
+			}
+		}
+		comp = comp->next;
+	}
+	return (yes);
+}
+
+char *get_limiter(t_comp *comp)
+{
+	char *limiter;
+
+	limiter = NULL;
+	while (comp)
+	{
+		if (comp->whatisthis == 8)
+		{
+			if (comp->next)
+			{
+				if (comp->next->whatisthis == 9)
+				{
+					limiter = comp->next->data;
+				}
+			}
+		}
+		comp = comp->next;
+	}
+	return (limiter);
+}

@@ -38,6 +38,8 @@
 # define STDOUT 1
 # define STDERR 2
 
+int	g_status;
+
 typedef struct s_comp
 {
 	char			*data;

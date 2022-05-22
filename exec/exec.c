@@ -12,8 +12,6 @@
 
 #include "../minishell.h"
 
-int	g_status;
-
 int	ft_execut(int infile, t_comp *comp, char **env, int what)
 {
 	int		pid;
@@ -37,7 +35,6 @@ int	ft_execut(int infile, t_comp *comp, char **env, int what)
 			perror(out);
 			return (0);
 		}
-		
 		if (in != NULL)
 			infile = open(in, O_RDONLY);
 		close(fd[0]);
@@ -80,7 +77,12 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 		perror(out);
 		return ;
 	}
-	if (in != NULL)
+	if (is_hedoc(comp))
+	{
+		if (get_limiter(comp) != NULL)
+			infile = her_doc(get_limiter(comp));
+	}
+	else if (in != NULL)
 		infile = open(in, O_RDONLY);
 	pid = fork();
 	if (pid == 0)
