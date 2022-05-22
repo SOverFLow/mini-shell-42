@@ -99,6 +99,8 @@ t_list	*ft_last_parser(t_list	*lst_comp, t_env *env_node);
 int		what_redi(t_comp *head);
 char	*ft_cmd(t_comp *comp);
 int		open_out_file(int what, char *out);
+int 	is_hedoc(t_comp *comp);
+char 	*get_limiter(t_comp *comp);
 
 //env
 t_env	*init_env(char **env);
