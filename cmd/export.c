@@ -12,6 +12,31 @@
 
 #include "../minishell.h"
 
+int check_var_env(char *var)
+{
+	if (*var == '\0')
+		return (0);
+	if (ft_isdigit(*var))
+		return (0);
+	while (*var)
+	{
+		if (ft_isalnum(*var) || *var == '_')
+			var++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
+void ft_print_error(char *err)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd("export", 2);
+	ft_putstr_fd(": `", 2);
+	ft_putstr_fd(err, 2);
+	ft_putstr_fd("': not a valid identifier\n", 2);
+}
+
 static	int	num_of_args(t_comp *comp)
 {
 	int	num;
@@ -82,7 +107,7 @@ void	ft_export(t_comp *comp, t_env *head, int outfile)
 			key = comp->next->next->data;
 			if (key[0] == '=')
 			{
-				ft_putstr_fd("bash: export: `=': not a valid identifier\n", 2);
+				ft_print_error(&key[0]);
 				return ;
 			}
 		}
@@ -91,7 +116,7 @@ void	ft_export(t_comp *comp, t_env *head, int outfile)
 			key = comp->next->data;
 			if (key[0] == '=')
 			{
-				ft_putstr_fd("bash: export: `=': not a valid identifier\n", 2);
+				ft_print_error(&key[0]);
 				return ;
 			}
 			if (comp->next->data != NULL)
