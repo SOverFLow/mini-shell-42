@@ -12,6 +12,31 @@
 
 #include "../minishell.h"
 
+int check_var_env(char *var)
+{
+	if (*var == '\0')
+		return (0);
+	if (ft_isdigit(*var))
+		return (0);
+	while (*var)
+	{
+		if (ft_isalnum(*var) || *var == '_')
+			var++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
+void ft_print_error(char *err)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd("export", 2);
+	ft_putstr_fd(": `", 2);
+	ft_putstr_fd(err, 2);
+	ft_putstr_fd("': not a valid identifier\n", 2);
+}
+
 static	int	num_of_args(t_comp *comp)
 {
 	int	num;
