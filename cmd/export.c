@@ -107,7 +107,7 @@ void	ft_export(t_comp *comp, t_env *head, int outfile)
 			key = comp->next->next->data;
 			if (key[0] == '=')
 			{
-				ft_putstr_fd("bash: export: `=': not a valid identifier\n", 2);
+				ft_print_error(&key[0]);
 				return ;
 			}
 		}
@@ -116,7 +116,7 @@ void	ft_export(t_comp *comp, t_env *head, int outfile)
 			key = comp->next->data;
 			if (key[0] == '=')
 			{
-				ft_putstr_fd("bash: export: `=': not a valid identifier\n", 2);
+				ft_print_error(&key[0]);
 				return ;
 			}
 			if (comp->next->data != NULL)
