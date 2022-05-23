@@ -68,10 +68,11 @@ char	**ft_get_cmd(t_comp *head)
 		return (NULL);
 	cmd = head->next;
 	i = 2;
-	while (cmd && cmd->whatisthis < 3)
+	while (cmd)
 	{
+		if (cmd->whatisthis < 3)
+			i++;
 		cmd = cmd->next;
-		i++;
 	}
 	cmd_tab = malloc(sizeof(char *) * i);
 	if (!cmd_tab)
@@ -79,9 +80,10 @@ char	**ft_get_cmd(t_comp *head)
 	cmd = head->next;
 	cmd_tab[0] = head->data;
 	i = 1;
-	while (cmd && cmd->whatisthis < 3)
+	while (cmd)
 	{
-		cmd_tab[i++] = cmd->data;
+		if (cmd->whatisthis < 3)
+			cmd_tab[i++] = cmd->data;
 		cmd = cmd->next;
 	}
 	cmd_tab[i] = NULL;

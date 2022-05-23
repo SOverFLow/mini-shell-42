@@ -26,6 +26,7 @@ void	ft_get_herdoc(char *stop, int fd)
 		free(line);
 	}
 	free(line);
+	exit(0);
 }
 
 int	her_doc(char *stop_keyword)
