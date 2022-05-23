@@ -47,47 +47,65 @@ char	*ft_qremove(char *str, char c)
 	return (new_str);
 }
 
-char	*ft_env_serch(char *data, char c, t_env *env_node)
+char	*ft_env_search(char *data, t_env *env_node)
 {
-	char	*str;
-
-	str = NULL;
-	if (c == '"')
-		str = ft_substr(data, 1, ft_strlen(data) - 2);
-	else if (c == 39)
-		str = ft_substr(data, 1, ft_strlen(data) - 2);
-	else
-		str = data;
-	if (str[0] == '$' && c != 39)
+	while (env_node)
 	{
-		while (env_node)
-		{
-			if (ft_strncmp(env_node->key, str + 1, ft_strlen(str)) == 0)
-				return (env_node->val);
-			env_node = env_node->next;
-		}
-		str = NULL;
+		if (ft_strncmp(env_node->key, data, ft_strlen(data)) == 0)
+			return (env_node->val);
+		env_node = env_node->next;
 	}
-	return (str);
+	return (NULL);
 }
 
-char	*ft_dollar(char *str)
+int	ft_contunue(char *dollar, char *s, int *j, t_env *env_nod)
 {
-	int	i;
+	size_t	len;
+	int		i;
+	char	*str;
 
 	i = 0;
+	len = 0;
+	while (s[len] != ' ' && s[len] != '.' && s[len])
+		len++;
+	str = ft_env_search(ft_substr(s, 0, len), env_nod);
+	if (!str)
+		return (len);
 	while (str[i])
 	{
-		if (str[i] == '$' && str[i + 1] != ' ' && str[i + 1] != '.')
-		{
-			
-		}
+		dollar[(*j)++] = str[i];
+		i++;
 	}
+	return (len);
+}
+
+char	*ft_dollar(char *str, t_env *env_nod)
+{
+	int		i;
+	int		j;
+	char	*dollar;
+
+	i = 0;
+	j = 0;
+	dollar = malloc(sizeof(char) * 1024);
+	while (str[i])
+	{
+		if (str[i] == '$' && str[i + 1] != ' ' && str[i + 1] != '.' && str[i + 1])
+		{
+			i += ft_contunue(dollar , str + (i + 1), &j, env_nod);
+		}
+		else
+			dollar[j++] = str[i];
+		i++;
+	}
+	dollar[j] = '\0';
+	return (dollar);
 }
 
 char	*ft_realvalue(char *data, t_env	*env_list)
 {
-	int	i;
+	int		i;
+	char	*str;
 
 	i = 0;
 	while (data[i])
@@ -99,8 +117,8 @@ char	*ft_realvalue(char *data, t_env	*env_list)
 		}
 		i++;
 	}
-
-	return (data);
+	str = ft_dollar(data, env_list);
+	return (str);
 }
 
 t_list	*ft_last_parser(t_list	*lst_comp, t_env *env_node)
