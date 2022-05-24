@@ -6,13 +6,13 @@
 /*   By: selhanda <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 18:07:01 by selhanda          #+#    #+#             */
-/*   Updated: 2022/05/16 17:00:20 by selhanda         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:56:08 by selhanda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int check_var_env(char *var)
+int	check_var_env(char *var)
 {
 	if (*var == '\0')
 		return (0);
@@ -28,7 +28,7 @@ int check_var_env(char *var)
 	return (1);
 }
 
-void ft_print_error(char *err)
+void	ft_print_error(char *err)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd("export", 2);
@@ -79,7 +79,7 @@ void	add_var(char *var, t_env *env_node)
 	}
 }
 
-static void hidden_env(t_env *head, int outfile)
+static	void	hidden_env(t_env *head, int outfile)
 {
 	while (head)
 	{

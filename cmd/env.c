@@ -6,7 +6,7 @@
 /*   By: selhanda <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 16:04:46 by selhanda          #+#    #+#             */
-/*   Updated: 2022/05/16 16:43:07 by selhanda         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:52:44 by selhanda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_env(t_env *head, t_comp *comp, int outfile)
 	{
 		while (head)
 		{
-			
 			ft_putstr_fd(head->key, outfile);
 			write(outfile, "=", 1);
 			ft_putstr_fd(head->val, outfile);
