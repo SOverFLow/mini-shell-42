@@ -21,7 +21,9 @@ void	ft_pwd(int outfile)
 	if (!cmd)
 	{
 		perror("Error");
+		g_status = 0;
 		return ;
 	}
 	ft_putendl_fd(cmd, outfile);
+	g_status = 0;
 }

@@ -139,5 +139,8 @@ void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 		else
 			ft_lst_cmd(infile, comp, env, what_redi(comp));
 	}
-	g_status = WEXITSTATUS(g_status);
+	if (WIFSIGNALED(g_status))
+		g_status += 128;
+	else
+		g_status = WEXITSTATUS(g_status);
 }
