@@ -102,6 +102,8 @@ int		open_out_file(int what, char *out);
 int 	is_hedoc(t_comp *comp);
 char 	*get_limiter(t_comp *comp);
 int		her_doc(char *stop_keyword);
+int		ft_qcount(char *str, char c);
+char	*ft_error_handler(char *line);
 
 //env
 t_env	*init_env(char **env);
