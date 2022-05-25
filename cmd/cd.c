@@ -18,10 +18,18 @@ static	void	edit_old_pwd(t_env *env)
 	char	*old;
 
 	if (getcwd(cmd, 256) == NULL)
+	{
 		perror("Error\n");
+		g_status = 1;
+		return ;
+	}
 	old = ft_strjoin("OLDPWD=", cmd);
 	if (!old)
+	{
 		perror("Error\n");
+		g_status = 1;
+		return ;
+	}
 	add_var(old, env);
 }
 
@@ -52,7 +60,11 @@ static	void	ft_go_to_path(int par, t_env *env)
 		edit_old_pwd(env);
 	}
 	if (chdir(path) != 0)
+	{
+		g_status = 1;
 		perror(path);
+		return ;
+	}
 }
 
 static	int	num_of_args(t_comp *comp)
@@ -82,7 +94,11 @@ void	ft_cd(t_comp *comp, t_env *env)
 		{
 			edit_old_pwd(env);
 			if (chdir(comp->next->data) != 0)
+			{
 				perror(comp->next->data);
+				g_status = 1;
+				return ;
+			}
 		}
 	}
 }

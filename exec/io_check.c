@@ -129,9 +129,7 @@ char *get_limiter(t_comp *comp)
 			if (comp->next)
 			{
 				if (comp->next->whatisthis == 9)
-				{
 					limiter = comp->next->data;
-				}
 			}
 		}
 		comp = comp->next;

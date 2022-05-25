@@ -40,7 +40,10 @@ char	*opens_files(char **files, int len)
 		{
 			fd = open(files[i], O_WRONLY | O_CREAT, 0666);
 			if (fd == -1)
+			{
 				perror(files[i]);
+				g_status = 1;
+			}
 			close(fd);
 		}
 		i++;
@@ -65,6 +68,7 @@ char	*infile_files(char **files, int len)
 				ft_putstr_fd("minishell: no such file or directory: ", 1);
 				ft_putstr_fd(files[i], 1);
 				printf("\n");
+				g_status = 1;
 				return (NULL);
 			}
 			return (files[i]);
@@ -77,6 +81,7 @@ char	*infile_files(char **files, int len)
 				ft_putstr_fd("minishell: no such file or directory: ", 1);
 				ft_putstr_fd(files[i], 1);
 				printf("\n");
+				g_status = 1;
 				break ;
 			}
 			if (fd != -1)
