@@ -74,7 +74,7 @@ void	execute_built_cmd(t_comp *comp, int infile, t_env *head, int what)
 	ft_do_built_cmd(comp, outfile, head);
 }
 
-int ft_who_infile(t_comp *comp, char *in)
+int	ft_who_infile(t_comp *comp, char *in)
 {
 	int	infile;
 
