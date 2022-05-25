@@ -72,7 +72,12 @@ void	add_var(char *var, t_env *env_node)
 		if (split[1])
 			new_node->val = ft_strdup(split[1]);
 		else
-			new_node->val = NULL;
+		{
+			if (ft_str_ichr(var, '=') > -1)
+				new_node->val = ft_strdup("=");
+			else
+				new_node->val = NULL;
+		}
 		while (env_node && env_node->next)
 			env_node = env_node->next;
 		tmp_node = env_node->next;
@@ -87,9 +92,13 @@ static	void	hidden_env(t_env *head, int outfile)
 	{
 		ft_putstr_fd("declare -x ", outfile);
 		ft_putstr_fd(head->key, outfile);
-		write(outfile, "=\"", 2);
-		ft_putstr_fd(head->val, outfile);
-		write(outfile, "\"", 1);
+		if (head->val != NULL)
+		{
+			write(outfile, "=\"", 2);
+			if (ft_strncmp(head->val, "=", 2))
+				ft_putstr_fd(head->val, outfile);
+			write(outfile, "\"", 1);
+		}
 		write(outfile, "\n", 1);
 		head = head->next;
 	}
