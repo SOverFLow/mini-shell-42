@@ -25,6 +25,28 @@ static	int	num_of_args(t_comp *comp)
 	return (num);
 }
 
+int count_n_num(char *str)
+{
+	int i;
+	int n;
+
+	i = 0;
+	n = 0;
+	if (str[i] == '-')
+	{
+		i += 1;
+		while (str[i] != '\0')
+		{
+			if (str[i] == 'n')
+				n = 1;
+			else
+				return (0);
+			i++;
+		}
+	}
+	return (n);
+}
+
 void	ft_echo(t_comp *comp, int outfile)
 {
 	int	n;
@@ -32,11 +54,9 @@ void	ft_echo(t_comp *comp, int outfile)
 	n = 0;
 	if (num_of_args(comp) > 1)
 	{
-		while (comp->next->data && ft_strncmp(comp->next->data, "-n", 3) == 0)
-		{
-			n = 1;
+		n = count_n_num(comp->next->data);
+		if (n == 1)
 			comp = comp->next;
-		}
 		while (comp->next && comp->next->whatisthis < 3)
 		{
 			ft_putstr_fd(comp->next->data, outfile);
