@@ -18,7 +18,8 @@ char	*ft_path_join(char *path, char *bin)
 	int		i;
 	int		j;
 
-	joined = malloc(sizeof(char) * (ft_str_ichr(path, 0) + ft_str_ichr(bin, 0) + 2));
+	joined = malloc(sizeof(char) * (ft_str_ichr(path,
+					0) + ft_str_ichr(bin, 0) + 2));
 	i = 0;
 	j = 0;
 	while (path[j])
@@ -54,4 +55,24 @@ int	ft_str_ichr(char *str, char c)
 	if (str[i] == c)
 		return (i);
 	return (-1);
+}
+
+char	*get_limiter(t_comp *comp)
+{
+	char	*limiter;
+
+	limiter = NULL;
+	while (comp)
+	{
+		if (comp->whatisthis == 8)
+		{
+			if (comp->next)
+			{
+				if (comp->next->whatisthis == 9)
+					limiter = comp->next->data;
+			}
+		}
+		comp = comp->next;
+	}
+	return (limiter);
 }

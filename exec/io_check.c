@@ -36,9 +36,9 @@ char	*is_outfile(t_comp *head)
 	return (opens_files(files, len));
 }
 
-int open_out_file(int what, char *out)
+int	open_out_file(int what, char *out)
 {
-	int outfile;
+	int	outfile;
 
 	if (what == 5)
 		outfile = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0666);
@@ -52,7 +52,6 @@ int	what_redi(t_comp *head)
 	int		what_redi;
 
 	what_redi = 0;
-
 	if (!head)
 		return (0);
 	while (head != NULL)
@@ -91,12 +90,11 @@ char	*is_infile(t_comp *head)
 	return (infile_files(files, len));
 }
 
-int is_hedoc(t_comp *comp)
+int	is_hedoc(t_comp *comp)
 {
-	int yes;
+	int	yes;
 
 	yes = 0;
-
 	while (comp)
 	{
 		if (comp->whatisthis == 8)
@@ -108,31 +106,12 @@ int is_hedoc(t_comp *comp)
 			}
 			else
 			{
-				ft_putstr_fd("syntax error near unexpected token `newline'\n", 2);
+				ft_putstr_fd("syntax error near unexpected token `newline'\n",
+					2);
 				return (0);
 			}
 		}
 		comp = comp->next;
 	}
 	return (yes);
-}
-
-char *get_limiter(t_comp *comp)
-{
-	char *limiter;
-
-	limiter = NULL;
-	while (comp)
-	{
-		if (comp->whatisthis == 8)
-		{
-			if (comp->next)
-			{
-				if (comp->next->whatisthis == 9)
-					limiter = comp->next->data;
-			}
-		}
-		comp = comp->next;
-	}
-	return (limiter);
 }

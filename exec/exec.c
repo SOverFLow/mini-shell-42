@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void ft_cammand_e(char **env, t_comp *comp, int infile, int outfile, char *in)
+void	ft_cammand_e(char **env, t_comp *comp, int infile, int outfile, char *in)
 {
 	if (thereis_infile(comp) && in == NULL)
 		exit(1);
@@ -104,7 +104,7 @@ void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 	t_comp	*comp;
 	int		i;
 	int		infile;
-	int 	size;
+	int		size;
 
 	i = 0;
 	infile = 0;
@@ -127,7 +127,8 @@ void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 			if (comp->data == NULL)
 				return ;
 			if (is_cmd_built(comp->data))
-				infile = execute_builtin_cmds(comp, infile, head, what_redi(comp));
+				infile = execute_builtin_cmds(comp, infile, head,
+						what_redi(comp));
 			else
 				infile = ft_execut(infile, comp, env, what_redi(comp));
 			lst_comp = lst_comp->next;

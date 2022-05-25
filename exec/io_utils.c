@@ -51,6 +51,14 @@ char	*opens_files(char **files, int len)
 	return (NULL);
 }
 
+void	ft_put_error_fd(char *str)
+{
+	ft_putstr_fd("minishell: no such file or directory: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("\n", 2);
+	g_status = 1;
+}
+
 char	*infile_files(char **files, int len)
 {
 	int	i;
@@ -65,10 +73,7 @@ char	*infile_files(char **files, int len)
 			close(fd);
 			if (fd == -1)
 			{
-				ft_putstr_fd("minishell: no such file or directory: ", 1);
-				ft_putstr_fd(files[i], 1);
-				printf("\n");
-				g_status = 1;
+				ft_put_error_fd(files[i]);
 				return (NULL);
 			}
 			return (files[i]);
@@ -78,10 +83,7 @@ char	*infile_files(char **files, int len)
 			fd = open(files[i], O_RDONLY);
 			if (fd == -1)
 			{
-				ft_putstr_fd("minishell: no such file or directory: ", 1);
-				ft_putstr_fd(files[i], 1);
-				printf("\n");
-				g_status = 1;
+				ft_put_error_fd(files[i]);
 				break ;
 			}
 			if (fd != -1)
