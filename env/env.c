@@ -57,8 +57,6 @@ t_env	*init_env(char **env)
 
 	env_node = malloc(sizeof(t_env));
 	head = malloc(sizeof(t_env));
-	if (!env_node)
-		return (0);
 	i = 1;
 	env_node->key = env_key(env[0]);
 	env_node->val = ft_strdup(getenv(env_node->key));
@@ -67,8 +65,6 @@ t_env	*init_env(char **env)
 	while (env && env[i] && env[0])
 	{
 		new_node = malloc(sizeof(t_env));
-		if (!new_node)
-			return (0);
 		new_node->key = env_key(env[i]);
 		new_node->val = ft_strdup(getenv(new_node->key));
 		new_node->next = NULL;
