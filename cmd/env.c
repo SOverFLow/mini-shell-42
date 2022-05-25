@@ -32,6 +32,8 @@ void	ft_env(t_env *head, t_comp *comp, int outfile)
 		ft_putstr_fd("env :", outfile);
 		ft_putstr_fd(comp->next->data, outfile);
 		ft_putstr_fd(": No such file or directory\n", outfile);
+		g_status = 127;
+		return ;
 	}
 	else
 	{

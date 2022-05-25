@@ -108,6 +108,7 @@ void	ft_export(t_comp *comp, t_env *head, int outfile)
 			if (key[0] == '=')
 			{
 				ft_print_error(&key[0]);
+				g_status = 1;
 				return ;
 			}
 		}
@@ -117,6 +118,7 @@ void	ft_export(t_comp *comp, t_env *head, int outfile)
 			if (key[0] == '=')
 			{
 				ft_print_error(&key[0]);
+				g_status = 1;
 				return ;
 			}
 			if (comp->next->data != NULL)

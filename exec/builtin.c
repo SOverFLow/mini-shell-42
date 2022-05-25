@@ -37,6 +37,7 @@ void	execute_built_cmd(t_comp *comp, int infile, t_env *head, int what)
 	char	*out;
 	int		outfile;
 
+	g_status = 0;
 	out = is_outfile(comp);
 	in = is_infile(comp);
 	if (out == NULL)
@@ -76,6 +77,7 @@ int	execute_builtin_cmds(t_comp *comp, int infile, t_env *head, int what)
 	int		fd[2];
 
 	pipe(fd);
+	g_status = 0;
 	out = is_outfile(comp);
 	in = is_infile(comp);
 	if (out == NULL)
