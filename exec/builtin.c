@@ -103,13 +103,7 @@ int	execute_builtin_cmds(t_comp *comp, int infile, t_env *head, int what)
 		outfile = fd[1];
 	else
 		outfile = open_out_file(what, out);
-	if (is_hedoc(comp))
-	{
-		if (get_limiter(comp) != NULL)
-			infile = her_doc(get_limiter(comp));
-	}
-	else if (in != NULL)
-		infile = open(in, O_RDONLY);
+	infile = ft_who_infile(comp, in);
 	if (outfile == -1)
 	{
 		perror(out);
