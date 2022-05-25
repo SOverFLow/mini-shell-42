@@ -12,19 +12,6 @@
 
 #include "../minishell.h"
 
-static	int	num_of_args(t_comp *comp)
-{
-	int	num;
-
-	num = 0;
-	while (comp)
-	{
-		comp = comp->next;
-		num++;
-	}
-	return (num);
-}
-
 void	free_env(t_env *env_node)
 {
 	if (env_node->next == NULL)
@@ -41,14 +28,16 @@ void	ft_unset(t_comp *comp, t_env *env_node)
 
 	if (num_of_args(comp) > 1)
 	{
-		if (ft_strncmp(comp->next->data, env_node->key, ft_strlen(env_node->key)) == 0)
+		if (ft_strncmp(comp->next->data, env_node->key,
+				ft_strlen(env_node->key)) == 0)
 		{
 			free_env(env_node);
 			return ;
 		}
 		while (env_node && env_node->next != NULL)
 		{
-			if (ft_strncmp(comp->next->data, env_node->next->key, ft_strlen(env_node->next->key)) == 0)
+			if (ft_strncmp(comp->next->data, env_node->next->key,
+					ft_strlen(env_node->next->key)) == 0)
 			{
 				tmp_node = env_node->next->next;
 				free_env(env_node->next);

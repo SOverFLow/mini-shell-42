@@ -67,19 +67,6 @@ static	void	ft_go_to_path(int par, t_env *env)
 	}
 }
 
-static	int	num_of_args(t_comp *comp)
-{
-	int	num;
-
-	num = 0;
-	while (comp)
-	{
-		comp = comp->next;
-		num++;
-	}
-	return (num);
-}
-
 void	ft_cd(t_comp *comp, t_env *env)
 {
 	if (num_of_args(comp) == 1)

@@ -31,6 +31,24 @@ int	is_cmd_built(char *cmd)
 	return (0);
 }
 
+void	ft_do_built_cmd(t_comp *comp, int outfile, t_env *head)
+{
+	if (ft_strncmp(comp->data, "echo", 5) == 0)
+		ft_echo(comp, outfile);
+	if (ft_strncmp(comp->data, "cd", 3) == 0)
+		ft_cd(comp, head);
+	if (ft_strncmp(comp->data, "pwd", 4) == 0)
+		ft_pwd(outfile);
+	if (ft_strncmp(comp->data, "exit", 5) == 0)
+		ft_exit(comp);
+	if (ft_strncmp(comp->data, "env", 4) == 0)
+		ft_env(head, comp, outfile);
+	if (ft_strncmp(comp->data, "export", 7) == 0)
+		ft_export(comp, head, outfile);
+	if (ft_strncmp(comp->data, "unset", 6) == 0)
+		ft_unset(comp, head);
+}
+
 void	execute_built_cmd(t_comp *comp, int infile, t_env *head, int what)
 {
 	char	*in;
@@ -53,20 +71,21 @@ void	execute_built_cmd(t_comp *comp, int infile, t_env *head, int what)
 		infile = open(in, O_RDONLY);
 	if (thereis_infile(comp) && in == NULL)
 		return ;
-	if (ft_strncmp(comp->data, "echo", 5) == 0)
-		ft_echo(comp, outfile);
-	if (ft_strncmp(comp->data, "cd", 3) == 0)
-		ft_cd(comp, head);
-	if (ft_strncmp(comp->data, "pwd", 4) == 0)
-		ft_pwd(outfile);
-	if (ft_strncmp(comp->data, "exit", 5) == 0)
-		ft_exit(comp);
-	if (ft_strncmp(comp->data, "env", 4) == 0)
-		ft_env(head, comp, outfile);
-	if (ft_strncmp(comp->data, "export", 7) == 0)
-		ft_export(comp, head, outfile);
-	if (ft_strncmp(comp->data, "unset", 6) == 0)
-		ft_unset(comp, head);
+	ft_do_built_cmd(comp, outfile, head);
+}
+
+int ft_who_infile(t_comp *comp, char *in)
+{
+	int	infile;
+
+	if (is_hedoc(comp))
+	{
+		if (get_limiter(comp) != NULL)
+			infile = her_doc(get_limiter(comp));
+	}
+	else if (in != NULL)
+		infile = open(in, O_RDONLY);
+	return (infile);
 }
 
 int	execute_builtin_cmds(t_comp *comp, int infile, t_env *head, int what)
@@ -94,24 +113,12 @@ int	execute_builtin_cmds(t_comp *comp, int infile, t_env *head, int what)
 	if (outfile == -1)
 	{
 		perror(out);
+		g_status = 1;
 		return (0);
 	}
 	if (thereis_infile(comp) && in == NULL)
 		return (0);
-	if (ft_strncmp(comp->data, "echo", 5) == 0)
-		ft_echo(comp, outfile);
-	if (ft_strncmp(comp->data, "cd", 3) == 0)
-		ft_cd(comp, head);
-	if (ft_strncmp(comp->data, "pwd", 4) == 0)
-		ft_pwd(outfile);
-	if (ft_strncmp(comp->data, "exit", 5) == 0)
-		ft_exit(comp);
-	if (ft_strncmp(comp->data, "env", 4) == 0)
-		ft_env(head, comp, outfile);
-	if (ft_strncmp(comp->data, "export", 7) == 0)
-		ft_export(comp, head, outfile);
-	if (ft_strncmp(comp->data, "unset", 6) == 0)
-		ft_unset(comp, head);
+	ft_do_built_cmd(comp, outfile, head);
 	close(fd[1]);
 	return (fd[0]);
 }

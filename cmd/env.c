@@ -12,19 +12,6 @@
 
 #include "../minishell.h"
 
-static	int	num_of_args(t_comp *comp)
-{
-	int	num;
-
-	num = 0;
-	while (comp)
-	{
-		comp = comp->next;
-		num++;
-	}
-	return (num);
-}
-
 void	ft_env(t_env *head, t_comp *comp, int outfile)
 {
 	if (num_of_args(comp) > 1 && comp->next->whatisthis < 5)

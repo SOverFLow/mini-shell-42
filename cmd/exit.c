@@ -12,20 +12,7 @@
 
 #include "../minishell.h"
 
-static	int	num_of_args(t_comp *comp)
-{
-	int	num;
-
-	num = 0;
-	while (comp)
-	{
-		comp = comp->next;
-		num++;
-	}
-	return (num);
-}
-
-int check_is_num_arg(char *str)
+int	check_is_num_arg(char *str)
 {
 	while (*str == ' ' || *str == '\t')
 		str++;
@@ -42,7 +29,7 @@ int check_is_num_arg(char *str)
 	return (1);
 }
 
-int check_is_num_int(char *str, int num)
+int	check_is_num_int(char *str, int num)
 {
 	while (*str == ' ' || *str == '\t')
 		str++;
@@ -65,11 +52,18 @@ int check_is_num_int(char *str, int num)
 	return (1);
 }
 
-void ft_error_for_non_num()
+void	ft_error_for_non_num(void)
 {
 	ft_putstr_fd("exit\n", 2);
 	ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
 	exit(255);
+}
+
+void	ft_to_m_p(void)
+{
+	ft_putstr_fd("exit\n", 2);
+	ft_putstr_fd("minishell: exit: Too many parametres\n", 2);
+	g_status = 1;
 }
 
 void	ft_exit(t_comp *comp)
@@ -79,9 +73,7 @@ void	ft_exit(t_comp *comp)
 
 	if (num_of_args(comp) > 2)
 	{
-		ft_putstr_fd("exit\n", 1);
-		printf("minishell: exit: Too many parametres\n");
-		g_status = 1;
+		ft_to_m_p();
 		return ;
 	}
 	if (num_of_args(comp) == 1)

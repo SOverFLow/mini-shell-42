@@ -12,44 +12,6 @@
 
 #include "../minishell.h"
 
-int	check_var_env(char *var)
-{
-	if (*var == '\0')
-		return (0);
-	if (ft_isdigit(*var))
-		return (0);
-	while (*var)
-	{
-		if (ft_isalnum(*var) || *var == '_')
-			var++;
-		else
-			return (0);
-	}
-	return (1);
-}
-
-void	ft_print_error(char *err)
-{
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd("export", 2);
-	ft_putstr_fd(": `", 2);
-	ft_putstr_fd(err, 2);
-	ft_putstr_fd("': not a valid identifier\n", 2);
-}
-
-static	int	num_of_args(t_comp *comp)
-{
-	int	num;
-
-	num = 0;
-	while (comp)
-	{
-		comp = comp->next;
-		num++;
-	}
-	return (num);
-}
-
 void	add_var(char *var, t_env *env_node)
 {
 	t_env	*tmp_node;
@@ -86,28 +48,10 @@ void	add_var(char *var, t_env *env_node)
 	}
 }
 
-static	void	hidden_env(t_env *head, int outfile)
-{
-	while (head)
-	{
-		ft_putstr_fd("declare -x ", outfile);
-		ft_putstr_fd(head->key, outfile);
-		if (head->val != NULL)
-		{
-			write(outfile, "=\"", 2);
-			if (ft_strncmp(head->val, "=", 2))
-				ft_putstr_fd(head->val, outfile);
-			write(outfile, "\"", 1);
-		}
-		write(outfile, "\n", 1);
-		head = head->next;
-	}
-}
-
 void	ft_export(t_comp *comp, t_env *head, int outfile)
 {
 	char	**split;
-	char *key;
+	char	*key;
 
 	if (num_of_args(comp) == 1)
 		hidden_env(head, outfile);

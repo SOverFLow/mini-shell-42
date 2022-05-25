@@ -102,6 +102,10 @@ int		open_out_file(int what, char *out);
 int 	is_hedoc(t_comp *comp);
 char 	*get_limiter(t_comp *comp);
 int		her_doc(char *stop_keyword);
+void	hidden_env(t_env *head, int outfile);
+int		check_var_env(char *var);
+void	ft_print_error(char *err);
+int		num_of_args(t_comp *comp);
 
 //env
 t_env	*init_env(char **env);

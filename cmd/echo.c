@@ -12,23 +12,10 @@
 
 #include "../minishell.h"
 
-static	int	num_of_args(t_comp *comp)
+int	count_n_num(char *str)
 {
-	int	num;
-
-	num = 0;
-	while (comp)
-	{
-		comp = comp->next;
-		num++;
-	}
-	return (num);
-}
-
-int count_n_num(char *str)
-{
-	int i;
-	int n;
+	int	i;
+	int	n;
 
 	i = 0;
 	n = 0;
