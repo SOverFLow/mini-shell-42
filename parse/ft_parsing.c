@@ -65,6 +65,7 @@ t_list	*ft_parsing(char *line, t_env *env_node)
 	int		i;
 	t_list	*lst_comp;
 
+	line = ft_error_handler(line);
 	if (!line)
 		return (0);
 	line = ft_makespace(line);

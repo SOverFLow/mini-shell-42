@@ -15,7 +15,11 @@ RF= -lreadline -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include
 CFLAGS = -lreadline -Wall -Wextra -Werror
 NAME = minishell
 LIBNAME = Libft/libft.a
+<<<<<<< HEAD
 SRCS = main.c parse/lst_comp.c parse/ft_custom_split.c exec/exec.c exec/io_utils.c exec/utils.c parse/ft_parsing.c exec/io_check.c env/env.c signals.c exec/builtin.c cmd/echo.c cmd/pwd.c cmd/cd.c cmd/exit.c cmd/env.c cmd/unset.c cmd/export.c parse/ft_makespace.c parse/utilus.c exec/exec_utils.c exec/herdoc.c cmd/cmd_utils.c 
+=======
+SRCS = main.c parse/lst_comp.c parse/ft_custom_split.c exec/exec.c exec/io_utils.c exec/utils.c parse/ft_parsing.c exec/io_check.c env/env.c signals.c exec/builtin.c cmd/echo.c cmd/pwd.c cmd/cd.c cmd/exit.c cmd/env.c cmd/unset.c cmd/export.c parse/ft_makespace.c parse/utilus.c exec/exec_utils.c exec/herdoc.c parse/ft_error_handler.c
+>>>>>>> acd84613f1e5a98a4fd01f3f5a55187a17d6bf51
 
 $(LIBNAME):
 	$(MAKE) -C Libft
