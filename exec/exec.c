@@ -139,8 +139,11 @@ void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 		else
 			ft_lst_cmd(infile, comp, env, what_redi(comp));
 	}
-	if (WIFSIGNALED(g_status))
+	if (WIFSIGNALED(g_status) && ft_strncmp(comp->data, "exit", 5))
 		g_status += 128;
 	else
-		g_status = WEXITSTATUS(g_status);
+	{
+		if (ft_strncmp(comp->data, "exit", 5))
+			g_status = WEXITSTATUS(g_status);
+	}
 }
