@@ -71,6 +71,8 @@ void	add_var(char *var, t_env *env_node)
 		new_node->key = ft_strdup(split[0]);
 		if (split[1])
 			new_node->val = ft_strdup(split[1]);
+		else
+			new_node->val = NULL;
 		while (env_node && env_node->next)
 			env_node = env_node->next;
 		tmp_node = env_node->next;
