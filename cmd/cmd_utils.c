@@ -20,7 +20,7 @@ int	check_var_env(char *var)
 		return (0);
 	while (*var)
 	{
-		if (ft_isalnum(*var) || *var == '_')
+		if (ft_isalnum(*var) || *var == '_' || *var == '=')
 			var++;
 		else
 			return (0);
