@@ -18,6 +18,8 @@ int	check_var_env(char *var)
 		return (0);
 	if (ft_isdigit(*var))
 		return (0);
+	else
+		return (1);
 	while (*var)
 	{
 		if (ft_isalnum(*var) || *var == '_')
