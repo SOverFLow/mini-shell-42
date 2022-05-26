@@ -12,10 +12,8 @@
 
 #include "../minishell.h"
 
-void	ft_cammand_e(char **env, t_comp *comp, int infile, int outfile, char *in)
+void	ft_cammand_e(char **env, t_comp *comp, int infile, int outfile)
 {
-	if (thereis_infile(comp) && in == NULL)
-		exit(1);
 	dup2(infile, 0);
 	dup2(outfile, 1);
 	if (ft_cmd(comp) != NULL)
@@ -62,7 +60,9 @@ int	ft_execut(int infile, t_comp *comp, char **env, int what)
 		else if (in != NULL)
 			infile = open(in, O_RDONLY);
 		close(fd[0]);
-		ft_cammand_e(env, comp, infile, outfile, in);
+		if (thereis_infile(comp) && in == NULL)
+			exit(1);
+		ft_cammand_e(env, comp, infile, outfile);
 	}
 	waitpid(pid, &g_status, 0);
 	close(fd[1]);
@@ -96,11 +96,15 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 		infile = open(in, O_RDONLY);
 	pid = fork();
 	if (pid == 0)
-		ft_cammand_e(env, comp, infile, outfile, in);
+	{
+		if (thereis_infile(comp) && in == NULL)
+			exit(1);
+		ft_cammand_e(env, comp, infile, outfile);
+	}
 	waitpid(pid, &g_status, 0);
 }
 
-void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
+void	ft_execution(t_list	*lst_comp, t_env *head)
 {
 	t_comp	*comp;
 	int		i;
@@ -118,7 +122,7 @@ void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 		if (is_cmd_built(comp->data))
 			execute_built_cmd(comp, infile, head, what_redi(comp));
 		else
-			ft_lst_cmd(infile, comp, env, what_redi(comp));
+			ft_lst_cmd(infile, comp, get_env_str(head), what_redi(comp));
 	}
 	else
 	{
@@ -131,7 +135,8 @@ void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 				infile = execute_builtin_cmds(comp, infile, head,
 						what_redi(comp));
 			else
-				infile = ft_execut(infile, comp, env, what_redi(comp));
+				infile = ft_execut(infile, comp, get_env_str(head),
+						what_redi(comp));
 			lst_comp = lst_comp->next;
 			i++;
 		}
@@ -139,7 +144,7 @@ void	ft_execution(t_list	*lst_comp, char **env, t_env *head)
 		if (is_cmd_built(comp->data))
 			execute_built_cmd(comp, infile, head, what_redi(comp));
 		else
-			ft_lst_cmd(infile, comp, env, what_redi(comp));
+			ft_lst_cmd(infile, comp, get_env_str(head), what_redi(comp));
 	}
 	if (WIFSIGNALED(g_status) && !is_cmd_built(comp->data))
 		g_status += 128;

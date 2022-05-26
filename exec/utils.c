@@ -76,3 +76,16 @@ char	*get_limiter(t_comp *comp)
 	}
 	return (limiter);
 }
+
+int	get_env_len(t_env *env)
+{
+	int	len;
+
+	len = 0;
+	while (env)
+	{
+		len++;
+		env = env->next;
+	}
+	return (len);
+}

@@ -89,3 +89,25 @@ char	**ft_get_cmd(t_comp *head)
 	cmd_tab[i] = NULL;
 	return (cmd_tab);
 }
+
+char	**get_env_str(t_env *env)
+{
+	int		len;
+	char	**env_tab;
+	int		i;
+	char	*key;
+
+	len = get_env_len(env);
+	i = 0;
+	env_tab = malloc(sizeof(char *) * (len + 1));
+	while (i < len)
+	{
+		key = ft_strjoin(env->key, "=");
+		env_tab[i] = ft_strjoin(key, env->val);
+		free(key);
+		env = env->next;
+		i++;
+	}
+	env_tab[i] = NULL;
+	return (env_tab);
+}

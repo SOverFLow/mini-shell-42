@@ -86,7 +86,7 @@ int		ft_str_ichr(char *str, char c);
 char	*check_s_car(char *line);
 char	*is_outfile(t_comp *head);
 char	*is_infile(t_comp *head);
-void	ft_execution(t_list	*lst_comp, char **env, t_env *head);
+void	ft_execution(t_list	*lst_comp, t_env *head);
 char	*ft_makespace(char *line);
 int		thereis_infile(t_comp *comp);
 int		infile_len(t_comp *head);
@@ -107,6 +107,8 @@ void	hidden_env(t_env *head, int outfile);
 int		check_var_env(char *var);
 void	ft_print_error(char *err);
 int		num_of_args(t_comp *comp);
+char	**get_env_str(t_env *env);
+int		get_env_len(t_env *env);
 
 //env
 t_env	*init_env(char **env);
