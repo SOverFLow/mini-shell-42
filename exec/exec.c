@@ -28,6 +28,7 @@ void	ft_cammand_e(char **env, t_comp *comp, int infile, int outfile, char *in)
 			exit(127);
 		}
 	}
+	exit(0);
 }
 
 int	ft_execut(int infile, t_comp *comp, char **env, int what)
