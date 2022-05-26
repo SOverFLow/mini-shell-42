@@ -33,16 +33,13 @@ void	ft_unset(t_comp *comp, t_env **env_node)
 	}
 	if (num_of_args(comp) > 1)
 	{
-		if (ft_strncmp(comp->next->data, node->key,
-				ft_strlen(node->key) + 1) == 0)
-		{
-			tmp_node = node->next;
-			*env_node = tmp_node;
-			free(node->val);
-			node->val = NULL;
-			free(node->key);
-			return ;
-		}
+		// if (ft_strncmp(comp->next->data, node->key,
+		// 		ft_strlen(node->key) + 1) == 0)
+		// {
+		// 	*env_node = node->next;
+		// 	free_env(node);
+		// 	return ;
+		// }
 		tmp_node = node;
 		node = node->next;
 		while (node && node->next)
@@ -63,9 +60,7 @@ void	ft_unset(t_comp *comp, t_env **env_node)
 					ft_strlen(node->key) + 1) == 0)
 			{
 				tmp_node->next = NULL;
-				free(node->val);
-				node->val = NULL;
-				free(node->key);
+				free_env(node);
 				return ;
 			}
 		}
