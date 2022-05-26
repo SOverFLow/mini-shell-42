@@ -18,13 +18,14 @@ int	main(int argc, char **argv, char **env)
 	t_list	*lst_comp;
 	t_env	*env_node;
 
-	signal(SIGINT, handler_cntrl_c);
-	signal(SIGSEGV, handler_cntrl_d);
 	signal(SIGQUIT, SIG_IGN);
 	env_node = init_env(env);
 	while (1)
 	{
+		signal(SIGSEGV, handler_cntrl_d);
+		signal(SIGINT, handler_cntrl_c);
 		line = readline("\033[1;32mminishell➜ ");
+		signal(SIGINT, handler_cntrl_c_after);
 		if (*line)
 		{
 			add_history(line);

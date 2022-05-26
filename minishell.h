@@ -74,7 +74,7 @@ int		execute_builtin_cmds(t_comp *comp, int infile, t_env *head, int what);
 void	ft_pwd(int outfile);
 void	ft_echo(t_comp *comp, int outfile);
 void	ft_env(t_env *head, t_comp *comp, int outfile);
-void	ft_unset(t_comp *comp, t_env *env_node);
+void	ft_unset(t_comp *comp, t_env **env_node);
 void	ft_cd(t_comp *comp, t_env *env);
 void	ft_exit(t_comp *comp);
 void	ft_export(t_comp *comp, t_env *head, int outfile);
@@ -117,6 +117,7 @@ char	*trim_key(char *s, int start, int end);
 
 // signals
 void	handler_cntrl_c(int num);
+void	handler_cntrl_c_after(int num);
 void	handler_cntrl_d(int num);
 
 #endif

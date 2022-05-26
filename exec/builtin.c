@@ -46,7 +46,7 @@ void	ft_do_built_cmd(t_comp *comp, int outfile, t_env *head)
 	if (ft_strncmp(comp->data, "export", 7) == 0)
 		ft_export(comp, head, outfile);
 	if (ft_strncmp(comp->data, "unset", 6) == 0)
-		ft_unset(comp, head);
+		ft_unset(comp, &head);
 }
 
 void	execute_built_cmd(t_comp *comp, int infile, t_env *head, int what)

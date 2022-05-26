@@ -14,37 +14,60 @@
 
 void	free_env(t_env *env_node)
 {
-	if (env_node->next == NULL)
-	{
-		env_node->key = NULL;
-		env_node->val = NULL;
-		env_node->next = NULL;
-	}
+	free(env_node->key);
+	free(env_node->val);
+	free(env_node);
 }
 
-void	ft_unset(t_comp *comp, t_env *env_node)
+void	ft_unset(t_comp *comp, t_env **env_node)
 {
 	t_env	*tmp_node;
+	t_env   *node;
 
+	node = *env_node;
+	if (num_of_args(comp) == 1)
+	{
+		g_status = 1;
+		ft_putstr_fd("unset: not enough arguments\n", 2);
+		return ;
+	}
 	if (num_of_args(comp) > 1)
 	{
-		if (ft_strncmp(comp->next->data, env_node->key,
-				ft_strlen(env_node->key)) == 0)
+		if (ft_strncmp(comp->next->data, node->key,
+				ft_strlen(node->key) + 1) == 0)
 		{
-			free_env(env_node);
+			tmp_node = node->next;
+			*env_node = tmp_node;
+			free(node->val);
+			node->val = NULL;
+			free(node->key);
 			return ;
 		}
-		while (env_node && env_node->next != NULL)
+		tmp_node = node;
+		node = node->next;
+		while (node && node->next)
 		{
-			if (ft_strncmp(comp->next->data, env_node->next->key,
-					ft_strlen(env_node->next->key)) == 0)
+			if (ft_strncmp(comp->next->data, node->key,
+					ft_strlen(node->next->key)) == 0)
 			{
-				tmp_node = env_node->next->next;
-				free_env(env_node->next);
-				env_node->next = tmp_node;
+				tmp_node->next = node->next;
+				free_env(node);
 				return ;
 			}
-			env_node = env_node->next;
+			tmp_node = node;
+			node = node->next;
+		}
+		if (node->next == NULL)
+		{
+			if (ft_strncmp(comp->next->data, node->key,
+					ft_strlen(node->key) + 1) == 0)
+			{
+				tmp_node->next = NULL;
+				free(node->val);
+				node->val = NULL;
+				free(node->key);
+				return ;
+			}
 		}
 	}
 }

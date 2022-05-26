@@ -31,6 +31,7 @@ static	void	edit_old_pwd(t_env *env)
 		return ;
 	}
 	add_var(old, env);
+	free(old);
 }
 
 static	char	*get_env_path(t_env *env, char *find, int len)

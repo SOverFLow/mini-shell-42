@@ -76,16 +76,16 @@ void	ft_export(t_comp *comp, t_env *head, int outfile)
 				g_status = 1;
 				return ;
 			}
-			if (check_var_env(comp->next->data))
-			{
+			// if (check_var_env(comp->next->data))
+			// {
 				if (comp->next->data != NULL)
 					add_var(comp->next->data, head);
-			}
-			else
-			{
-				ft_print_error(comp->next->data);
-				g_status = 1;
-			}
+			// }
+			// else
+			// {
+			// 	ft_print_error(comp->next->data);
+			// 	g_status = 1;
+			// }
 			comp = comp->next;
 		}
 	}
