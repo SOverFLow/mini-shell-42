@@ -48,15 +48,18 @@ void	ft_delete_env(t_env **env, char *key)
 
 void	ft_unset(t_comp *comp, t_env **env)
 {
-	if (num_of_args(comp) == 1)
+	if (num_of_args(comp) > 1)
 	{
-		g_status = 1;
-		ft_putstr_fd("unset: not enough arguments", 2);
-		return ;
-	}
-	while (comp->next)
-	{
-		ft_delete_env(env, comp->next->data);
-		comp = comp->next;
+		while (comp->next)
+		{
+			if (check_var_env(comp->next->data))
+				ft_delete_env(env, comp->next->data);
+			else
+			{
+				ft_print_error(comp->next->data);
+				g_status = 1;
+			}
+			comp = comp->next;
+		}
 	}
 }
