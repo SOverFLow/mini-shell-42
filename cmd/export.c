@@ -80,14 +80,14 @@ void	add_var(char *var, t_env *env_node)
 	}
 }
 
-void	ft_export(t_comp *comp, t_env *head, int outfile)
+void	ft_export(t_comp *comp, t_env **head, int outfile)
 {
 	char	*key;
 	int		err;
 
 	if (num_of_args(comp) == 1)
 	{
-		hidden_env(head, outfile);
+		hidden_env(*head, outfile);
 		return ;
 	}
 	else
@@ -109,7 +109,7 @@ void	ft_export(t_comp *comp, t_env *head, int outfile)
 			if (err == 1)
 			{
 				if (comp->next->data != NULL)
-					add_var(comp->next->data, head);
+					add_var(comp->next->data, *head);
 			}
 			comp = comp->next;
 		}

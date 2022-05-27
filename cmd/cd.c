@@ -12,11 +12,13 @@
 
 #include "../minishell.h"
 
-static	void	edit_old_pwd(t_env *env)
+static	void	edit_old_pwd(t_env **env)
 {
+	t_env	*my_env;
 	char	cmd[256];
 	char	*old;
 
+	my_env = *env;
 	if (getcwd(cmd, 256) == NULL)
 	{
 		perror("Error\n");
@@ -30,22 +32,24 @@ static	void	edit_old_pwd(t_env *env)
 		g_status = 1;
 		return ;
 	}
-	add_var(old, env);
-	free(old);
+	add_var(old, my_env);
 }
 
-static	char	*get_env_path(t_env *env, char *find, int len)
+static	char	*get_env_path(t_env **env, char *find, int len)
 {
-	while (env)
+	t_env	*my_env;
+
+	my_env = *env;
+	while (my_env)
 	{
-		if (ft_strncmp(env->key, find, len) == 0)
-			return (env->val);
-		env = env->next;
+		if (ft_strncmp(my_env->key, find, len) == 0)
+			return (my_env->val);
+		my_env = my_env->next;
 	}
 	return (NULL);
 }
 
-static	void	ft_go_to_path(int par, t_env *env)
+static	void	ft_go_to_path(int par, t_env **env)
 {
 	char	*path;
 
@@ -68,7 +72,7 @@ static	void	ft_go_to_path(int par, t_env *env)
 	}
 }
 
-void	ft_cd(t_comp *comp, t_env *env)
+void	ft_cd(t_comp *comp, t_env **env)
 {
 	if (num_of_args(comp) == 1)
 		ft_go_to_path(0, env);

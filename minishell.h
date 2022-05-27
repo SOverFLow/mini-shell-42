@@ -64,20 +64,20 @@ char	*ft_error_handler(char *line);
 
 //exec
 int		is_cmd_built(char *cmd);
-void	execute_built_cmd(t_comp *comp, int infile, t_env *head, int what);
+void	execute_built_cmd(t_comp *comp, int infile, t_env **head, int what);
 char	*ft_get_path(char *cmd, char **env);
 void	ft_exec(char *cmd, char **env);
 char	**ft_get_cmd(t_comp *head);
-int		execute_builtin_cmds(t_comp *comp, int infile, t_env *head, int what);
+int		execute_builtin_cmds(t_comp *comp, int infile, t_env **head, int what);
 
 // cammand
 void	ft_pwd(int outfile);
 void	ft_echo(t_comp *comp, int outfile);
 void	ft_env(t_env *head, t_comp *comp, int outfile);
 void	ft_unset(t_comp *comp, t_env **env_node);
-void	ft_cd(t_comp *comp, t_env *env);
+void	ft_cd(t_comp *comp, t_env **env);
 void	ft_exit(t_comp *comp);
-void	ft_export(t_comp *comp, t_env *head, int outfile);
+void	ft_export(t_comp *comp, t_env **head, int outfile);
 
 // utils
 char	*ft_path_join(char *path, char *bin);
@@ -86,7 +86,7 @@ int		ft_str_ichr(char *str, char c);
 char	*check_s_car(char *line);
 char	*is_outfile(t_comp *head);
 char	*is_infile(t_comp *head);
-void	ft_execution(t_list	*lst_comp, t_env *head);
+void	ft_execution(t_list	*lst_comp, t_env **head);
 char	*ft_makespace(char *line);
 int		thereis_infile(t_comp *comp);
 int		infile_len(t_comp *head);
@@ -111,7 +111,7 @@ char	**get_env_str(t_env *env);
 int		get_env_len(t_env *env);
 
 //env
-t_env	*init_env(char **env);
+t_env	**init_env(char **env);
 char	*env_key(char *str);
 char	*trim_key(char *s, int start, int end);
 

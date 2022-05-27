@@ -104,7 +104,7 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 	waitpid(pid, &g_status, 0);
 }
 
-void	ft_execution(t_list	*lst_comp, t_env *head)
+void	ft_execution(t_list	*lst_comp, t_env **head)
 {
 	t_comp	*comp;
 	int		i;
@@ -122,7 +122,7 @@ void	ft_execution(t_list	*lst_comp, t_env *head)
 		if (is_cmd_built(comp->data))
 			execute_built_cmd(comp, infile, head, what_redi(comp));
 		else
-			ft_lst_cmd(infile, comp, get_env_str(head), what_redi(comp));
+			ft_lst_cmd(infile, comp, get_env_str(*head), what_redi(comp));
 	}
 	else
 	{
@@ -135,7 +135,7 @@ void	ft_execution(t_list	*lst_comp, t_env *head)
 				infile = execute_builtin_cmds(comp, infile, head,
 						what_redi(comp));
 			else
-				infile = ft_execut(infile, comp, get_env_str(head),
+				infile = ft_execut(infile, comp, get_env_str(*head),
 						what_redi(comp));
 			lst_comp = lst_comp->next;
 			i++;
@@ -144,7 +144,7 @@ void	ft_execution(t_list	*lst_comp, t_env *head)
 		if (is_cmd_built(comp->data))
 			execute_built_cmd(comp, infile, head, what_redi(comp));
 		else
-			ft_lst_cmd(infile, comp, get_env_str(head), what_redi(comp));
+			ft_lst_cmd(infile, comp, get_env_str(*head), what_redi(comp));
 	}
 	if (WIFSIGNALED(g_status) && !is_cmd_built(comp->data))
 		g_status += 128;

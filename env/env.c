@@ -48,11 +48,11 @@ char	*env_key(char *str)
 	return (NULL);
 }
 
-t_env	*init_env(char **env)
+t_env	**init_env(char **env)
 {
 	t_env	*env_node;
 	t_env	*new_node;
-	t_env	*head;
+	t_env	**head;
 	int		i;
 
 	env_node = malloc(sizeof(t_env));
@@ -61,7 +61,7 @@ t_env	*init_env(char **env)
 	env_node->key = env_key(env[0]);
 	env_node->val = ft_strdup(getenv(env_node->key));
 	env_node->next = NULL;
-	head = env_node;
+	*head = env_node;
 	while (env && env[i] && env[0])
 	{
 		new_node = malloc(sizeof(t_env));
