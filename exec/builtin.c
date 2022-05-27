@@ -89,7 +89,6 @@ int	ft_who_infile(t_comp *comp, char *in)
 	return (infile);
 }
 
-
 int	execute_builtin_cmds(t_comp *comp, int infile, t_env **head, int what)
 {
 	char	*in;
@@ -118,4 +117,3 @@ int	execute_builtin_cmds(t_comp *comp, int infile, t_env **head, int what)
 	close(fd[1]);
 	return (fd[0]);
 }
-
