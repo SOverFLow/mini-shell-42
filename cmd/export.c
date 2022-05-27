@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int ft_is_in_env(t_env *head, char *key)
+int	ft_is_in_env(t_env *head, char *key)
 {
 	while (head)
 	{
@@ -25,7 +25,7 @@ int ft_is_in_env(t_env *head, char *key)
 
 void	edit_env_value_by_key(t_env **head, char *key, char *val)
 {
-	t_env *my_head;
+	t_env	*my_head;
 
 	my_head = *head;
 	while (my_head)
