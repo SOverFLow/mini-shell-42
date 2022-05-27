@@ -32,6 +32,7 @@ void	edit_env_value_by_key(t_env **head, char *key, char *val)
 	{
 		if (ft_strncmp(my_head->key, key, ft_strlen(key)) == 0)
 		{
+			free(my_head->val);
 			my_head->val = ft_strdup(val);
 			return ;
 		}
@@ -68,7 +69,7 @@ void	add_var(char *var, t_env *env_node)
 		else
 		{
 			if (ft_str_ichr(var, '=') > -1)
-				new_node->val = ft_strdup("=");
+				new_node->val = ft_strdup("");
 			else
 				new_node->val = NULL;
 		}
