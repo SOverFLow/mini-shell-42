@@ -78,6 +78,7 @@ int	ft_who_infile(t_comp *comp, char *in)
 {
 	int	infile;
 
+	infile = 0;
 	if (is_hedoc(comp))
 	{
 		if (get_limiter(comp) != NULL)

@@ -40,6 +40,7 @@ int	open_out_file(int what, char *out)
 {
 	int	outfile;
 
+	outfile = 1;
 	if (what == 5)
 		outfile = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	else if (what == 7)

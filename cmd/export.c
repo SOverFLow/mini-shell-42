@@ -46,8 +46,7 @@ void	add_var(char *var, t_env *env_node)
 	t_env	*new_node;
 	char	**split;
 
-	if (var)
-		split = ft_split(var, '=');
+	split = ft_split(var, '=');
 	if (split[0] != NULL)
 	{
 		if (ft_is_in_env(env_node, split[0]))

@@ -14,6 +14,7 @@
 
 void	handler_cntrl_c(int num)
 {
+	(void)num;
 	ft_putstr_fd("\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
@@ -23,12 +24,14 @@ void	handler_cntrl_c(int num)
 
 void	handler_cntrl_c_after(int num)
 {
+	(void)num;
 	ft_putstr_fd("\n", 1);
 	g_status = 1;
 }
 
 void	handler_cntrl_d(int num)
 {
+	(void)num;
 	ft_putstr_fd("exit", 1);
 	exit(1);
 }

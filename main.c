@@ -19,6 +19,8 @@ int	main(int argc, char **argv, char **env)
 	t_env	*env_node;
 
 	signal(SIGQUIT, SIG_IGN);
+	(void)argc;
+	(void)argv;
 	env_node = init_env(env);
 	while (1)
 	{

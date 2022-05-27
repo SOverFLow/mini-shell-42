@@ -71,6 +71,7 @@ void	ft_exit(t_comp *comp)
 	char	*tmp;
 	int		i;
 
+	i = 0;
 	if (num_of_args(comp) > 2)
 	{
 		ft_to_m_p();

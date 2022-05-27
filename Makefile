@@ -12,7 +12,7 @@
 
 CC = cc
 RF= -lreadline -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include
-CFLAGS = -lreadline -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 NAME = minishell
 LIBNAME = Libft/libft.a
 SRCS = main.c parse/lst_comp.c parse/ft_custom_split.c exec/exec.c exec/io_utils.c exec/utils.c parse/ft_parsing.c \
@@ -23,7 +23,7 @@ $(LIBNAME):
 	$(MAKE) -C Libft
 
 $(NAME): $(LIBNAME)
-	$(CC) $(SRCS) $(RF) $(LIBNAME) -o $(NAME)
+	$(CC) $(SRCS) $(CFLAGS) $(RF) $(LIBNAME) -o $(NAME)
 all: $(NAME)
 
 clean:
