@@ -47,3 +47,17 @@ int	her_doc(char *stop_keyword)
 	waitpid(pid, NULL, 0);
 	return (fd[0]);
 }
+
+int	infile_len(t_comp *head)
+{
+	int	len;
+
+	len = 0;
+	while (head)
+	{
+		if (head->whatisthis == 3)
+			len++;
+		head = head->next;
+	}
+	return (len);
+}

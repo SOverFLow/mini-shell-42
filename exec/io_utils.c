@@ -59,6 +59,18 @@ void	ft_put_error_fd(char *str)
 	g_status = 1;
 }
 
+char	*try_open_file(int fd, char *file)
+{
+	fd = open(file, O_RDONLY);
+	close(fd);
+	if (fd == -1)
+	{
+		ft_put_error_fd(file);
+		return (NULL);
+	}
+	return (file);
+}
+
 char	*infile_files(char **files, int len)
 {
 	int	i;
@@ -68,16 +80,7 @@ char	*infile_files(char **files, int len)
 	while (i < len)
 	{
 		if (files[i + 1] == NULL)
-		{
-			fd = open(files[i], O_RDONLY);
-			close(fd);
-			if (fd == -1)
-			{
-				ft_put_error_fd(files[i]);
-				return (NULL);
-			}
-			return (files[i]);
-		}
+			return (try_open_file(fd, files[i]));
 		else
 		{
 			fd = open(files[i], O_RDONLY);
@@ -92,18 +95,4 @@ char	*infile_files(char **files, int len)
 		i++;
 	}
 	return (NULL);
-}
-
-int	infile_len(t_comp *head)
-{
-	int	len;
-
-	len = 0;
-	while (head)
-	{
-		if (head->whatisthis == 3)
-			len++;
-		head = head->next;
-	}
-	return (len);
 }
