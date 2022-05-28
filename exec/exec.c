@@ -53,6 +53,23 @@ int	ft_execut(int infile, t_comp *comp, char **env, int what)
 	return (fd[0]);
 }
 
+int	ft_cmd_norm(char *out, int what)
+{
+	int	outfile;
+
+	outfile = 1;
+	if (out == NULL)
+		outfile = 1;
+	else
+		outfile = open_out_file(what, out);
+	if (outfile == -1)
+	{
+		perror(out);
+		return (-1);
+	}
+	return (outfile);
+}
+
 void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 {
 	int		outfile;
@@ -62,20 +79,11 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 
 	out = is_outfile(comp);
 	in = is_infile(comp);
-	if (out == NULL)
-		outfile = 1;
-	else
-		outfile = open_out_file(what, out);
-	if (outfile == -1)
-	{
-		perror(out);
+	if (ft_cmd_norm(out, what) == -1)
 		return ;
-	}
-	if (is_hedoc(comp))
-	{
-		if (get_limiter(comp) != NULL)
+	outfile = ft_cmd_norm(out, what);
+	if (is_hedoc(comp) && get_limiter(comp) != NULL)
 			infile = her_doc(get_limiter(comp));
-	}
 	else if (in != NULL)
 		infile = open(in, O_RDONLY);
 	pid = fork();
