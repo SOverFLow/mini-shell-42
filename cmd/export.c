@@ -78,6 +78,7 @@ void	add_var(char *var, t_env *env_node)
 		env_node->next = new_node;
 		new_node->next = tmp_node;
 	}
+	ft_free_machine(split);
 }
 
 void	ft_export(t_comp *comp, t_env **head, int outfile)
