@@ -44,7 +44,7 @@ int	ft_qoutes_cheaker(char *line)
 	return (1);
 }
 
-int	ft_redection_cheaker(char *line, char c)
+char	ft_redection_cheaker(char *line, char c)
 {
 	int	i;
 
@@ -59,9 +59,9 @@ int	ft_redection_cheaker(char *line, char c)
 			while (line[i] == ' ' && line[i])
 				i++;
 			if (!line[i])
-				return (1);
+				return ('\n');
 			if (line[i] && (line[i] == '>' || line[i] == '|' || line[i] == '<'))
-				return (1);
+				return (line[i]);
 		}
 		i++;
 	}
@@ -70,6 +70,8 @@ int	ft_redection_cheaker(char *line, char c)
 
 char	*ft_error_handler(char *line)
 {
+	char	c;
+
 	if (ft_qoutes_cheaker(line))
 	{
 		write(2, "error : quote not closed\n", 25);
@@ -77,12 +79,26 @@ char	*ft_error_handler(char *line)
 	}
 	else if (ft_redection_cheaker(line, '>'))
 	{
-		write(1, "minishell: syntax error\n", 24);
+		c = ft_redection_cheaker(line, '>');
+		if (c == '\n')
+			write(1, "minishell: syntax error near unexpected token `newline'\n", 56);
+		else
+		{
+			ft_putstr_fd("minishell: syntax error near unexpected token ", 1);
+			ft_putendl_fd(&c, 1);
+		}
 		return (NULL);
 	}
 	else if (ft_redection_cheaker(line, '<'))
 	{
-		write(1, "minishell: syntax error\n", 24);
+		c = ft_redection_cheaker(line, '<');
+		if (c == '\n')
+			write(1, "minishell: syntax error near unexpected token `newline'\n", 56);
+		else
+		{
+			ft_putstr_fd("minishell: syntax error near unexpected token ", 1);
+			ft_putendl_fd(&c, 1);
+		}
 		return (NULL);
 	}
 	return (line);
