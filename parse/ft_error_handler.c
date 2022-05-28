@@ -44,11 +44,45 @@ int	ft_qoutes_cheaker(char *line)
 	return (1);
 }
 
+int	ft_redection_cheaker(char *line, char c)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] && line[i] == c)
+		{
+			i++;
+			if (line[i] && line[i] == c)
+				i++;
+			while (line[i] == ' ' && line[i])
+				i++;
+			if (!line[i])
+				return (1);
+			if (line[i] && (line[i] == '>' || line[i] == '|' || line[i] == '<'))
+				return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 char	*ft_error_handler(char *line)
 {
 	if (ft_qoutes_cheaker(line))
 	{
 		write(2, "error : quote not closed\n", 25);
+		return (NULL);
+	}
+	else if (ft_redection_cheaker(line, '>'))
+	{
+		write(1, "minishell: syntax error\n", 24);
+		return (NULL);
+	}
+	else if (ft_redection_cheaker(line, '<'))
+	{
+		write(1, "minishell: syntax error\n", 24);
 		return (NULL);
 	}
 	return (line);
