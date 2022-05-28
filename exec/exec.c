@@ -65,6 +65,7 @@ int	ft_execut(int infile, t_comp *comp, char **env, int what)
 		ft_cammand_e(env, comp, infile, outfile);
 	}
 	waitpid(pid, &g_status, 0);
+	ft_free_machine(env);
 	close(fd[1]);
 	return (fd[0]);
 }
@@ -102,6 +103,7 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 		ft_cammand_e(env, comp, infile, outfile);
 	}
 	waitpid(pid, &g_status, 0);
+	ft_free_machine(env);
 }
 
 void	ft_execution(t_list	*lst_comp, t_env **head)
