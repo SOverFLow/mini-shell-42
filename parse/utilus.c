@@ -44,6 +44,7 @@ char	*ft_qremove(char *str, char c)
 		i++;
 	}
 	new_str[j] = '\0';
+	free(str);
 	return (new_str);
 }
 
@@ -52,9 +53,13 @@ char	*ft_env_search(char *data, t_env *env_node)
 	while (env_node)
 	{
 		if (ft_strncmp(env_node->key, data, ft_strlen(data)) == 0)
+		{
+			free(data);
 			return (env_node->val);
+		}
 		env_node = env_node->next;
 	}
+	free(data);
 	return (NULL);
 }
 
@@ -107,6 +112,7 @@ char	*ft_dollar(char *str, t_env *env_nod)
 		i++;
 	}
 	dollar[j] = '\0';
+	free(str);
 	return (dollar);
 }
 
@@ -125,6 +131,7 @@ char	*ft_realvalue(char *data, t_env	*env_list)
 		}
 		i++;
 	}
+	//free(data);
 	str = ft_dollar(data, env_list);
 	return (str);
 }
