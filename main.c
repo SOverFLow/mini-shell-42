@@ -35,7 +35,7 @@ int	main(int argc, char **argv, char **env)
 			if (lst_comp != NULL)
 				ft_execution(lst_comp, env_node);
 			free(line);
-			free(lst_comp);
+			// free(lst_comp);
 		}
 	}
 }

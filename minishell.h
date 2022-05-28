@@ -109,6 +109,7 @@ void	ft_print_error(char *err);
 int		num_of_args(t_comp *comp);
 char	**get_env_str(t_env *env);
 int		get_env_len(t_env *env);
+void    ft_free_machine(char **list);
 
 //env
 t_env	*init_env(char **env);
