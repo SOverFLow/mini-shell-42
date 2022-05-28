@@ -120,6 +120,7 @@ void	check_for_status(t_comp *comp);
 void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what);
 int		ft_cmd_norm(char *out, int what, char **env);
 int		ft_new_norm_func(char *out, int fd, int what, char **env);
+int		func_for_infile_norm(int infile, char *in, t_comp *comp);
 
 //env
 t_env	**init_env(char **env);

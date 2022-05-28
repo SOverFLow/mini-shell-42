@@ -47,3 +47,12 @@ int	ft_new_norm_func(char *out, int fd, int what, char **env)
 	}
 	return (outfile);
 }
+
+int	func_for_infile_norm(int infile, char *in, t_comp *comp)
+{
+	if (is_hedoc(comp) && get_limiter(comp) != NULL)
+		infile = her_doc(get_limiter(comp));
+	else if (in != NULL)
+		infile = open(in, O_RDONLY);
+	return (infile);
+}

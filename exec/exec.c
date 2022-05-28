@@ -29,10 +29,7 @@ int	ft_execut(int infile, t_comp *comp, char **env, int what)
 		if (ft_new_norm_func(out, fd[1], what, env) == -1)
 			exit(0);
 		outfile = ft_new_norm_func(out, fd[1], what, env);
-		if (is_hedoc(comp) && get_limiter(comp) != NULL)
-			infile = her_doc(get_limiter(comp));
-		else if (in != NULL)
-			infile = open(in, O_RDONLY);
+		infile = func_for_infile_norm(infile, in, comp);
 		close(fd[0]);
 		if (thereis_infile(comp) && in == NULL)
 			exit(1);
