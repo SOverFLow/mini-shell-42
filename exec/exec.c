@@ -106,6 +106,14 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 	ft_free_machine(env);
 }
 
+void	ft_execute_one_cmd(t_comp *comp, t_env **head, int infile)
+{
+	if (is_cmd_built(comp->data))
+		execute_built_cmd(comp, infile, head, what_redi(comp));
+	else
+		ft_lst_cmd(infile, comp, get_env_str(*head), what_redi(comp));
+}
+
 void	ft_execution(t_list	*lst_comp, t_env **head)
 {
 	t_comp	*comp;
@@ -121,10 +129,7 @@ void	ft_execution(t_list	*lst_comp, t_env **head)
 		comp = lst_comp->content;
 		if (comp->data == NULL)
 			return ;
-		if (is_cmd_built(comp->data))
-			execute_built_cmd(comp, infile, head, what_redi(comp));
-		else
-			ft_lst_cmd(infile, comp, get_env_str(*head), what_redi(comp));
+		ft_execute_one_cmd(comp, head, infile);
 	}
 	else
 	{
