@@ -12,6 +12,21 @@
 
 #include "../minishell.h"
 
+int	ft_export_norm(t_env **env_node, char *split1, char *split2)
+{
+	t_env	*node;
+
+	node = *env_node;
+	if (node && node->key == NULL)
+	{
+		node->key = ft_strdup(split1);
+		if (split2)
+			node->val = ft_strdup(split2);
+		return (1);
+	}
+	return (0);
+}
+
 void	add_var(char *var, t_env *env_node)
 {
 	char	**split;
@@ -32,13 +47,8 @@ void	add_var(char *var, t_env *env_node)
 			}
 			return ;
 		}
-		if (env_node && env_node->key == NULL)
-		{
-			env_node->key = ft_strdup(split[0]);
-			if (split[1])
-				env_node->val = ft_strdup(split[1]);
+		if (ft_export_norm(&env_node, split[0], split[1]))
 			return ;
-		}
 		add_new_var(split, env_node, var);
 		ft_free_machine(split);
 	}
