@@ -27,7 +27,7 @@ int	ft_execut(int infile, t_comp *comp, char **env, int what)
 	if (pid == 0)
 	{
 		if (ft_new_norm_func(out, fd[1], what, env) == -1)
-			return (-1);
+			exit(0);
 		outfile = ft_new_norm_func(out, fd[1], what, env);
 		if (is_hedoc(comp) && get_limiter(comp) != NULL)
 			infile = her_doc(get_limiter(comp));
