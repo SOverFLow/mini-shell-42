@@ -12,24 +12,6 @@
 
 #include "../minishell.h"
 
-int	ft_cmd_norm(char *out, int what, char **env)
-{
-	int	outfile;
-
-	outfile = 1;
-	if (out == NULL)
-		outfile = 1;
-	else
-		outfile = open_out_file(what, out);
-	if (outfile == -1)
-	{
-		perror(out);
-		ft_free_machine(env);
-		return (-1);
-	}
-	return (outfile);
-}
-
 int	ft_execut(int infile, t_comp *comp, char **env, int what)
 {
 	int		pid;
@@ -44,16 +26,9 @@ int	ft_execut(int infile, t_comp *comp, char **env, int what)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (out == NULL)
-			outfile = fd[1];
-		else
-			outfile = open_out_file(what, out);
-		if (outfile == -1)
-		{
-			perror(out);
-			ft_free_machine(env);
-			return (0);
-		}
+		if (ft_new_norm_func(out, fd[1], what, env) == -1)
+			return (-1);
+		outfile = ft_new_norm_func(out, fd[1], what, env);
 		if (is_hedoc(comp) && get_limiter(comp) != NULL)
 			infile = her_doc(get_limiter(comp));
 		else if (in != NULL)
