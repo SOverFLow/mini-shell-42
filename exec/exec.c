@@ -78,31 +78,14 @@ void	ft_execution(t_list	*lst_comp, t_env **head)
 	i = 0;
 	infile = 0;
 	size = ft_lstsize(lst_comp);
+	comp = lst_comp->content;
 	if (size == 1)
 	{
-		comp = lst_comp->content;
 		if (comp->data == NULL)
 			return ;
 		ft_execute_one_cmd(comp, head, infile);
 	}
 	else
-	{
-		while (i < size - 1)
-		{
-			comp = lst_comp->content;
-			if (comp->data == NULL)
-				return ;
-			if (is_cmd_built(comp->data))
-				infile = execute_builtin_cmds(comp, infile, head,
-						what_redi(comp));
-			else
-				infile = ft_execut(infile, comp, get_env_str(*head),
-						what_redi(comp));
-			lst_comp = lst_comp->next;
-			i++;
-		}
-		comp = lst_comp->content;
-		ft_execute_one_cmd(comp, head, infile);
-	}
+		infile = norm_fun_exec(size, infile, lst_comp, head);
 	check_for_status(comp);
 }
