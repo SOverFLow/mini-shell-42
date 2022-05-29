@@ -120,7 +120,8 @@ char	*ft_error_handler(char *line)
 		else
 		{
 			ft_putstr_fd("minishell: syntax error near unexpected token ", 1);
-			ft_putendl_fd(&c, 1);
+			write(1, &c, 1);
+			write(1, "\n", 1);
 		}
 		return (NULL);
 	}
@@ -132,7 +133,8 @@ char	*ft_error_handler(char *line)
 		else
 		{
 			ft_putstr_fd("minishell: syntax error near unexpected token ", 1);
-			ft_putendl_fd(&c, 1);
+			write(1, &c, 1);
+			write(1, "\n", 1);
 		}
 		return (NULL);
 	}
