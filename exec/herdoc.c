@@ -44,7 +44,7 @@ int	her_doc(char *stop_keyword)
 		ft_get_herdoc(stop_keyword, fd[1]);
 	}
 	close(fd[1]);
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &g_status, 0);
 	return (fd[0]);
 }
 

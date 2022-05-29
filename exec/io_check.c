@@ -17,6 +17,7 @@ char	*is_outfile(t_comp *head)
 	char	**files;
 	int		i;
 	int		len;
+	char	*file;
 
 	len = outfile_len(head);
 	files = malloc(sizeof(char *) * (len + 1));
@@ -33,7 +34,9 @@ char	*is_outfile(t_comp *head)
 		head = head->next;
 	}
 	files[i] = NULL;
-	return (opens_files(files, len));
+	file = opens_files(files, len);
+	ft_free_machine(files);
+	return (file);
 }
 
 int	open_out_file(int what, char *out)
@@ -72,6 +75,7 @@ char	*is_infile(t_comp *head)
 	char	**files;
 	int		i;
 	int		len;
+	char	*file;
 
 	len = infile_len(head);
 	files = malloc(sizeof(char *) * (len + 1));
@@ -88,7 +92,9 @@ char	*is_infile(t_comp *head)
 		head = head->next;
 	}
 	files[i] = NULL;
-	return (infile_files(files, len));
+	file = infile_files(files, len);
+	ft_free_machine(files);
+	return (file);
 }
 
 int	is_hedoc(t_comp *comp)

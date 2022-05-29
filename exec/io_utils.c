@@ -62,12 +62,12 @@ void	ft_put_error_fd(char *str)
 char	*try_open_file(int fd, char *file)
 {
 	fd = open(file, O_RDONLY);
-	close(fd);
 	if (fd == -1)
 	{
 		ft_put_error_fd(file);
 		return (NULL);
 	}
+	close(fd);
 	return (file);
 }
 
@@ -89,8 +89,7 @@ char	*infile_files(char **files, int len)
 				ft_put_error_fd(files[i]);
 				break ;
 			}
-			if (fd != -1)
-				close(fd);
+			close(fd);
 		}
 		i++;
 	}
