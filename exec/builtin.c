@@ -71,6 +71,8 @@ void	execute_built_cmd(t_comp *comp, int infile, t_env **head, int what)
 		infile = her_doc(get_limiter(comp));
 	else if (in != NULL)
 		infile = open(in, O_RDONLY);
+	if (infile == -1)
+		return ;
 	if (thereis_infile(comp) && in == NULL)
 		return ;
 	ft_do_built_cmd(comp, outfile, head);
