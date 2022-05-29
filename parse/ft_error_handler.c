@@ -88,15 +88,20 @@ char*	ft_pipe_cheaker(char *line)
 				ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 1);
 				return (NULL);
 			}
-			p = i + 1;
+			p = i;
 			while (line[p])
 			{
-				if (line[p] == ' ' && line[p])
+				p++;
+				while (line[p] == ' ' && line[p])
 					p++;
-				if (line[p] != ' ' && line[p] != '|')
+				if (!line[p] || line[p] == '|')
+				{
+					ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 1);
+					return (NULL);
+				}
+				else
 					break ;
 			}
-			printf("p is %d\n", p);
 		}
 		i++;
 	}
