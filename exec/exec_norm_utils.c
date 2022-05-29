@@ -42,7 +42,7 @@ void	check_for_status(t_comp *comp)
 	if (WIFSIGNALED(g_status) && !is_cmd_built(comp->data) && !is_hedoc(comp))
 		g_status += 128;
 	else
-	{
+	{	
 		if (!is_cmd_built(comp->data) && !is_hedoc(comp))
 			g_status = WEXITSTATUS(g_status);
 	}
