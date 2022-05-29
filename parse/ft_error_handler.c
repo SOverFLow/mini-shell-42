@@ -36,9 +36,6 @@ int	ft_qoutes_cheaker(char *line)
 
 	dq = ft_count(line, '"');
 	sq = ft_count(line, 39);
-
-	// if (dq == 0 || sq == 0)
-	// 	return (0);
 	if (dq % 2 == 0 && sq % 2 == 0)
 		return (0);
 	return (1);
@@ -66,6 +63,44 @@ char	ft_redection_cheaker(char *line, char c)
 		i++;
 	}
 	return (0);
+}
+
+char*	ft_pipe_cheaker(char *line)
+{
+	int	i;
+	int	p;
+
+	i = 0;
+	p = 0;
+	while (line[i])
+	{
+		if (line[i] == '|')
+		{
+			p = i - 1;
+			while (p >= 0)
+			{
+				if (line[p] != ' ' && p != -1)
+					break ;
+				p--;
+			}
+			if (p < 0)
+			{
+				ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 1);
+				return (NULL);
+			}
+			p = i + 1;
+			while (line[p])
+			{
+				if (line[p] == ' ' && line[p])
+					p++;
+				if (line[p] != ' ' && line[p] != '|')
+					break ;
+			}
+			printf("p is %d\n", p);
+		}
+		i++;
+	}
+	return (line);
 }
 
 char	*ft_error_handler(char *line)
@@ -101,5 +136,5 @@ char	*ft_error_handler(char *line)
 		}
 		return (NULL);
 	}
-	return (line);
+	return (ft_pipe_cheaker(line));
 }

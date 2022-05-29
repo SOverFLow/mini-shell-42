@@ -73,7 +73,7 @@ int	ft_contunue(char *dollar, char *s, int *j, t_env *env_nod)
 	len = 0;
 	if (s[i] != '?')
 	{
-		while (s[len] != ' ' && s[len] != '.' && s[len])
+		while (s[len] != ' ' && s[len] != '.' && s[len] && s[i + 1] && s[len] != '"' && s[len] != 39)
 			len++;
 		str = ft_env_search(ft_substr(s, 0, len), env_nod);
 	}
@@ -103,7 +103,7 @@ char	*ft_dollar(char *str, t_env *env_nod)
 	dollar = malloc(sizeof(char) * 1024);
 	while (str[i])
 	{
-		if (str[i] == '$' && str[i + 1] != ' ' && str[i + 1] != '.' && str[i + 1])
+		if (str[i] == '$' && str[i + 1] != ' ' && str[i + 1] != '.')
 		{
 			i += ft_contunue(dollar , str + (i + 1), &j, env_nod);
 		}
@@ -118,10 +118,28 @@ char	*ft_dollar(char *str, t_env *env_nod)
 
 char	*ft_realvalue(char *data, t_env	*env_list)
 {
-	int		i;
-	char	*str;
+	int	i;
+	int	c;
+
 
 	i = 0;
+	c = 0;
+	while (data[i])
+	{
+		if (data[i] == 39)
+		{
+			c = 39;
+			break ;
+		}
+		else if (data[i] == '"')
+		{
+			c = 34;
+			break ;
+		}
+		i++;
+	}
+	if (c != 39)
+		data = ft_dollar(data, env_list);
 	while (data[i])
 	{
 		if (data[i] == '"' || data[i] == 39)
@@ -131,9 +149,7 @@ char	*ft_realvalue(char *data, t_env	*env_list)
 		}
 		i++;
 	}
-	//free(data);
-	str = ft_dollar(data, env_list);
-	return (str);
+	return (data);
 }
 
 t_list	*ft_last_parser(t_list	*lst_comp, t_env *env_node)
