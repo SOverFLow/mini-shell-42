@@ -90,5 +90,4 @@ void	ft_execution(t_list	*lst_comp, t_env **head)
 	else
 		infile = norm_fun_exec(size, infile, lst_comp, head);
 	check_for_status(comp);
-	free(lst_comp->content);
 }
