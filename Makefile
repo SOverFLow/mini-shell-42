@@ -18,7 +18,7 @@ LIBNAME = Libft/libft.a
 SRCS = main.c parse/lst_comp.c parse/ft_custom_split.c exec/exec.c exec/io_utils.c exec/utils.c parse/ft_parsing.c \
 exec/io_check.c env/env.c signals.c exec/builtin.c cmd/echo.c cmd/pwd.c cmd/cd.c cmd/exit.c cmd/env.c cmd/unset.c \
 cmd/export.c parse/ft_makespace.c parse/utilus.c exec/exec_utils.c exec/herdoc.c cmd/cmd_utils.c parse/ft_error_handler.c \
-parse/ft_free_machine.c cmd/export_utils.c exec/exec_norm_utils.c
+parse/ft_free_machine.c cmd/export_utils.c exec/exec_norm_utils.c exec/func_for_norm.c
 
 $(LIBNAME):
 	$(MAKE) -C Libft

@@ -26,22 +26,10 @@ int	ft_execut(int infile, t_comp *comp, char **env, int what)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (out == NULL)
-			outfile = fd[1];
-		else
-			outfile = open_out_file(what, out);
-		if (outfile == -1)
-		{
-			perror(out);
-			return (0);
-		}
-		if (is_hedoc(comp))
-		{
-			if (get_limiter(comp) != NULL)
-				infile = her_doc(get_limiter(comp));
-		}
-		else if (in != NULL)
-			infile = open(in, O_RDONLY);
+		if (ft_new_norm_func(out, fd[1], what, env) == -1)
+			exit(0);
+		outfile = ft_new_norm_func(out, fd[1], what, env);
+		infile = func_for_infile_norm(infile, in, comp);
 		close(fd[0]);
 		if (thereis_infile(comp) && in == NULL)
 			exit(1);
@@ -62,22 +50,15 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 
 	out = is_outfile(comp);
 	in = is_infile(comp);
-	if (out == NULL)
-		outfile = 1;
-	else
-		outfile = open_out_file(what, out);
-	if (outfile == -1)
-	{
-		perror(out);
+	if (ft_cmd_norm(out, what, env) == -1)
 		return ;
-	}
-	if (is_hedoc(comp))
-	{
-		if (get_limiter(comp) != NULL)
+	outfile = ft_cmd_norm(out, what, env);
+	if (is_hedoc(comp) && get_limiter(comp) != NULL)
 			infile = her_doc(get_limiter(comp));
-	}
 	else if (in != NULL)
 		infile = open(in, O_RDONLY);
+	if (infile == -1)
+		return ;
 	pid = fork();
 	if (pid == 0)
 	{
@@ -99,31 +80,16 @@ void	ft_execution(t_list	*lst_comp, t_env **head)
 	i = 0;
 	infile = 0;
 	size = ft_lstsize(lst_comp);
+	comp = lst_comp->content;
 	if (size == 1)
 	{
-		comp = lst_comp->content;
 		if (comp->data == NULL)
 			return ;
 		ft_execute_one_cmd(comp, head, infile);
 	}
 	else
-	{
-		while (i < size - 1)
-		{
-			comp = lst_comp->content;
-			if (comp->data == NULL)
-				return ;
-			if (is_cmd_built(comp->data))
-				infile = execute_builtin_cmds(comp, infile, head,
-						what_redi(comp));
-			else
-				infile = ft_execut(infile, comp, get_env_str(*head),
-						what_redi(comp));
-			lst_comp = lst_comp->next;
-			i++;
-		}
-		comp = lst_comp->content;
-		ft_execute_one_cmd(comp, head, infile);
-	}
+		infile = norm_fun_exec(size, infile, lst_comp, head);
+	if (infile == -1)
+		return ;
 	check_for_status(comp);
 }

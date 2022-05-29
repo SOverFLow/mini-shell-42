@@ -118,6 +118,11 @@ void	ft_cammand_e(char **env, t_comp *comp, int infile, int outfile);
 void	ft_execute_one_cmd(t_comp *comp, t_env **head, int infile);
 void	check_for_status(t_comp *comp);
 void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what);
+int		ft_cmd_norm(char *out, int what, char **env);
+int		ft_new_norm_func(char *out, int fd, int what, char **env);
+int		func_for_infile_norm(int infile, char *in, t_comp *comp);
+int		norm_fun_exec(int size, int infile, t_list *lst_comp, t_env **head);
+int		ft_execut(int infile, t_comp *comp, char **env, int what);
 
 //env
 t_env	**init_env(char **env);

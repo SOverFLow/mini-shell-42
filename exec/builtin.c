@@ -62,13 +62,17 @@ void	execute_built_cmd(t_comp *comp, int infile, t_env **head, int what)
 		outfile = 1;
 	else
 		outfile = open_out_file(what, out);
-	if (is_hedoc(comp))
+	if (outfile == -1)
 	{
-		if (get_limiter(comp) != NULL)
-			infile = her_doc(get_limiter(comp));
+		perror(out);
+		return ;
 	}
+	if (is_hedoc(comp) && get_limiter(comp) != NULL)
+		infile = her_doc(get_limiter(comp));
 	else if (in != NULL)
 		infile = open(in, O_RDONLY);
+	if (infile == -1)
+		return ;
 	if (thereis_infile(comp) && in == NULL)
 		return ;
 	ft_do_built_cmd(comp, outfile, head);
