@@ -64,6 +64,7 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 			exit(1);
 		ft_cammand_e(env, comp, infile, outfile);
 	}
+	free(comp->data);
 	waitpid(pid, &g_status, 0);
 	ft_free_machine(env);
 }
@@ -88,4 +89,5 @@ void	ft_execution(t_list	*lst_comp, t_env **head)
 	else
 		infile = norm_fun_exec(size, infile, lst_comp, head);
 	check_for_status(comp);
+	free(lst_comp->content);
 }
