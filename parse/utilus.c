@@ -107,7 +107,7 @@ char	*ft_dollar(char *str, t_env *env_nod)
 	dollar = malloc(sizeof(char) * 1024);
 	while (str[i])
 	{
-		if (str[i] == '$' && str[i + 1] != ' ' && str[i + 1] != '.')
+		if (str[i] == '$' && str[i + 1])
 		{
 			i += ft_contunue(dollar, str + (i + 1), &j, env_nod);
 		}
@@ -137,6 +137,11 @@ char	*ft_realvalue(char *data, t_env	*env_list)
 		else if (data[i] == '"')
 		{
 			c = 34;
+			break ;
+		}
+		else if (data[i] == '$')
+		{
+			c = 36;
 			break ;
 		}
 		i++;
