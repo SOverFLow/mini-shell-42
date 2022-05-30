@@ -50,9 +50,11 @@ char	*ft_qremove(char *str, char c)
 
 char	*ft_env_search(char *data, t_env *env_node)
 {
+	if (data[0] == '\0')
+		return (NULL);
 	while (env_node)
 	{
-		if (ft_strncmp(env_node->key, data, ft_strlen(data)) == 0)
+		if (ft_strncmp(env_node->key, data, ft_strlen(env_node->key) + 1) == 0)
 		{
 			free(data);
 			return (env_node->val);
@@ -71,9 +73,11 @@ int	ft_contunue(char *dollar, char *s, int *j, t_env *env_nod)
 
 	i = 0;
 	len = 0;
+	if (ft_isdigit(s[i]))
+		return (1);
 	if (s[i] != '?')
 	{
-		while (s[len] != ' ' && s[len] != '.' && s[len] && s[i + 1] && s[len] != '"' && s[len] != 39)
+		while (ft_isalnum(s[len]) || s[len] == '_')
 			len++;
 		str = ft_env_search(ft_substr(s, 0, len), env_nod);
 	}
