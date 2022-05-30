@@ -34,6 +34,17 @@ int	count_n_num(char *str)
 	return (n);
 }
 
+void	ft_echo_norm(t_comp *comp, int outfile)
+{
+	while (comp->next && comp->next->whatisthis < 3)
+	{
+		ft_putstr_fd(comp->next->data, outfile);
+		if (comp->next->next != NULL)
+			write(outfile, " ", 1);
+		comp = comp->next;
+	}
+}
+
 void	ft_echo(t_comp *comp, int outfile)
 {
 	int	n;
@@ -56,13 +67,7 @@ void	ft_echo(t_comp *comp, int outfile)
 			}
 			i += 1;
 		}
-		while (comp->next && comp->next->whatisthis < 3)
-		{
-			ft_putstr_fd(comp->next->data, outfile);
-			if (comp->next->next != NULL)
-				write(outfile, " ", 1);
-			comp = comp->next;
-		}
+		ft_echo_norm(comp, outfile);
 	}
 	if (n == 0)
 		write(outfile, "\n", 1);
