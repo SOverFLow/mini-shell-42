@@ -37,13 +37,25 @@ int	count_n_num(char *str)
 void	ft_echo(t_comp *comp, int outfile)
 {
 	int	n;
+	int	i;
 
 	n = 0;
+	i = 0;
 	if (num_of_args(comp) > 1)
 	{
-		n = count_n_num(comp->next->data);
-		if (n == 1)
-			comp = comp->next;
+		while (comp->next)
+		{
+			n = count_n_num(comp->next->data);
+			if (n == 1)
+				comp = comp->next;
+			else
+			{
+				if (i > 0)
+					n = 1;
+				break ;
+			}
+			i += 1;
+		}
 		while (comp->next && comp->next->whatisthis < 3)
 		{
 			ft_putstr_fd(comp->next->data, outfile);
