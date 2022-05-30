@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../minishell.h"
 
 int	ft_count(char *str, char c)
@@ -65,7 +64,7 @@ char	ft_redection_cheaker(char *line, char c)
 	return (0);
 }
 
-char*	ft_pipe_cheaker(char *line)
+char	*ft_pipe_cheaker(char *line)
 {
 	int	i;
 	int	p;

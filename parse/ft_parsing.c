@@ -56,7 +56,6 @@ t_comp	*ft_comp_creat(char *line)
 		ft_comp_add(&comp, ft_comp_new(splited[i], whatisthis(splited, i)));
 		i++;
 	}
-	//free(line);
 	return (comp);
 }
 

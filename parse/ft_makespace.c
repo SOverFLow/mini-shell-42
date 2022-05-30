@@ -38,7 +38,6 @@ char	*ft_dowork(char *line, char token)
 		i++;
 	}
 	str[j] = '\0';
-	//free(line);
 	return (str);
 }
 
@@ -50,6 +49,5 @@ char	*ft_makespace(char *line)
 	str = ft_dowork(line, '>');
 	final = ft_dowork(str, '<');
 	free(str);
-	//free(line);
 	return (final);
 }
