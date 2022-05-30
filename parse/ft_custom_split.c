@@ -22,7 +22,7 @@ static	int	is_space(char c)
 static int	ft_skip(char *str, char c)
 {
 	int	i;
-	int index;
+	int	index;
 
 	i = 1;
 	index = 0;
@@ -61,12 +61,15 @@ static int	ft_w_len(char *str)
 
 char	**ft_custom_split(char *str)
 {
-	int		i = 0 ;
-	int		j = 0;
-	int		size = 0;
+	int		i;
+	int		j;
+	int		size;
 	char	**split;
 	int		k;
 
+	i = 0;
+	j = 0;
+	size = 0;
 	split = (char **)malloc(sizeof(char *) * (ft_w_len(str) + 1));
 	while (j < ft_w_len(str))
 	{

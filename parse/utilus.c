@@ -105,7 +105,7 @@ char	*ft_dollar(char *str, t_env *env_nod)
 	{
 		if (str[i] == '$' && str[i + 1] != ' ' && str[i + 1] != '.')
 		{
-			i += ft_contunue(dollar , str + (i + 1), &j, env_nod);
+			i += ft_contunue(dollar, str + (i + 1), &j, env_nod);
 		}
 		else
 			dollar[j++] = str[i];
@@ -120,7 +120,6 @@ char	*ft_realvalue(char *data, t_env	*env_list)
 {
 	int	i;
 	int	c;
-
 
 	i = 0;
 	c = 0;
