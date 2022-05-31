@@ -23,7 +23,7 @@ int	ft_is_in_env(t_env *head, char *key)
 	return (0);
 }
 
-void	edit_env_value_by_key(t_env **head, char *key, char *val)
+void	edit_env_value(t_env **head, char *key, char *val, int tr)
 {
 	t_env	*my_head;
 
@@ -34,7 +34,11 @@ void	edit_env_value_by_key(t_env **head, char *key, char *val)
 		{
 			free(my_head->val);
 			if (val != NULL)
+			{
 				my_head->val = ft_strdup(val);
+				if (tr)
+					free(val);
+			}
 			else
 				my_head->val = NULL;
 			return ;
