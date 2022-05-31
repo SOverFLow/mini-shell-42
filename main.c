@@ -22,7 +22,6 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	env_node = init_env(env);
-	lst_comp = NULL;
 	while (1)
 	{
 		signal(SIGSEGV, handler_cntrl_d);
@@ -34,10 +33,8 @@ int	main(int argc, char **argv, char **env)
 			add_history(line);
 			lst_comp = ft_parsing(line, *env_node);
 			if (lst_comp != NULL)
-			{
 				ft_execution(lst_comp, env_node);
-				ft_leaks_killer(lst_comp);
-			}
+			ft_leaks_killer(lst_comp);
 		}
 		free(line);
 	}
