@@ -23,7 +23,7 @@ int	ft_is_in_env(t_env *head, char *key)
 	return (0);
 }
 
-void	edit_env_value_by_key(t_env **head, char *key, char *val, int tr)
+void	edit_env_value(t_env **head, char *key, char *val, int tr)
 {
 	t_env	*my_head;
 
