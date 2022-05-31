@@ -34,10 +34,6 @@
 # define HER_DOC		8 // <<
 # define LIMITER		9 // limiter
 
-# define STDIN 0
-# define STDOUT 1
-# define STDERR 2
-
 int	g_status;
 
 typedef struct s_comp
