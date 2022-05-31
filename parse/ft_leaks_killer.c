@@ -10,17 +10,40 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../minishell.h"
 
-// void    ft_leaks_killer(t_list  *lst)
-// {
-//     t_comp  *comp;
+void	ft_comp_freer(t_comp *comp)
+{
+	t_comp	*tmp;
 
-//     while (lst)
-//     {
-//         comp = lst->next;
-//         ft_comp_freer(comp);
-//         ft
-//     }
-// }
+	tmp = comp;
+	while (tmp)
+	{
+		tmp = comp->next;
+		free(comp->data);
+		free(comp);
+		comp = tmp;
+	}
+}
+
+void	ft_leaks_killer(t_list *lst)
+{
+	t_comp	*comp;
+	t_list	*tmp;
+	t_list	*list;
+
+	list = lst;
+	while (lst)
+	{
+		comp = lst->content;
+		ft_comp_freer(comp);
+		lst = lst->next;
+	}
+	while (list)
+	{
+		tmp = list->next;
+		//free(list->content);
+		free(list);
+		list = tmp;
+	}
+}

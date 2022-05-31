@@ -22,4 +22,5 @@ void	ft_free_machine(char **list)
 		free(list[i]);
 		i++;
 	}
+	free(list);
 }

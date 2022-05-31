@@ -56,6 +56,7 @@ t_comp	*ft_comp_creat(char *line)
 		ft_comp_add(&comp, ft_comp_new(splited[i], whatisthis(splited, i)));
 		i++;
 	}
+	free(splited);
 	return (comp);
 }
 
@@ -79,5 +80,6 @@ t_list	*ft_parsing(char *line, t_env *env_node)
 	}
 	ft_free_machine(split);
 	free(line);
-	return (ft_last_parser(lst_comp, env_node));
+	lst_comp = ft_last_parser(lst_comp, env_node);
+	return (lst_comp);
 }
