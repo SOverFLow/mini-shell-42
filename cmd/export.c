@@ -37,23 +37,21 @@ void	add_var(char *var, t_env *env_node)
 		if (ft_is_in_env(env_node, split[0]))
 		{
 			if (split[1])
-				edit_env_value_by_key(&env_node, split[0], split[1]);
+				edit_env_value_by_key(&env_node, split[0], split[1], 0);
 			else
 			{
 				if (ft_str_ichr(var, '=') > -1)
-					edit_env_value_by_key(&env_node, split[0], ft_strdup(""));
+					edit_env_value_by_key(&env_node, split[0], ft_strdup(""), 1);
 				else
-					edit_env_value_by_key(&env_node, split[0], NULL);
+					edit_env_value_by_key(&env_node, split[0], NULL, 0);
 			}
 			ft_free_machine(split);
 			return ;
 		}
 		if (ft_export_norm(&env_node, split[0], split[1]))
-		{
 			ft_free_machine(split);
-			return ;
-		}
-		add_new_var(split, env_node, var);
+		else
+			add_new_var(split, env_node, var);
 	}
 	ft_free_machine(split);
 }

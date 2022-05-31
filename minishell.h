@@ -108,7 +108,7 @@ int		get_env_len(t_env *env);
 void	ft_free_machine(char **list);
 void	ft_do_export_job(char *key, t_env **head);
 void	add_new_var(char **split, t_env *env_node, char *var);
-void	edit_env_value_by_key(t_env **head, char *key, char *val);
+void	edit_env_value_by_key(t_env **head, char *key, char *val, int tr);
 int		ft_is_in_env(t_env *head, char *key);
 void	ft_cammand_e(char **env, t_comp *comp, int infile, int outfile);
 void	ft_execute_one_cmd(t_comp *comp, t_env **head, int infile);
