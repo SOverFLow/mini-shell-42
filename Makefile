@@ -21,10 +21,8 @@ cmd/export.c parse/ft_makespace.c parse/utilus.c exec/exec_utils.c exec/herdoc.c
 parse/ft_free_machine.c cmd/export_utils.c exec/exec_norm_utils.c exec/func_for_norm.c parse/ft_leaks_killer.c \
 parse/ft_utilus1.c parse/utilus2.c
 
-$(LIBNAME):
+$(NAME):
 	$(MAKE) -C Libft
-
-$(NAME): $(LIBNAME)
 	$(CC) $(SRCS) $(CFLAGS) $(RF) $(LIBNAME) -o $(NAME)
 all: $(NAME)
 
