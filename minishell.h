@@ -91,7 +91,7 @@ char	*opens_files(char **files, int len);
 int		outfile_len(t_comp *head);
 void	add_var(char *var, t_env *env_node);
 char	*ft_env_serch(char *data, char c, t_env *env_node);
-char	*ft_realvalue(char *data, t_env	*env_list);
+char	*ft_realvalue(char *data, t_env	*env_list, int c);
 t_list	*ft_last_parser(t_list	*lst_comp, t_env *env_node);
 int		what_redi(t_comp *head);
 char	*ft_cmd(t_comp *comp);
@@ -121,7 +121,8 @@ int		norm_fun_exec(int size, int infile, t_list *lst_comp, t_env **head);
 int		ft_execut(int infile, t_comp *comp, char **env, int what);
 char	*ft_qremove(char *str, char c);
 void	ft_leaks_killer(t_list *lst);
-
+char	ft_redection_cheaker(char *line, char c);
+int		ft_qoutes_cheaker(char *line);
 //env
 t_env	**init_env(char **env);
 char	*env_key(char *str);
