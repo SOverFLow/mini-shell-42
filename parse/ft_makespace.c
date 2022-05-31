@@ -38,7 +38,6 @@ char	*ft_dowork(char *line, char token)
 		i++;
 	}
 	str[j] = '\0';
-	//free(line);
 	return (str);
 }
 
