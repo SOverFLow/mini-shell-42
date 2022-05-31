@@ -59,6 +59,20 @@ static int	ft_w_len(char *str)
 	return (len);
 }
 
+void	ft_25line_split(char *str, int *i, int *size)
+{
+	if (str[*i] == '"' || str[*i] == 39)
+	{
+		*size += ft_skip(str + *i, str[*i]);
+		*i += ft_skip(str + *i, str[*i]);
+	}
+	else
+	{
+		(*size)++;
+		(*i)++;
+	}
+}
+
 char	**ft_custom_split(char *str)
 {
 	int		i;
@@ -77,18 +91,7 @@ char	**ft_custom_split(char *str)
 		while (str[i] && is_space(str[i]))
 			i++;
 		while (str[i] && !is_space(str[i]))
-		{
-			if (str[i] == '"' || str[i] == 39)
-			{
-				size += ft_skip(str + i, str[i]);
-				i += ft_skip(str + i, str[i]);
-			}
-			else
-			{
-				size++;
-				i++;
-			}
-		}
+			ft_25line_split(str, &i, &size);
 		split[j] = malloc(sizeof(char) * size + 1);
 		while (size)
 			split[j][k++] = str[i - size--];

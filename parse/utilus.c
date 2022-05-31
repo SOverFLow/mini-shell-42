@@ -81,13 +81,11 @@ char	*ft_dollar(char *str, t_env *env_nod)
 	return (dollar);
 }
 
-char	*ft_realvalue(char *data, t_env	*env_list)
+char	*ft_realvalue(char *data, t_env	*env_list, int c)
 {
 	int	i;
-	int	c;
 
 	i = 0;
-	c = 0;
 	while (data[i])
 	{
 		if (data[i] == 39 || data[i] == '"' || data[i] == '$')
@@ -115,14 +113,16 @@ t_list	*ft_last_parser(t_list	*lst_comp, t_env *env_node)
 {
 	t_comp	*comp;
 	t_list	*temp;
+	int		c;
 
+	c = 0;
 	temp = lst_comp;
 	while (lst_comp)
 	{
 		comp = lst_comp->content;
 		while (comp)
 		{
-			comp->data = ft_realvalue(comp->data, env_node);
+			comp->data = ft_realvalue(comp->data, env_node, c);
 			comp = comp->next;
 		}
 		lst_comp = lst_comp->next;
