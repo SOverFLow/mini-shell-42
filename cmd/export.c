@@ -45,13 +45,17 @@ void	add_var(char *var, t_env *env_node)
 				else
 					edit_env_value_by_key(&env_node, split[0], NULL);
 			}
+			ft_free_machine(split);
 			return ;
 		}
 		if (ft_export_norm(&env_node, split[0], split[1]))
+		{
+			ft_free_machine(split);
 			return ;
+		}
 		add_new_var(split, env_node, var);
-		ft_free_machine(split);
 	}
+	ft_free_machine(split);
 }
 
 void	ft_export(t_comp *comp, t_env **head, int outfile)
