@@ -20,7 +20,8 @@ void	ft_comp_freer(t_comp *comp)
 	while (tmp)
 	{
 		tmp = comp->next;
-		free(comp->data);
+		if (comp->data[0])
+			free(comp->data);
 		free(comp);
 		comp = tmp;
 	}
@@ -42,7 +43,6 @@ void	ft_leaks_killer(t_list *lst)
 	while (list)
 	{
 		tmp = list->next;
-		//free(list->content);
 		free(list);
 		list = tmp;
 	}
