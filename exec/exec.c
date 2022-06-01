@@ -83,7 +83,7 @@ void	ft_execution(t_list	*lst_comp, t_env **head)
 	comp = lst_comp->content;
 	if (size == 1)
 	{
-		if (comp->data == NULL)
+		if (!comp)
 			return ;
 		ft_execute_one_cmd(comp, head, infile);
 	}

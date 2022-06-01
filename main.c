@@ -24,17 +24,23 @@ int	main(int argc, char **argv, char **env)
 	env_node = init_env(env);
 	while (1)
 	{
-		signal(SIGSEGV, handler_cntrl_d);
 		signal(SIGINT, handler_cntrl_c);
 		line = readline("\033[1;32mminishell➜ ");
 		signal(SIGINT, handler_cntrl_c_after);
+		if (line == NULL)
+		{
+			write(1, "exit\n", 5);
+			exit(0);
+		}
 		if (*line)
 		{
 			add_history(line);
 			lst_comp = ft_parsing(line, *env_node);
 			if (lst_comp != NULL)
+			{
 				ft_execution(lst_comp, env_node);
-			ft_leaks_killer(lst_comp);
+				ft_leaks_killer(lst_comp);
+			}
 		}
 		free(line);
 	}
