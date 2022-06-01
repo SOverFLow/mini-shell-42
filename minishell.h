@@ -131,6 +131,5 @@ char	*trim_key(char *s, int start, int end);
 // signals
 void	handler_cntrl_c(int num);
 void	handler_cntrl_c_after(int num);
-void	handler_cntrl_d(int num);
 
 #endif
