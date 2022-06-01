@@ -31,11 +31,23 @@ int	ft_count(char *str, char c)
 int	ft_qoutes_cheaker(char *line)
 {
 	int	dq;
-	int	sq;
+	int	c;
+	int	i;
 
-	dq = ft_count(line, '"');
-	sq = ft_count(line, 39);
-	if (dq % 2 == 0 && sq % 2 == 0)
+	c = 0;
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == 39 || line[i] == '"')
+		{
+			c = line[i];
+			break ;
+		}
+		i++;
+	}
+
+	dq = ft_count(line, c);
+	if (dq % 2 == 0)
 		return (0);
 	return (1);
 }
