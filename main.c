@@ -45,7 +45,6 @@ int	main(int argc, char **argv, char **env)
 		{
 			add_history(line);
 			lst_comp = ft_parsing(line, *env_node);
-			ft_print_comp(lst_comp->content);
 			if (lst_comp != NULL)
 			{
 				ft_execution(lst_comp, env_node);

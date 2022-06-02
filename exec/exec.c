@@ -60,7 +60,6 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 		infile = open(in, O_RDONLY);
 	if (infile == -1)
 		return ;
-	printf("in = %s fd = %d\n", in, infile);
 	pid = fork();
 	if (pid == 0)
 	{
