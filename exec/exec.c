@@ -72,6 +72,7 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 		ft_cammand_e(env, comp, infile, outfile);
 	}
 	waitpid(pid, &g_status, 0);
+	free(out);
 	ft_free_machine(env);
 }
 

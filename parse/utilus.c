@@ -54,6 +54,7 @@ int	ft_contunue(char *dollar, char *s, int *j, t_env *env_nod)
 		return (len);
 	while (str[i])
 		dollar[(*j)++] = str[i++];
+	free(str);
 	return (len);
 }
 

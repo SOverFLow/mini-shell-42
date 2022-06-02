@@ -35,7 +35,7 @@ char	*opens_files(char **files, int len)
 	while (i < len)
 	{
 		if (files[i + 1] == NULL)
-			return (files[i]);
+			return (ft_strdup(files[i]));
 		else
 		{
 			fd = open(files[i], O_WRONLY | O_CREAT, 0666);

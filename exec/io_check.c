@@ -28,7 +28,7 @@ char	*is_outfile(t_comp *head)
 	{
 		if (head->whatisthis == 4)
 		{
-			files[i] = head->data;
+			files[i] = ft_strdup(head->data);
 			i++;
 		}
 		head = head->next;
