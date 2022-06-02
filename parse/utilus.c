@@ -34,9 +34,11 @@ int	ft_contunue(char *dollar, char *s, int *j, t_env *env_nod)
 	size_t	len;
 	int		i;
 	char	*str;
+	int		leaks;
 
 	i = 0;
 	len = 0;
+	leaks = 0;
 	if (ft_isdigit(s[i]))
 		return (1);
 	if (s[i] != '?')
@@ -49,12 +51,14 @@ int	ft_contunue(char *dollar, char *s, int *j, t_env *env_nod)
 	{
 		str = ft_itoa(g_status);
 		len++;
+		leaks = 1;
 	}
 	if (!str)
 		return (len);
 	while (str[i])
 		dollar[(*j)++] = str[i++];
-	free(str);
+	if (leaks == 1)
+		free(str);
 	return (len);
 }
 
