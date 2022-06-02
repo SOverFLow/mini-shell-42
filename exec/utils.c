@@ -57,11 +57,13 @@ int	ft_str_ichr(char *str, char c)
 	return (-1);
 }
 
-char	*get_limiter(t_comp *comp)
+int	get_limiter(t_comp *comp)
 {
 	char	*limiter;
+	int		fd;
 
 	limiter = NULL;
+	fd = -1;
 	while (comp)
 	{
 		if (comp->whatisthis == 8)
@@ -69,12 +71,15 @@ char	*get_limiter(t_comp *comp)
 			if (comp->next)
 			{
 				if (comp->next->whatisthis == 9)
+				{
 					limiter = comp->next->data;
+					fd = her_doc(limiter);
+				}
 			}
 		}
 		comp = comp->next;
 	}
-	return (limiter);
+	return (fd);
 }
 
 int	get_env_len(t_env *env)

@@ -97,7 +97,7 @@ int		what_redi(t_comp *head);
 char	*ft_cmd(t_comp *comp);
 int		open_out_file(int what, char *out);
 int		is_hedoc(t_comp *comp);
-char	*get_limiter(t_comp *comp);
+int		get_limiter(t_comp *comp);
 int		her_doc(char *stop_keyword);
 void	hidden_env(t_env *head, int outfile);
 int		check_var_env(char *var);

@@ -67,8 +67,8 @@ void	execute_built_cmd(t_comp *comp, int infile, t_env **head, int what)
 		perror(out);
 		return ;
 	}
-	if (is_hedoc(comp) && get_limiter(comp) != NULL)
-		infile = her_doc(get_limiter(comp));
+	if (is_hedoc(comp))
+		infile = get_limiter(comp);
 	else if (in != NULL)
 		infile = open(in, O_RDONLY);
 	if (infile == -1)
@@ -84,10 +84,7 @@ int	ft_who_infile(t_comp *comp, char *in)
 
 	infile = 0;
 	if (is_hedoc(comp))
-	{
-		if (get_limiter(comp) != NULL)
-			infile = her_doc(get_limiter(comp));
-	}
+		infile = get_limiter(comp);
 	else if (in != NULL)
 		infile = open(in, O_RDONLY);
 	return (infile);

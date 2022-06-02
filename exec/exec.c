@@ -54,8 +54,8 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 	if (ft_cmd_norm(out, what, env) == -1)
 		return ;
 	outfile = ft_cmd_norm(out, what, env);
-	if (is_hedoc(comp) && get_limiter(comp) != NULL)
-			infile = her_doc(get_limiter(comp));
+	if (is_hedoc(comp))
+			infile = get_limiter(comp);
 	else if (in != NULL)
 		infile = open(in, O_RDONLY);
 	if (infile == -1)
