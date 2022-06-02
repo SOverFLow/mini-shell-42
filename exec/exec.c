@@ -59,7 +59,10 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 	else if (in != NULL)
 		infile = open(in, O_RDONLY);
 	if (infile == -1)
+	{
+		ft_free_machine(env);
 		return ;
+	}
 	pid = fork();
 	if (pid == 0)
 	{
