@@ -12,13 +12,10 @@
 
 #include "minishell.h"
 
-void	ft_print_comp(t_comp *comp)
+void	if_line_null(void)
 {
-	while (comp)
-	{
-		printf("data = %s wathisthis = %d\n", comp->data, comp->whatisthis);
-		comp = comp->next;
-	}
+	write(1, "exit\n", 5);
+	exit(0);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -37,10 +34,7 @@ int	main(int argc, char **argv, char **env)
 		line = readline("\033[1;32mminishell➜ ");
 		signal(SIGINT, handler_cntrl_c_after);
 		if (line == NULL)
-		{
-			write(1, "exit\n", 5);
-			exit(0);
-		}
+			if_line_null();
 		if (*line)
 		{
 			add_history(line);
