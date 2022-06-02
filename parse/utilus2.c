@@ -45,7 +45,6 @@ int	ft_qoutes_cheaker(char *line)
 		}
 		i++;
 	}
-
 	dq = ft_count(line, c);
 	if (dq % 2 == 0)
 		return (0);
