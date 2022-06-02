@@ -26,6 +26,7 @@ int	ft_execut(int infile, t_comp *comp, char **env, int what)
 	pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGQUIT, SIG_DFL);
 		if (ft_new_norm_func(out, fd[1], what, env) == -1)
 			exit(0);
 		outfile = ft_new_norm_func(out, fd[1], what, env);
@@ -63,6 +64,7 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 	pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGQUIT, SIG_DFL);
 		if (thereis_infile(comp) && in == NULL)
 			exit(1);
 		ft_cammand_e(env, comp, infile, outfile);
