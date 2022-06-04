@@ -99,12 +99,14 @@ int	execute_builtin_cmds(t_comp *comp, int infile, t_env **head, int what)
 	g_status = 0;
 	out = is_outfile(comp);
 	in = is_infile(comp);
-	outfile = norm_for_outfile(out, what, fd[1]);
+	if (out == NULL)
+		outfile = fd[1];
+	else
+		outfile = open_out_file(what, out);
 	infile = ft_who_infile(comp, in);
 	if (outfile == -1)
 	{
-		perror(out);
-		g_status = 1;
+		ft_norm_cmd_s_f(out);
 		return (0);
 	}
 	if (thereis_infile(comp) && in == NULL)

@@ -125,6 +125,8 @@ char	ft_redection_cheaker(char *line, char c);
 int		ft_qoutes_cheaker(char *line);
 int		norm_for_outfile(char *out, int what, int fd);
 int		norm_for_outfile_two(char *out, int what);
+char	*ft_else(size_t *len, int *leaks);
+void	ft_norm_cmd_s_f(char *out);
 //env
 t_env	**init_env(char **env);
 char	*env_key(char *str);

@@ -48,11 +48,7 @@ int	ft_contunue(char *dollar, char *s, int *j, t_env *env_nod)
 		str = ft_env_search(ft_substr(s, 0, len), env_nod);
 	}
 	else
-	{
-		str = ft_itoa(g_status);
-		len++;
-		leaks = 1;
-	}
+		str = ft_else(&len, &leaks);
 	if (!str)
 		return (len);
 	while (str[i])

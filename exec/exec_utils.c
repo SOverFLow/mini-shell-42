@@ -74,7 +74,7 @@ char	**ft_get_cmd(t_comp *head)
 			i++;
 		cmd = cmd->next;
 	}
-	cmd_tab = malloc(sizeof(char *) * i);
+	cmd_tab = malloc(sizeof(char *) * i + 1);
 	cmd = head;
 	while (x < i)
 	{

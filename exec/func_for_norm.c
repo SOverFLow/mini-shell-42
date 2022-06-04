@@ -81,3 +81,9 @@ int	norm_fun_exec(int size, int infile, t_list *lst_comp, t_env **head)
 	ft_execute_one_cmd(comp, head, infile);
 	return (infile);
 }
+
+void	ft_norm_cmd_s_f(char *out)
+{
+	perror(out);
+	g_status = 1;
+}

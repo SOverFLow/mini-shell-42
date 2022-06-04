@@ -18,6 +18,14 @@ void	if_line_null(void)
 	exit(0);
 }
 
+void	ft_void(int ac, char **av, char *line)
+{
+	(void)ac;
+	(void)av;
+	if (line == NULL)
+		if_line_null();
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	char	*line;
@@ -25,16 +33,13 @@ int	main(int argc, char **argv, char **env)
 	t_env	**env_node;
 
 	signal(SIGQUIT, SIG_IGN);
-	(void)argc;
-	(void)argv;
 	env_node = init_env(env);
 	while (1)
 	{
 		signal(SIGINT, handler_cntrl_c);
 		line = readline("\033[1;32mminishell➜ ");
 		signal(SIGINT, handler_cntrl_c_after);
-		if (line == NULL)
-			if_line_null();
+		ft_void(argc, argv, line);
 		if (*line)
 		{
 			add_history(line);

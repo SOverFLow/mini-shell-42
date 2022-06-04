@@ -74,3 +74,10 @@ char	ft_redection_cheaker(char *line, char c)
 	}
 	return (0);
 }
+
+char	*ft_else(size_t *len, int *leaks)
+{
+	*leaks = 1;
+	*len += 1;
+	return (ft_itoa(g_status));
+}
