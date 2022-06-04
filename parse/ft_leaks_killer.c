@@ -20,8 +20,7 @@ void	ft_comp_freer(t_comp *comp)
 	while (tmp)
 	{
 		tmp = comp->next;
-		if (comp->data[0])
-			free(comp->data);
+		free(comp->data);
 		free(comp);
 		comp = tmp;
 	}
