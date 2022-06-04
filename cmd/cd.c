@@ -86,6 +86,11 @@ void	ft_cd(t_comp *comp, t_env **env)
 		else
 		{
 			edit_old_pwd(env);
+			if (ft_strncmp(comp->next->data, ">", 1) == 0)
+			{
+				ft_go_to_path(0, env);
+				return ;
+			}
 			if (chdir(comp->next->data) != 0)
 			{
 				perror(comp->next->data);
