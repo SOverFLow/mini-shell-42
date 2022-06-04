@@ -47,3 +47,27 @@ void	check_for_status(t_comp *comp)
 			g_status = WEXITSTATUS(g_status);
 	}
 }
+
+int	norm_for_outfile(char *out, int what, int fd)
+{
+	int	outfile;
+
+	outfile = 1;
+	if (out == NULL)
+		outfile = fd;
+	else
+		outfile = open_out_file(what, out);
+	return (outfile);
+}
+
+int	norm_for_outfile_two(char *out, int what)
+{
+	int	outfile;
+
+	outfile = 1;
+	if (out == NULL)
+		outfile = 1;
+	else
+		outfile = open_out_file(what, out);
+	return (outfile);
+}

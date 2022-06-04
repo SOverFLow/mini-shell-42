@@ -58,10 +58,7 @@ void	execute_built_cmd(t_comp *comp, int infile, t_env **head, int what)
 	g_status = 0;
 	out = is_outfile(comp);
 	in = is_infile(comp);
-	if (out == NULL)
-		outfile = 1;
-	else
-		outfile = open_out_file(what, out);
+	outfile = norm_for_outfile_two(out, what);
 	if (outfile == -1)
 	{
 		perror(out);
@@ -102,10 +99,7 @@ int	execute_builtin_cmds(t_comp *comp, int infile, t_env **head, int what)
 	g_status = 0;
 	out = is_outfile(comp);
 	in = is_infile(comp);
-	if (out == NULL)
-		outfile = fd[1];
-	else
-		outfile = open_out_file(what, out);
+	outfile = norm_for_outfile(out, what, fd[1]);
 	infile = ft_who_infile(comp, in);
 	if (outfile == -1)
 	{

@@ -123,6 +123,8 @@ char	*ft_qremove(char *str, char c);
 void	ft_leaks_killer(t_list *lst);
 char	ft_redection_cheaker(char *line, char c);
 int		ft_qoutes_cheaker(char *line);
+int		norm_for_outfile(char *out, int what, int fd);
+int		norm_for_outfile_two(char *out, int what);
 //env
 t_env	**init_env(char **env);
 char	*env_key(char *str);
