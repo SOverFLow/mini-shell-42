@@ -43,6 +43,18 @@ int	ft_execut(int infile, t_comp *comp, char **env, int what)
 	return (fd[0]);
 }
 
+int	infile_for_norm_f(t_comp *comp, char *in)
+{
+	int	infile;
+
+	infile = -1;
+	if (is_hedoc(comp))
+			infile = get_limiter(comp);
+	else if (in != NULL)
+		infile = open(in, O_RDONLY);
+	return (infile);
+}
+
 void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 {
 	int		outfile;
@@ -55,10 +67,7 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 	if (ft_cmd_norm(out, what, env) == -1)
 		return ;
 	outfile = ft_cmd_norm(out, what, env);
-	if (is_hedoc(comp))
-			infile = get_limiter(comp);
-	else if (in != NULL)
-		infile = open(in, O_RDONLY);
+	infile = infile_for_norm_f(comp, in);
 	if (infile == -1)
 	{
 		ft_free_machine(env);
