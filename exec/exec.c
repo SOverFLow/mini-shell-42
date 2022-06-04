@@ -12,14 +12,6 @@
 
 #include "../minishell.h"
 
-void	ft_dala(int pid, char *out, int fd, char **env)
-{
-	waitpid(pid, &g_status, 0);
-	ft_free_machine(env);
-	close(fd);
-	free(out);
-}
-
 int	ft_execut(int infile, t_comp *comp, char **env, int what)
 {
 	int		pid;
@@ -72,11 +64,7 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 	if (ft_cmd_norm(out, what, env) == -1)
 		return ;
 	outfile = ft_cmd_norm(out, what, env);
-	if (is_hedoc(comp))
-			infile = get_limiter(comp);
-	else if (in != NULL)
-		infile = open(in, O_RDONLY);
-	if (infile == -1)
+	if (infile_norminette_func(infile, comp, in) == -1)
 	{
 		ft_free_machine(env);
 		return ;
@@ -89,9 +77,7 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 			exit(1);
 		ft_cammand_e(env, comp, infile, outfile);
 	}
-	waitpid(pid, &g_status, 0);
-	free(out);
-	ft_free_machine(env);
+	other_func_for_norm(pid, out, env);
 }
 
 void	ft_execution(t_list	*lst_comp, t_env **head)

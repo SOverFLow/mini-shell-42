@@ -127,6 +127,9 @@ int		norm_for_outfile(char *out, int what, int fd);
 int		norm_for_outfile_two(char *out, int what);
 char	*ft_else(size_t *len, int *leaks);
 void	ft_norm_cmd_s_f(char *out);
+void	ft_dala(int pid, char *out, int fd, char **env);
+int		infile_norminette_func(int infile, t_comp *comp, char *in);
+void	other_func_for_norm(int pid, char *out, char **env);
 //env
 t_env	**init_env(char **env);
 char	*env_key(char *str);
