@@ -12,6 +12,14 @@
 
 #include "../minishell.h"
 
+void	ft_dala(int pid, char *out, int fd, char **env)
+{
+	waitpid(pid, &g_status, 0);
+	ft_free_machine(env);
+	close(fd);
+	free(out);
+}
+
 int	ft_execut(int infile, t_comp *comp, char **env, int what)
 {
 	int		pid;
@@ -36,10 +44,7 @@ int	ft_execut(int infile, t_comp *comp, char **env, int what)
 			exit(1);
 		ft_cammand_e(env, comp, infile, outfile);
 	}
-	waitpid(pid, &g_status, 0);
-	ft_free_machine(env);
-	close(fd[1]);
-	free(out);
+	ft_dala(pid, out, fd[1], env);
 	return (fd[0]);
 }
 
