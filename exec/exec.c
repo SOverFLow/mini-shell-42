@@ -39,6 +39,7 @@ int	ft_execut(int infile, t_comp *comp, char **env, int what)
 	waitpid(pid, &g_status, 0);
 	ft_free_machine(env);
 	close(fd[1]);
+	free(out);
 	return (fd[0]);
 }
 
