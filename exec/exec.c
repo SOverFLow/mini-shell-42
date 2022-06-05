@@ -64,7 +64,8 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 	if (ft_cmd_norm(out, what, env) == -1)
 		return ;
 	outfile = ft_cmd_norm(out, what, env);
-	if (infile_norminette_func(infile, comp, in) == -1)
+	infile = infile_norminette_func(infile, comp, in);
+	if (infile == -1)
 	{
 		ft_free_machine(env);
 		return ;
