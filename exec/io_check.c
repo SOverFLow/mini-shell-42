@@ -86,7 +86,7 @@ char	*is_infile(t_comp *head)
 	{
 		if (head->whatisthis == 3)
 		{
-			files[i] = head->data;
+			files[i] = ft_strdup(head->data);
 			i++;
 		}
 		head = head->next;

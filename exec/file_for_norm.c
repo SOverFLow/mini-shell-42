@@ -29,9 +29,10 @@ int	infile_norminette_func(int infile, t_comp *comp, char *in)
 	return (infile);
 }
 
-void	other_func_for_norm(int pid, char *out, char **env)
+void	other_func_for_norm(int pid, char *out, char **env, char *in)
 {
 	waitpid(pid, &g_status, 0);
 	free(out);
+	free(in);
 	ft_free_machine(env);
 }

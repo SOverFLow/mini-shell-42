@@ -68,7 +68,7 @@ char	*try_open_file(int fd, char *file)
 		return (NULL);
 	}
 	close(fd);
-	return (file);
+	return (ft_strdup(file));
 }
 
 char	*infile_files(char **files, int len)

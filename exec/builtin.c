@@ -73,6 +73,7 @@ void	execute_built_cmd(t_comp *comp, int infile, t_env **head, int what)
 	if (thereis_infile(comp) && in == NULL)
 		return ;
 	free(out);
+	free(in);
 	ft_do_built_cmd(comp, outfile, head);
 }
 
@@ -113,6 +114,6 @@ int	execute_builtin_cmds(t_comp *comp, int infile, t_env **head, int what)
 		return (0);
 	ft_do_built_cmd(comp, outfile, head);
 	close(fd[1]);
-	free(out);
+	clear_files(out, in);
 	return (fd[0]);
 }

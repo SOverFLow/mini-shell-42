@@ -37,6 +37,7 @@ int	ft_execut(int infile, t_comp *comp, char **env, int what)
 		ft_cammand_e(env, comp, infile, outfile);
 	}
 	ft_dala(pid, out, fd[1], env);
+	free(in);
 	return (fd[0]);
 }
 
@@ -78,7 +79,7 @@ void	ft_lst_cmd(int infile, t_comp *comp, char **env, int what)
 			exit(1);
 		ft_cammand_e(env, comp, infile, outfile);
 	}
-	other_func_for_norm(pid, out, env);
+	other_func_for_norm(pid, out, env, in);
 }
 
 void	ft_execution(t_list	*lst_comp, t_env **head)
@@ -101,4 +102,10 @@ void	ft_execution(t_list	*lst_comp, t_env **head)
 	else
 		infile = norm_fun_exec(size, infile, lst_comp, head);
 	check_for_status(comp);
+}
+
+void	clear_files(char *out, char *in)
+{
+	free(out);
+	free(in);
 }
