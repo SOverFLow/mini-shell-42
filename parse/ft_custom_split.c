@@ -12,9 +12,9 @@
 
 #include "../minishell.h"
 
-static	int	is_space(char c)
+static	int	is_space(char c, char sep)
 {
-	if (c == ' ' || c == '\t')
+	if (c == sep)
 		return (1);
 	return (0);
 }
@@ -35,7 +35,7 @@ static int	ft_skip(char *str, char c)
 	return (index + 1);
 }
 
-static int	ft_w_len(char *str)
+static int	ft_w_len(char *str, char sep)
 {
 	int	i;
 	int	len;
@@ -44,11 +44,11 @@ static int	ft_w_len(char *str)
 	len = 0;
 	while (str[i])
 	{
-		while (str[i] && is_space(str[i]))
+		while (str[i] && is_space(str[i], sep))
 			i++;
 		if (str[i])
 			len++;
-		while (str[i] && !is_space(str[i]))
+		while (str[i] && !is_space(str[i], sep))
 		{
 			if (str[i] == '"' || str[i] == 39)
 				i += ft_skip(str + i, str[i]);
@@ -73,7 +73,7 @@ void	ft_25line_split(char *str, int *i, int *size)
 	}
 }
 
-char	**ft_custom_split(char *str)
+char	**ft_custom_split(char *str, char sep)
 {
 	int		i;
 	int		j;
@@ -84,13 +84,13 @@ char	**ft_custom_split(char *str)
 	i = 0;
 	j = 0;
 	size = 0;
-	split = (char **)malloc(sizeof(char *) * (ft_w_len(str) + 1));
-	while (j < ft_w_len(str))
+	split = (char **)malloc(sizeof(char *) * (ft_w_len(str, sep) + 1));
+	while (j < ft_w_len(str, sep))
 	{
 		k = 0;
-		while (str[i] && is_space(str[i]))
+		while (str[i] && is_space(str[i], sep))
 			i++;
-		while (str[i] && !is_space(str[i]))
+		while (str[i] && !is_space(str[i], sep))
 			ft_25line_split(str, &i, &size);
 		split[j] = malloc(sizeof(char) * size + 1);
 		while (size)

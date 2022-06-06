@@ -49,7 +49,7 @@ t_comp	*ft_comp_creat(char *line)
 	t_comp	*comp;
 
 	i = 0;
-	splited = ft_custom_split(line);
+	splited = ft_custom_split(line, ' ');
 	comp = NULL;
 	while (splited[i] != NULL)
 	{
@@ -71,7 +71,7 @@ t_list	*ft_parsing(char *line, t_env *env_node)
 		return (0);
 	line = ft_makespace(line);
 	lst_comp = NULL;
-	split = ft_split(line, '|');
+	split = ft_custom_split(line, '|');
 	i = 0;
 	while (split[i] != NULL)
 	{
