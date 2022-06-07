@@ -19,7 +19,7 @@ static	int	is_space(char c, char sep)
 	return (0);
 }
 
-static int	ft_skip(char *str, char c)
+int	ft_skip(char *str, char c)
 {
 	int	i;
 	int	index;

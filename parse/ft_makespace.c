@@ -25,6 +25,11 @@ char	*ft_dowork(char *line, char token)
 	str = (char *)malloc(sizeof(char) * size + 1);
 	while (line[i])
 	{
+		if (line[i] == '"' || line[i] == 39)
+		{
+			while (j < ft_skip(line, line[i]))
+				str[j++] = line[i++];
+		}
 		if (line[i] == token)
 		{
 			if (line[i - 1] != ' ' && line[i - 1] != token)

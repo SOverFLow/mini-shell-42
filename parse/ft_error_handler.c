@@ -45,6 +45,8 @@ char	*ft_pipe_cheaker(char *line)
 	p = 0;
 	while (line[i])
 	{
+		if (line[i] == '"' || line[i] == 39)
+			i += ft_skip(line, line[i]);
 		if (line[i] == '|')
 		{
 			p = i - 1;

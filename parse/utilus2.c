@@ -58,7 +58,9 @@ char	ft_redection_cheaker(char *line, char c)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] && line[i] == c)
+		if (line[i] == '"' || line[i] == 39)
+			i += ft_skip(line, line[i]);
+		else if (line[i] && line[i] == c)
 		{
 			i++;
 			if (line[i] && line[i] == c)
