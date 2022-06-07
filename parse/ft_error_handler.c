@@ -12,8 +12,9 @@
 
 #include "../minishell.h"
 
-int	ft_25line(int p, char *line)
+int	ft_25line(int p, char *line, int i)
 {
+	p = i;
 	while (line[p])
 	{
 		p++;
@@ -41,8 +42,7 @@ char	*ft_pipe_cheaker(char *line)
 	int	i;
 	int	p;
 
-	i = 0;
-	p = 0;
+	init_v(&i, &p);
 	while (line[i])
 	{
 		if (line[i] == '"' || line[i] == 39)
@@ -58,8 +58,7 @@ char	*ft_pipe_cheaker(char *line)
 			}
 			if (p < 0)
 				return (ft_p_error());
-			p = i;
-			if (ft_25line(p, line) == 0)
+			if (ft_25line(p, line, i) == 0)
 				return (NULL);
 		}
 		i++;

@@ -12,6 +12,20 @@
 
 #include "../minishell.h"
 
+int	ft_25(char *line, char *str, int *j, int i)
+{
+	while (*j < ft_skip(line, line[i]))
+		str[(*j)++] = line[i++];
+	return (i);
+}
+
+void	ft_init(int *j, int *i, int *size, char *line)
+{
+	*i = 0;
+	*j = 0;
+	*size = ft_strlen(line) + 100;
+}
+
 char	*ft_dowork(char *line, char token)
 {
 	int		size;
@@ -19,17 +33,12 @@ char	*ft_dowork(char *line, char token)
 	int		j;
 	char	*str;
 
-	i = 0;
-	j = 0;
-	size = ft_strlen(line) + 100;
+	ft_init(&j, &i, &size, line);
 	str = (char *)malloc(sizeof(char) * size + 1);
 	while (line[i])
 	{
 		if (line[i] == '"' || line[i] == 39)
-		{
-			while (j < ft_skip(line, line[i]))
-				str[j++] = line[i++];
-		}
+			i = ft_25(line, str, &j, i);
 		if (line[i] == token)
 		{
 			if (line[i - 1] != ' ' && line[i - 1] != token)

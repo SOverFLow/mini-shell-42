@@ -24,3 +24,9 @@ void	ft_free_machine(char **list)
 	}
 	free(list);
 }
+
+void	init_v(int *i, int *p)
+{
+	*i = 0;
+	*p = 0;
+}
